@@ -19,6 +19,21 @@ const router = createRouter({
       component: () => import('../views/Home.vue')
     },
     {
+      path: '/education',
+      name: 'education',
+      component: () => import('../views/Education.vue')
+    },
+    {
+      path: '/experience',
+      name: 'experience',
+      component: () => import('../views/Experience.vue')
+    },
+    {
+      path: '/projects',
+      name: 'projects',
+      component: () => import('../views/Projects.vue')
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "404",
       component: () => import("../views/NotFound.vue"),

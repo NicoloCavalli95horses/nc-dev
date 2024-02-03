@@ -1,7 +1,9 @@
 <template>
   <Icons />
   <NavBar />
-  <RouterView />
+  <Transition>
+    <RouterView />
+  </Transition>
 </template>
 <script setup>
 //==================================
@@ -15,4 +17,13 @@ import Icons from "./components/Icons.vue";
 </script>
 
 <style lang="scss" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
