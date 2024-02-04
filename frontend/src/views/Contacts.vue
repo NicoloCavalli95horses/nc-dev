@@ -6,6 +6,8 @@
         <h2>Say hello</h2>
         <p class="top-12">Email</p>
         <InputText placeholder="email" v-model:text="email" />
+        <p class="top-12">Subject</p>
+        <InputText placeholder="email" v-model:text="subject" />
         <p class="top-12">Message</p>
         <InputText placeholder="your message" v-model:text="msg" />
         <Btn class="top-24" @click="onEmailSend">Send</Btn>
@@ -33,18 +35,20 @@ import InputText from '@/components/InputText.vue';
 // Consts
 //==============================
 const email = ref( undefined );
+const subject = ref( undefined );
 const msg = ref( undefined );
 
 //==============================
 // Functions
 //==============================
 async function onEmailSend() {
-  await apiSendEmail({ email: email.value, message: msg.value });
+  apiSendEmail({ from: email.value, subject: subject.value, message: msg.value }).then((res) => console.log(res));
   email.value = undefined;
   msg.value = undefined;
+  subject.value = undefined;
 }
 
-apiTest();
+
 </script>
 
 <style lang="scss" scoped>

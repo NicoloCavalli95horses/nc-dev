@@ -34,7 +34,7 @@ const emit = defineEmits([
     width: 100%;
     border-radius: 1.2rem;
     outline: none;
-    border: none;
+    border: 0.2rem solid transparent;
     caret-color: var(--primary);
     font-size: 1.8rem;
     &:focus {

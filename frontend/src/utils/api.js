@@ -1,49 +1,45 @@
-export async function apiSendEmail({ email, message }) {
-  const apiUrl = "http://127.0.0.1:8000/api/events";
-  const apiOption = {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    body: JSON.stringifyQuery({ email, message }),
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow",
-    referrerPolicy: "origin",
-  };
+//==============================
+// Consts
+//==============================
+const BASE_URL = 'http://127.0.0.1:8000/api/';
 
-  try {
-    const res = await fetch(apiUrl, apiOption);
-    return res;
-  } catch (error) {
-    return error;
-  }
+
+//==============================
+// Functions
+//==============================
+export async function apiSendEmail({ from, subject, message }) {
+  const url = `${BASE_URL}email`;
+  const options = getApiOption({
+    method: 'POST',
+    body: JSON.stringify({ from, subject, message })
+  });
+
+  return fetch(url, options)
+  .then(response => response.json())
+  .then(data => data);
 }
 
 
 export function apiTest() {
-  const url = 'http://127.0.0.1:8000/test';
-  const apiOptions = {
-    method: "GET",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json" },
-    redirect: "follow",
-    referrerPolicy: "origin",
+  const url = `${BASE_URL}test`;
+  const options = getApiOption();
+
+  return fetch(url, options)
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => error.message);
+}
+
+
+function getApiOption({ method, mode, cache, credentials, headers, redirect, referrerPolicy, body } = {}) {
+  return {
+    method: method || 'GET',
+    mode: mode || "cors",
+    cache: cache || "no-cache",
+    credentials: credentials || "same-origin",
+    body: body || undefined,
+    headers: headers || { "Content-Type": "application/json" },
+    redirect: redirect || "follow",
+    referrerPolicy: referrerPolicy || "origin",
   };
-
-  fetch(url, apiOptions)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Errore nella richiesta. Status: ' + response.status);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Risposta:', data);
-    })
-    .catch(error => {
-      console.error('Errore durante la richiesta:', error.message);
-    });
-
 }
