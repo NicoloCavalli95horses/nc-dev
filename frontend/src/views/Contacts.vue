@@ -10,7 +10,7 @@
         <InputText placeholder="email" v-model:text="subject" />
         <p class="top-12">Message</p>
         <InputText placeholder="your message" v-model:text="msg" />
-        <Btn class="top-24" @click="onEmailSend">Send</Btn>
+        <Btn :disabled="disable_send" class="top-24" @click="onEmailSend">Send</Btn>
       </div>
     </div>
   </div>
@@ -24,9 +24,11 @@ import {
   ref,
 } from 'vue';
 import {
-  apiTest,
   apiSendEmail,
 } from '../utils/api';
+import {
+  addToastMsg,
+} from '../utils/globals';
 
 import Btn from '@/components/Btn.vue';
 import InputText from '@/components/InputText.vue';
@@ -37,12 +39,21 @@ import InputText from '@/components/InputText.vue';
 const email = ref( undefined );
 const subject = ref( undefined );
 const msg = ref( undefined );
+const disable_send = ref( false );
 
 //==============================
 // Functions
 //==============================
 async function onEmailSend() {
-  apiSendEmail({ from: email.value, subject: subject.value, message: msg.value }).then((res) => console.log(res));
+  disable_send.value = true;
+  apiSendEmail({ from: email.value, subject: subject.value, message: msg.value }).then(
+    (res) => {
+      if ( res.code == 200 ) {
+        addToastMsg({ msg: 'Email successfully sent!', time: 5000 }); 
+        disable_send.value = false;
+      }
+    }
+  );
   email.value = undefined;
   msg.value = undefined;
   subject.value = undefined;

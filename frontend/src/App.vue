@@ -1,6 +1,7 @@
 <template>
   <Icons />
   <NavBar />
+  <ToastMsg />
   <Transition>
     <RouterView />
   </Transition>
@@ -10,9 +11,9 @@
 // Import
 //==================================
 import { RouterView } from "vue-router";
+import ToastMsg from "./components/ToastMsg.vue";
 import NavBar from "./components/NavBar.vue";
 import Icons from "./components/Icons.vue";
-
 
 </script>
 
