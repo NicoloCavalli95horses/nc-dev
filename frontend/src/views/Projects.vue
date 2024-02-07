@@ -1,49 +1,25 @@
 <template>
-  <div class="main-home">
-    <div class="header">
-      <h1>Projects</h1>
+  <BaseLayout>
+    <template #title>Projects</template>
+    <template #default>
       <h2>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, distinctio dignissimos? Laboriosam minima deserunt ducimus nam dolorem adipisci iste eaque dolores, laborum, consectetur blanditiis reprehenderit assumenda, error expedita ratione recusandae.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam tempore libero esse similique perspiciatis, doloremque a perferendis molestias dignissimos quibusdam iure, necessitatibus odio nesciunt error doloribus reiciendis rem consequatur. Officia.
       </h2>
-    </div>
-  </div>
+    </template>
+  </BaseLayout>
 </template>
 
 <script setup>
 //==============================
 // Import
 //==============================
+import BaseLayout from '@/components/BaseLayout.vue';
 
 //==============================
 // Consts
 //==============================
+
 </script>
 
 <style lang="scss" scoped>
-.main-home {
-  margin: 100px 22px 0 22px; //navbar
-  .header {
-    display: flex;
-    h1 {
-      writing-mode: vertical-lr;
-    }
-    h2 {
-      margin: 22px 32px;
-      line-height: 1.6;
-      span {
-        font-size: inherit;
-        &.selected {
-          border: 2px solid var(--primary);
-          color: var(--primary);
-          padding: 4px 6px;
-          border-radius: 12px;
-        }
-        &.monospaced {
-          font-family: monospace;
-          opacity: 0.5;
-        }
-      }
-    }
-  }
-}
 </style>

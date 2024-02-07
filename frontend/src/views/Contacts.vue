@@ -1,19 +1,23 @@
 <template>
-  <div class="main-home">
-    <div class="header">
-      <h1>Contacts</h1>
-      <div class="input-wrapper">
-        <h2>Say hello</h2>
-        <p class="top-12">Email</p>
-        <InputText placeholder="email" v-model:text="email" />
-        <p class="top-12">Subject</p>
-        <InputText placeholder="email" v-model:text="subject" />
-        <p class="top-12">Message</p>
-        <InputText placeholder="your message" v-model:text="msg" />
-        <Btn :disabled="disable_send" class="top-24" @click="onEmailSend">Send</Btn>
-      </div>
-    </div>
-  </div>
+  <BaseLayout>
+    <template #title>Contacts</template>
+    <template #default>
+      <section>
+        <div class="contact-box">
+          <p><span>email</span> nicolo.cavalli95@gmail.com</p>
+          <p><span>mobile</span> +39 346 95 92 168</p>
+          <p><span>monday - friday</span> 8:00 - 20:00</p>
+          <h4 class="top-32">Email</h4>
+          <InputText placeholder="email" v-model:text="email" />
+          <h4 class="top-12">Subject</h4>
+          <InputText placeholder="email" v-model:text="subject" />
+          <h4 class="top-12">Message</h4>
+          <InputText placeholder="your message" type="textarea" v-model:text="msg" />
+          <Btn :disabled="disable_send" class="top-24" @click="onEmailSend">Send</Btn>
+        </div>
+      </section>
+    </template>
+  </BaseLayout>
 </template>
 
 <script setup>
@@ -32,6 +36,7 @@ import {
 
 import Btn from '@/components/Btn.vue';
 import InputText from '@/components/InputText.vue';
+import BaseLayout from '@/components/BaseLayout.vue';
 
 //==============================
 // Consts
@@ -63,33 +68,22 @@ async function onEmailSend() {
 </script>
 
 <style lang="scss" scoped>
-.main-home {
-  margin: 100px 22px 0 22px; //navbar
-  .header {
-    display: flex;
-    h1 {
-      writing-mode: vertical-lr;
-    }
-    .input-wrapper {
-      margin: 22px 32px;
-
-      h2 {
-        line-height: 1.6;
+  section {
+    width: 100%;
+    max-width: 800px;
+    .contact-box {
+      margin: 0 22px;
+      p {
+        &:not(:first-of-type) {
+          margin: 22px 0;
+        }
         span {
-          font-size: inherit;
-          &.selected {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 4px 6px;
-            border-radius: 12px;
-          }
-          &.monospaced {
-            font-family: monospace;
-            opacity: 0.5;
-          }
+          display: block;
+          color: var(--secondary);
+          text-transform: uppercase;
+          letter-spacing: 2px;
         }
       }
     }
   }
-}
 </style>
