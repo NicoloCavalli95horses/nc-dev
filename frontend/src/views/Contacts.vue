@@ -72,7 +72,6 @@ async function onEmailSend() {
     width: 100%;
     max-width: 800px;
     .contact-box {
-      margin: 0 22px;
       p {
         &:not(:first-of-type) {
           margin: 22px 0;

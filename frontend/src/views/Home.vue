@@ -76,8 +76,9 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
   h2 {
-    margin: 22px 32px;
+    position: relative;
     line-height: 1.6;
+    z-index: 1;
     span {
       font-size: inherit;
       &.selected {

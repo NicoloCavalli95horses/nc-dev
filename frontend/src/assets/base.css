@@ -55,19 +55,22 @@
 
 /* Root font-size: 1rem = 10px */
 html {
+  width: 100%;
   font-size: 10px;
   overflow: hidden;
 }
 
 body {
+  width: 100%;
+  height: 100%;
   position: fixed;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   margin: 0;
   padding: 0;
   border: 0;
   outline: 0;
   scroll-behavior: smooth;
-  width: 100%;
-  height: 100vh;
   background-color: #222;
   user-select: none;
 }
@@ -142,17 +145,17 @@ a {
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 0.6rem;
+  width: 0.4rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--font-dark);
+  background: #222;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary);
+  background: #444;
 }
 
 /* Handle on hover */

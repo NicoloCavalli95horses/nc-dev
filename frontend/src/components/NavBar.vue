@@ -21,8 +21,7 @@ import router from '../router/index';
 //==================================
 const items = [
   { id: 'home',       route: '',           value: 'home'       },
-  { id: 'education',  route: 'education',  value: 'education'  },
-  { id: 'experience', route: 'experience', value: 'experience' },
+  { id: 'story',      route: 'story',      value: 'my story' },
   { id: 'projects',   route: 'projects',   value: 'projects'   },
   { id: 'contacts',   route: 'contacts',   value: 'contacts'   },
 ];
@@ -49,7 +48,7 @@ nav {
   top: 0;
   width: 100%;
   box-sizing: border-box;
-  height: 100px;
+  background-color: #222;
   .main-nav {
     display: flex;
     align-items: center;
