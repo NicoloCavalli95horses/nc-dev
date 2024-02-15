@@ -127,6 +127,9 @@ h6 {
 p, span, ul, li, a {
   font-size: 1.4rem;
 }
+ul {
+  margin-left: 22px;
+}
 
 a {
   text-decoration: none;

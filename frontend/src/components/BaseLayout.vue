@@ -19,14 +19,17 @@
   }
   display: flex;
   .vertical {
+    width: clamp(5rem, 7vw, 9rem);
+    position: fixed;
     writing-mode: vertical-lr;
   }
   .main {
     width: 100%;
-    margin: 0 12px;
+    margin-left: clamp(5rem, 7vw, 9rem);
+    padding: 32px 22px 0 22px;
     @media screen and (min-width: 600px) {
       width: calc( 100% - 64px);
-      margin: 22px 32px;
+      padding: 32px 44px 0 44px;
     }
   }
 }

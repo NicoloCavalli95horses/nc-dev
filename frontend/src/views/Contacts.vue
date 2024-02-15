@@ -4,16 +4,18 @@
     <template #default>
       <section>
         <div class="contact-box">
-          <p><span>email</span> nicolo.cavalli95@gmail.com</p>
-          <p><span>mobile</span> +39 346 95 92 168</p>
-          <p><span>monday - friday</span> 8:00 - 20:00</p>
-          <h4 class="top-32">Email</h4>
-          <InputText placeholder="email" v-model:text="email" />
-          <h4 class="top-12">Subject</h4>
-          <InputText placeholder="email" v-model:text="subject" />
-          <h4 class="top-12">Message</h4>
-          <InputText placeholder="your message" type="textarea" v-model:text="msg" />
-          <Btn :disabled="disable_send" class="top-24" @click="onEmailSend">Send</Btn>
+          <p><label>email</label> nicolo.cavalli95@gmail.com</p>
+          <p><label>mobile</label> +39 346 95 92 168</p>
+          <p><label>monday - friday</label> 8:00 - 20:00</p>
+          <div class="inputs">
+            <h4>Email</h4>
+            <InputText placeholder="email" v-model:text="email" />
+            <h4>Subject</h4>
+            <InputText placeholder="email" v-model:text="subject" />
+            <h4>Message</h4>
+            <InputText placeholder="your message" type="textarea" v-model:text="msg" />
+            <Btn :disabled="disable_send" @click="onEmailSend">Send</Btn>
+          </div>
         </div>
       </section>
     </template>
@@ -55,8 +57,12 @@ async function onEmailSend() {
     (res) => {
       if ( res.code == 200 ) {
         addToastMsg({ msg: 'Email successfully sent!', time: 5000 }); 
-        disable_send.value = false;
       }
+      disable_send.value = false;
+    },
+    () => {
+      addToastMsg({ msg: 'An error occurred: email send failed', time: 5000 }); 
+      disable_send.value = false;
     }
   );
   email.value = undefined;
@@ -76,12 +82,10 @@ async function onEmailSend() {
         &:not(:first-of-type) {
           margin: 22px 0;
         }
-        span {
-          display: block;
-          color: var(--secondary);
-          text-transform: uppercase;
-          letter-spacing: 2px;
-        }
+      }
+      .inputs {
+        display: grid;
+        grid-gap: 12px;
       }
     }
   }

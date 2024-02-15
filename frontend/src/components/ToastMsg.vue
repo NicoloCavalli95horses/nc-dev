@@ -43,8 +43,7 @@ onBeforeUnmount( () => {
 
 <style lang="scss" scoped>
 .toast-msg {
-  background-color: white;
-  border: 1px solid #222;
+  background-color: #eee;
   border-radius: 12px;
   position: fixed;
   bottom: 22px;
@@ -53,8 +52,7 @@ onBeforeUnmount( () => {
   padding: 8px 12px;
   p {
     color: #222;
-    font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 

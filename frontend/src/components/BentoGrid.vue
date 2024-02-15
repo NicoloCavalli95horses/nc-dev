@@ -1,19 +1,17 @@
 <template>
   <div class="bento-grid">
     <a
-      :href="cell.href"
-      class="cell"
-      :class="{
-        'large' : Math.random() > 0.5,
-        'disabled' : !cell?.title
-      }"
-      v-for="cell in cells"
-      :key="cell.id"
-    >
+      :href="item.href"
+      class="item"
+      v-for="item in items"
+      :key="item.id"
+      >
+      <!-- :class="{ 'large' : item.large, 'filler' : !item.title && !item.content }" -->
       <div class="text">
-        <h4>{{ cell?.title }}</h4>
-        <p>{{ cell?.content }}</p>
+        <label>{{ item?.title }}</label>
+        <p>{{ item?.content }}</p>
       </div>
+      <iframe v-if="item?.iframe" :src="item.href" />
     </a>
   </div>
 </template>
@@ -22,7 +20,6 @@
 //==============================
 // Imports
 //==============================
-import { computed } from "vue";
 
 //==============================
 // Props and emits
@@ -32,22 +29,12 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  show_filler: Boolean,
 });
 
 //==============================
 // Consts
 //==============================
-const cells = computed(() => {
-  const items = [ ...props.items];
-  if ( !props.show_filler ) { return items; }
-  const randomIndex = Math.floor(Math.random() * (items.length + 1));
-  const max = Math.random() > 0.5 ? 3 : 4;
-  for (let i = 0; i < max; i++ ){
-    items.splice(randomIndex, 0, {id: Symbol()});
-  }
-  return items;
-})
+
 
 //==============================
 // Watch
@@ -56,33 +43,41 @@ const cells = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-$box-w: 180px;
+$box-w: calc(1920px / 5);
+$box-h: calc(1080px / 5);
 .bento-grid {
   display: grid;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: repeat(auto-fill, minmax($box-w, 1fr));
-  grid-gap: clamp(1em, 1vw, 2em);
+  grid-template-columns: repeat(auto-fill, $box-w);
+  grid-gap: clamp(1em, 0.8vw, 2em);
   align-items: center;
-  .cell {
+  a.item {
+    width: $box-w;
+    height: $box-h;
+    overflow: hidden;
+    position: relative;
     background-color: #333;
     border-radius: clamp(1em, 1vw, 2em);
-    height: calc($box-w*2);
     display: flex;
     flex-direction: column;
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: none;
+      width: calc(1920px / 1.5);
+      height: calc(1080px / 1.5);
+      transform: translate(-50%, -50%) scale(0.30);
+      pointer-events: none;
+    }
     .text {
       padding: 22px;
     }
      
-    &.large {
-      @media screen and (min-width: 800px) {
-        grid-column: span 2;
-      }
-    }
-    &.disabled {
+    &.filler {
       background-color: #333;
       opacity: 0.3;
     }
   }
 }
+
 </style>

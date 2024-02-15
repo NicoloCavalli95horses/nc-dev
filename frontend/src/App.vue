@@ -3,6 +3,7 @@
   <NavBar />
   <ToastMsg />
   <RouterView />
+  <OnTopBtn />
 </template>
 <script setup>
 //==================================
@@ -11,6 +12,7 @@
 import { RouterView } from "vue-router";
 import ToastMsg from "./components/ToastMsg.vue";
 import NavBar from "./components/NavBar.vue";
+import OnTopBtn from "./components/OnTopBtn.vue";
 import Icons from "./components/Icons.vue";
 
 </script>

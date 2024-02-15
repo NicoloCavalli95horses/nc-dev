@@ -1,7 +1,7 @@
 <template>
   <div class="fixed-right" :class="[show ? 'fade-in' : 'fade-out']">
-    <Btn :def="true" @click="onTopClick()">
-      <svg class="r-12"><use href="#check"></use></svg>
+    <Btn @click="onTopClick">
+      <svg><use href="#arrow-up"></use></svg>
     </Btn>
   </div>
 </template>
@@ -53,8 +53,10 @@ onUnmounted(() => {
   bottom: 2.2rem;
   box-shadow: var(--box-shadow);
   border-radius: var(--radius-xl);
+  &:deep(button) {
+    padding: 10px;
+  }
 }
-
 .fade-in {
   opacity: 1;
   transition-duration: var(--transition-slow);
