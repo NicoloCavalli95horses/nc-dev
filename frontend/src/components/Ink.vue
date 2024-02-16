@@ -19,6 +19,7 @@
       cx="50%"
       cy="50%"
       r="50%"
+      fill="#333"
       :style="{ filter: `url(#${filter_id})` }"
     />
   </svg>

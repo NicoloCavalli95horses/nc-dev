@@ -3,10 +3,9 @@
     <template #title>Hi, I'm Nicolò</template>
     <template #default>
       <h2>
-        I am a <span class="selected">designer</span> and <span class="monospaced">developer</span>,<br>
-        specialized in Web Development with Vue.js and Laravel.<br> <br>
-        I like simple and well-made things <br>
-        As they say, art is all in the details.
+        I am a <span class="selected">designer</span> and <span class="monospaced">&#60;developer&#47;&#62;</span><br>
+        specialized in Web Development with Vue.js and Laravel.<br><br>
+        I like crafting simple and well-made UIs. As they say, art is all in the details...
       </h2>
    
       <div class="ink-wrapper">

@@ -1,9 +1,7 @@
 //==============================
 // Consts
 //==============================
-const BASE_URL = 'https://nicolocavalli.com/api/';
-// const BASE_URL = 'http://127.0.0.1:8000/api/';
-
+const BASE_URL = import.meta.env.DEV ? 'http://127.0.0.1:8000/api/' : 'https://nicolocavalli.com/api/';
 
 //==============================
 // Functions
