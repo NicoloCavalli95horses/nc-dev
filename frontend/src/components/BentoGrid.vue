@@ -40,7 +40,7 @@ const props = defineProps({
 <style lang="scss" scoped>
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 12px;
   .item {
     background-color: #333;

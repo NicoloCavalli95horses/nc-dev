@@ -51,6 +51,7 @@ const items = [
     title: "Fractal tree",
     content: "Exploring the idea of recursive component in Vue.js",
     href: "https://fractal-tree-vue.netlify.app/",
+    src: '/img/fractal.png',
   },
   {
     id: Symbol(),
@@ -64,6 +65,18 @@ const items = [
     title: "2D vectors playground",
     content: "Interactive platform about 2D vectors",
     href: "https://2dvectors.netlify.app/",
+  },
+  {
+    id: Symbol(),
+    title: "WS live chat",
+    content: "Web Socket chat in Node.js",
+    href: "https://ws-chat-ntws.onrender.com/",
+  },
+  {
+    id: Symbol(),
+    title: "2 players game",
+    content: "2 players fighting game (desktop only). A little buggy attempt to master the Pinia state management system",
+    href: "https://thelastwarrior.netlify.app/",
   },
 ];
 </script>
