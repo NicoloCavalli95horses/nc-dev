@@ -28,33 +28,31 @@ const props = defineProps({
   },
 });
 
-//==============================
-// Consts
-//==============================
 
-//==============================
-// Watch
-//==============================
 </script>
 
 <style lang="scss" scoped>
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   grid-gap: 12px;
   .item {
-    background-color: #333;
+    background-color: var(--grey-33);
     border-radius: clamp(1em, 1vw, 2em);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     &.large {
+      aspect-ratio: 16 / 9;
       @media screen and (min-width: 750px) {
         grid-column: span 2;
       }
     }
     .text {
       padding: 22px;
+      p {
+        margin-top: 4px;
+      }
     }
   }
 }

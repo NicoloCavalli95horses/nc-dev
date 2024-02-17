@@ -56,12 +56,12 @@ async function onEmailSend() {
   apiSendEmail({ from: email.value, subject: subject.value, message: msg.value }).then(
     (res) => {
       if ( res.code == 200 ) {
-        addToastMsg({ msg: 'Email successfully sent!', time: 5000 }); 
+        addToastMsg({ msg: 'Email sent', time: 5000 }); 
       }
       disable_send.value = false;
     },
     () => {
-      addToastMsg({ msg: 'An error occurred: email send failed', time: 5000 }); 
+      addToastMsg({ msg: 'Email send failed', time: 5000 }); 
       disable_send.value = false;
     }
   );

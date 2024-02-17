@@ -1,34 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Signika+Negative&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 :root {
-  /* AUTUMN COLOR PALETTE */
-  --karry: rgb(255, 235, 210); 
-  --atomic-tangerine: rgb(255, 163, 100);
-  --crusta: rgb(252, 118, 67);
-  --apple-blossom: rgb(175, 79, 65);
-  --pickled-bluewood: rgb(39, 50, 72);
-  --darker-pickled-bluewood: rgb(27, 35, 50);
-
-  /* LIGHT FLAMES */
-  --quartz: #171515;
-  --cardovan: #894242;
-  --indian-red: #d55c5a;
-  --tulip: #f5918f;
-  --almond: #ebd4cc;
-  
-  /* functional references */
   --primary: rgb(228, 61, 61);
   --secondary: rgb(255, 63, 63);
-  --footer-bg: var(--darker-pickled-bluewood);
-  --footer-bg-05: rgba(27, 35, 50, 0.5);
-  --background: var(--pickled-bluewood);
   --backdrop: rgba(255, 235, 210, 0.1);
-  --font-light: var(--karry);
-  --font-dark: var(--pickled-bluewood);
-  --white: rgb(240, 240, 255); 
-  --black: rgb(17, 17, 17);
+  --font-light: rgb(255, 235, 210);
   --error-color: rgb(209, 44, 44);
+  --font-dark: #222;
+  --grey-22: #222; 
+  --grey-28: #282828; 
+  --grey-33: #333; 
+  --grey-44: #444; 
+
 
   --radius-xl: 2.6rem;
   --radius-l: 1.8rem;
@@ -71,13 +55,13 @@ body {
   border: 0;
   outline: 0;
   scroll-behavior: smooth;
-  background-color: #222;
+  background-color: var(--grey-22);
   user-select: none;
 }
 
 /* Font */
-h1, h2, h3, h5, p, ul, li, a, span, input, textarea, label, summary, details {
-  font-family: 'Quicksand', monospace;
+h2, h5, p, ul, li, a, span, input, textarea, label, summary, details {
+  font-family: 'Montserrat', monospace;
 }
 
 h1, h3, h4 {
@@ -126,6 +110,7 @@ h6 {
 
 p, span, ul, li, a {
   font-size: 1.4rem;
+  line-height: 1.5;
 }
 ul {
   margin-left: 22px;
@@ -153,12 +138,12 @@ a {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #222;
+  background: var(--grey-22);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: var(--grey-44);
 }
 
 /* Handle on hover */

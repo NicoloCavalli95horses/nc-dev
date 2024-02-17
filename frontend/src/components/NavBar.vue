@@ -48,7 +48,6 @@ nav {
   top: 0;
   width: 100%;
   box-sizing: border-box;
-  background-color: #222;
   .main-nav {
     display: flex;
     align-items: center;

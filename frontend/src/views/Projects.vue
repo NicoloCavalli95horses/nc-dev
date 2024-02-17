@@ -21,8 +21,7 @@ const items = [
   {
     id: Symbol(),
     title: "Pegorer STA website",
-    content:
-      "Full responsive single page application with a structured multi steps contact form. Handled the SEO optimization",
+    content: "Full responsive single page application with a structured multi steps contact form. Handled the SEO optimization",
     href: "https://www.pegorersta.it/",
     src: '/img/pegorersta.png',
   },
@@ -41,8 +40,7 @@ const items = [
   {
     id: Symbol(),
     title: "Machine learning for web accessibility",
-    content:
-      "Interacting with a website using your own body movements: through the device's webcam, the system can recognize postures or gestures of your choice; an action is associated for each of these gestures (scroll up, down, or zoom in)",
+    content: "Interacting with a website using your own body movements: through the device's webcam, the system can recognize postures or gestures of your choice; an action is associated for each of these gestures (scroll up, down, or zoom in)",
     href: "https://a3-project.netlify.app/",
     src: '/img/a3project.png',
   },
@@ -74,8 +72,8 @@ const items = [
   },
   {
     id: Symbol(),
-    title: "2 players game",
-    content: "2 players fighting game (desktop only). A little buggy attempt to master the Pinia state management system",
+    title: "Two players game",
+    content: "Two players fighting game. A little exercise to master the Pinia state management system",
     href: "https://thelastwarrior.netlify.app/",
   },
 ];

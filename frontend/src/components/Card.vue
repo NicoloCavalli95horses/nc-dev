@@ -37,7 +37,7 @@ const props = defineProps({
   padding: 32px 0px;
   &:not(:last-of-type) {
     padding: 0 0 32px 0;
-    border-bottom: 1px solid #282828;
+    border-bottom: 1px solid var(--grey-28);
   }
   p {
     margin-top: 12px;
@@ -54,7 +54,7 @@ const props = defineProps({
       justify-content: center;
       text-transform: uppercase;
       letter-spacing: -0.5px;
-      background-color: #303030;
+      background-color: var(--grey-33);
       padding: 8px 12px;
       border-radius: var(--radius-xl);
     }
