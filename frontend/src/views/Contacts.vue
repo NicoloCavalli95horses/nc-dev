@@ -51,7 +51,7 @@ const disable_send = ref( false );
 const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
-const areFieldsValid = computed(() => emailRegex.test( email.value ) && subject.value.length && msg.value.length );
+const areFieldsValid = computed(() => emailRegex.test( email.value ) && subject.value && msg.value );
 
 //==============================
 // Functions
