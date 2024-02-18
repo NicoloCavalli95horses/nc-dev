@@ -2,8 +2,13 @@
   <BaseLayout>
     <template #title>My story</template>
     <template #default>
+      <h3 class="bottom-24">Education</h3>
       <div class="events">
-        <Card v-for="item in items" :key="item.id" :item="item" />
+        <Card v-for="item in EDUCATION" :key="item.id" :item="item" />
+      </div>
+      <h3 class="top-24">Professional experience</h3>
+      <div class="events">
+        <Card v-for="item in PROFESSIONAL" :key="item.id" :item="item" />
       </div>
     </template>
   </BaseLayout>
@@ -19,7 +24,7 @@ import Card from "@/components/Card.vue";
 //==============================
 // Consts
 //==============================
-const items = [
+const EDUCATION = [
   {
     id: Symbol(),
     year: "2014-2017",
@@ -28,11 +33,9 @@ const items = [
       paragraph:
         "A humanistic starting point characterized by an integrated approach and a practical settings",
       list: [
-        "knowledge in different areas of psychological disciplines",
         "methods and procedures of investigation and scientific research in the psychological field",
         "application in theoretical-practical laboratories in educational, clinical and work psychology field",
         "exercise of psychological tests",
-        "development of intervention projects in educational and clinical field",
       ],
       tags: ["communication", "statistics", "research methods"],
     },
@@ -44,6 +47,11 @@ const items = [
     content: {
       paragraph:
         "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
+      list: [
+        "understanding of the basics of computer science, with a focus on the Web Development field",
+        "cognitive ergonomy and principles of visual design applied to digital products",
+        "design laboratories and experience of creating and developing a brand",
+      ],
       tags: ["html", "css", "javascript", "node.js", "ux", "ui", "figma"],
     },
   },
@@ -54,17 +62,30 @@ const items = [
       "2nd Level Master's Degree in Artificial Intelligence for Human Science",
     content: {
       paragraph:
-        "Course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
-        tags: ["python", "keras", "pandas", "tensorflow"],
+        "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
+      list: [
+        "history and state of art of psychology of learning and human intelligence",
+        "computational linguistics in KNIME environment",
+        "hands-on experience in implementing the most famous machine learning algorithms in Python",
+      ],
+      tags: ["python", "keras", "pandas", "tensorflow"],
     },
   },
+];
+
+const PROFESSIONAL = [
   {
     id: Symbol(),
     year: "2022-today",
     title: "Web Developer (iCare)",
     content: {
       paragraph:
-        "Designing, developing, testing, debugging and improving usability and functionality of complex UI for medical applications in the ophthalmic field",
+        "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",
+      list: [
+        "maintain and develop the enterprise design system",
+        "develop, debug and improve usability and functionality of complex interface, from isolated base components to whole pages and views",
+        "unit test and end-to-end test in Cypress",
+      ],
       tags: ["vue.js", "cypress", "jira", "confluence", "figma"],
     },
   },
@@ -72,11 +93,15 @@ const items = [
 </script>
 
 <style lang="scss" scoped>
+h3 {
+  font-family: monospace;
+  letter-spacing: -1px;
+  color: var(--grey-33);
+}
 .events {
   width: 100%;
   display: grid;
   grid-auto-flow: row;
   grid-gap: 22px;
 }
-
 </style>

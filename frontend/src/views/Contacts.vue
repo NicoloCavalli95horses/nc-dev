@@ -14,7 +14,7 @@
             <InputText placeholder="email" v-model:text="subject" />
             <h4>Message</h4>
             <InputText placeholder="your message" type="textarea" v-model:text="msg" />
-            <Btn :disabled="disable_send" @click="onEmailSend">Send</Btn>
+            <Btn :disabled="disable_send || !areFieldsValid" @click="onEmailSend">Send</Btn>
           </div>
         </div>
       </section>
@@ -28,6 +28,7 @@
 //==============================
 import {
   ref,
+  computed,
 } from 'vue';
 import {
   apiSendEmail,
@@ -47,6 +48,10 @@ const email = ref( undefined );
 const subject = ref( undefined );
 const msg = ref( undefined );
 const disable_send = ref( false );
+const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
+const areFieldsValid = computed(() => emailRegex.test( email.value ) && subject.value.length && msg.value.length );
 
 //==============================
 // Functions

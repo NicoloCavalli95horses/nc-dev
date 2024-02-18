@@ -1,5 +1,5 @@
 <template>
- <div v-if="toast" class="toast-msg">
+ <div v-if="toast" class="toast-msg fadein">
    <p>{{ toast?.msg }}</p> 
  </div>
 </template>
@@ -44,12 +44,12 @@ onBeforeUnmount( () => {
 <style lang="scss" scoped>
 .toast-msg {
   background-color: var(--font-light);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   position: fixed;
   bottom: 22px;
   left: 50%;
   transform: translate(-50%, 0%);
-  padding: 8px 12px;
+  padding: 8px 16px;
   p {
     color: var(--font-dark);
     font-size: 18px;
