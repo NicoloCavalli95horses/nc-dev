@@ -27,9 +27,9 @@ const items = [
   },
   {
     id: Symbol(),
-    title: "Ray casting",
-    content: "An interactive simulation of the Ray Casting algorithm",
-    href: "https://ray-casting.netlify.app/",
+    title: "Three.js learning path",
+    content: "documentation of progress in using the Three.js library",
+    href: "https://threejs-learning.netlify.app/",
   },
   {
     id: Symbol(),
@@ -69,6 +69,12 @@ const items = [
     title: "WS live chat",
     content: "Web Socket chat in Node.js",
     href: "https://ws-chat-ntws.onrender.com/",
+  },
+  {
+    id: Symbol(),
+    title: "Ray casting",
+    content: "An interactive simulation of the Ray Casting algorithm",
+    href: "https://ray-casting.netlify.app/",
   },
   {
     id: Symbol(),

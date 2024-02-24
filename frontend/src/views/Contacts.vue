@@ -4,9 +4,13 @@
     <template #default>
       <section>
         <div class="contact-box">
+          <p>
+            <a href="https://github.com/NicoloCavalli95horses"><svg><use href="#github"></use></svg></a>
+            <a href="https://www.instagram.com/nicolo.cavalli95/"><svg><use href="#instagram"></use></svg></a>
+            <a href="https://www.linkedin.com/in/nicolo-cavalli/"><svg><use href="#linkedin"></use></svg></a>
+          </p>
           <p><label>email</label> nicolo.cavalli95@gmail.com</p>
           <p><label>mobile</label> +39 346 95 92 168</p>
-          <p><label>monday - friday</label> 8:00 - 20:00</p>
           <div class="inputs">
             <h4>Email</h4>
             <InputText placeholder="email" v-model:text="email" />
