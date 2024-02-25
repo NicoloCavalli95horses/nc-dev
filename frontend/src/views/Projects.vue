@@ -28,7 +28,7 @@ const items = [
   {
     id: Symbol(),
     title: "Three.js learning path",
-    content: "documentation of progress in using the Three.js library",
+    content: "Documentation of progress in using the Three.js library",
     href: "https://threejs-learning.netlify.app/",
   },
   {

@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
       <h3 class="bottom-12 c-text">404 not found</h3>
-      <p class="bottom-24 c-text">Questa pagina non esiste o non è al momento raggiungibile.</p>
+      <p class="bottom-24 c-text">This page does not exist.</p>
       <div class="flex-center">
         <!-- <Btn text="homepage" :def="true" @click="$router.push('/')" /> -->
       </div>
