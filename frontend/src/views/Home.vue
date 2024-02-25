@@ -53,7 +53,7 @@ function onDownload() {
 }
 
 function downloadAsset({file}) {
-  const file_path = 'public/download/' + file;
+  const file_path = `/download/${file}`;
   const a = document.createElement('a');
   a.href = file_path;
   a.download = file;

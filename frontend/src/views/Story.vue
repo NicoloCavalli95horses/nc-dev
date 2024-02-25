@@ -2,9 +2,6 @@
   <BaseLayout>
     <template #title>My story</template>
     <template #default>
-      <!-- <div class="quote"> -->
-        <!-- <Quote /> -->
-      <!-- </div> -->
       <h3 class="bottom-24">Education</h3>
       <div class="events">
         <Card v-for="item in EDUCATION" :key="item.id" :item="item" />
@@ -23,7 +20,6 @@
 //==============================
 import BaseLayout from "@/components/BaseLayout.vue";
 import Card from "@/components/Card.vue";
-import Quote from "@/components/Quote.vue";
 
 //==============================
 // Consts
@@ -101,12 +97,6 @@ h3 {
   font-family: monospace;
   letter-spacing: -1px;
   color: var(--grey-33);
-}
-.quote {
-  width: 100%;
-  height: 50vh;
-  display: flex;
-  justify-content: center;
 }
 .events {
   width: 100%;
