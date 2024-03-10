@@ -52,7 +52,6 @@ async function onLogin() {
   
   if ( res.code == 200 && res.status == 'OK' ) {
     is_admin.value = true;
-    addToastMsg({msg: 'logged in as admin', time: 5000});
     emit('close');
   } else {
     addToastMsg({msg: 'auth failure', time: 5000});

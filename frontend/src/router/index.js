@@ -2,7 +2,6 @@
 // Import
 //===========================
 import { createRouter, createWebHistory } from "vue-router";
-import { is_admin, addToastMsg } from "../utils/globals";
 
 //===========================
 // Consts
@@ -44,27 +43,11 @@ const router = createRouter({
       path: "/editor",
       name: "editor",
       component: () => import("../views/Editor.vue"),
-      beforeEnter: (to, from, next) => {
-        if (is_admin.value) {
-          next();
-        } else {
-          addToastMsg({ msg: "access denied", time: 5000 });
-          next("/");
-        }
-      },
     },
     {
       path: "/editor/:id",
       name: "update",
       component: () => import("../views/Editor.vue"),
-      beforeEnter: (to, from, next) => {
-        if (is_admin.value) {
-          next();
-        } else {
-          addToastMsg({ msg: "access denied", time: 5000 });
-          next("/");
-        }
-      },
     },
     {
       path: "/:pathMatch(.*)*",

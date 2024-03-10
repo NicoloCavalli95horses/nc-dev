@@ -67,6 +67,7 @@ import {
   useRoute,
 } from 'vue-router';
 import {
+  is_admin,
   addToastMsg,
 } from '@/utils/globals';
 import {
@@ -112,7 +113,7 @@ const getClass    = computed( () => {
       : is_list.value ? 'list' : '';
 })
 
-const canSave = computed(() => title.value && description.value && tags.value.length && body.value.length );
+const canSave = computed(() => title.value && description.value && tags.value.length && body.value.length && is_admin.value );
 const editID  = computed(() => route.params?.id );
 
 //==============================
@@ -141,6 +142,7 @@ function getChunk( classStyle ) {
 }
 
 async function onSave() {
+  if ( !is_admin.value ) { return; }
   if ( editID.value ) {
     await updateArticle();
     return;
