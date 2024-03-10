@@ -1,7 +1,10 @@
 //==================================
 // Import
 //==================================
-import { ref } from 'vue';
+import {
+  ref,
+  watch,
+} from 'vue';
 
 
 //==================================
@@ -10,8 +13,11 @@ import { ref } from 'vue';
 const MOBILE_W = 500;
 const MONTHS   = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
 
-export const toastMsg = ref( [] );
+export const toastMsg  = ref( [] );
 export const is_mobile = ref( window.innerWidth <= MOBILE_W );
+export const is_admin  = ref( false );
+
+window.addEventListener('resize', () => is_mobile.value = window.innerWidth <= MOBILE_W);
 
 //==================================
 // Functions
@@ -29,7 +35,11 @@ export function filterDate( date ) {
   return `${day} ${MONTHS[month_idx]} ${year}`
 }
 
-function onResize() {
-  is_mobile.value = window.innerWidth <= MOBILE_W;
-}
-window.addEventListener('resize', onResize);
+//==================================
+// Watchers
+//==================================
+watch( is_admin, (newVal) => {
+  if (newVal) {
+    addToastMsg({msg: 'admin mode', time: 5000});
+  }
+});

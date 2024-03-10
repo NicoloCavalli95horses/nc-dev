@@ -2,9 +2,13 @@
   <div class="thumb" @click="$router.push({ path: `/blog/${item.id}` })">
     <div class="title">
       <h4>{{ item.title }}</h4>
-      <div class="btns">
-        <Btn icon :def="false" @click="(e) => { e.stopPropagation(); emit('edit'); }"><svg><use href="#edit"></use></svg></Btn>
-        <Btn icon :def="false" @click="(e) => { e.stopPropagation(); emit('delete'); }"><svg><use href="#delete"></use></svg></Btn>
+      <div v-if="is_admin" class="btns">
+        <Btn icon :def="false" @click="(e) => { e.stopPropagation(); emit('edit'); }">
+          <svg><use href="#edit"></use></svg>
+        </Btn>
+        <Btn icon :def="false" @click="(e) => { e.stopPropagation(); emit('delete'); }">
+          <svg><use href="#delete"></use></svg>
+        </Btn>
       </div>
     </div>
     <div class="body">
@@ -25,7 +29,11 @@
 //==============================
 // Import
 //==============================
-import { filterDate } from '@/utils/globals';
+import {
+  is_admin,
+  filterDate
+} from '@/utils/globals';
+
 import Btn from './Btn.vue';
 
 //==============================
@@ -41,14 +49,6 @@ const emit = defineEmits([
  'delete',
 ]);
 
-//==============================
-// Consts
-//==============================
-
-
-//==============================
-// Functions
-//==============================
 
 </script>
 
@@ -80,7 +80,9 @@ const emit = defineEmits([
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 8px;
+    gap: 10px;
     .tags {
       display: grid;
       grid-gap: 6px;

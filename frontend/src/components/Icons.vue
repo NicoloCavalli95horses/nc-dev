@@ -16,6 +16,18 @@
     <symbol id="arrow-up" viewBox="0 0 24 24" fill="currentColor">
       <path d="M7,15L12,10L17,15H7Z" />
     </symbol>
+ 
+    <symbol id="pin" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
+    </symbol>
+
+    <symbol id="office" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18,15H16V17H18M18,11H16V13H18M20,19H12V17H14V15H12V13H14V11H12V9H20M10,7H8V5H10M10,11H8V9H10M10,15H8V13H10M10,19H8V17H10M6,7H4V5H6M6,11H4V9H6M6,15H4V13H6M6,19H4V17H6M12,7V3H2V21H22V7H12Z" />
+    </symbol>
+
+    <symbol id="school" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
+    </symbol>
 
     <symbol id="edit" viewBox="0 0 24 24" fill="currentColor">
       <path d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H10V20.1L20 10.1V8L14 2H6M13 3.5L18.5 9H13V3.5M20.1 13C20 13 19.8 13.1 19.7 13.2L18.7 14.2L20.8 16.3L21.8 15.3C22 15.1 22 14.7 21.8 14.5L20.5 13.2C20.4 13.1 20.3 13 20.1 13M18.1 14.8L12 20.9V23H14.1L20.2 16.9L18.1 14.8Z" />

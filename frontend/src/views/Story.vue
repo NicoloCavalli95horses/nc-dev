@@ -27,8 +27,11 @@ const EDUCATION = [
   {
     id: Symbol(),
     year: "2014 - 2017",
-    location: "IUSVE University, Venice (VE)",
     title: "Bachelor's Degree in Psychology",
+    location: {
+      icon: "#school",
+      text: "IUSVE University, Venice (VE)",
+    },
     content: {
       paragraph: "A humanistic starting point characterized by an integrated approach and a practical settings",
       list: [
@@ -43,7 +46,10 @@ const EDUCATION = [
     id: Symbol(),
     year: "2018 - 2021",
     title: "Master's Degree in Human Computer Interaction",
-    location: "Milano-Bicocca University, Milan (MI)",
+    location: {
+      icon: "#school",
+      text: "Milano-Bicocca University, Milan (MI)",
+    },
     content: {
       paragraph:
         "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
@@ -59,7 +65,10 @@ const EDUCATION = [
     id: Symbol(),
     year: "2021 - 2022",
     title: "2nd Level Master's Degree in Artificial Intelligence for Human Science",
-    location: "Federico II University, Naples (NA)",
+    location: {
+      icon: "#school",
+      text: "Federico II University, Naples (NA)",
+    },
     content: {
       paragraph: "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
       list: [
@@ -77,7 +86,10 @@ const PROFESSIONAL = [
     id: Symbol(),
     year: `2022 - today (${ getProExpTime() })`,
     title: "Web Developer (iCare)",
-    location: "Padua (PDA)",
+    location: {
+      icon: "#office",
+      text: "Padua (PD)"
+    },
     content: {
       paragraph:
         "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",

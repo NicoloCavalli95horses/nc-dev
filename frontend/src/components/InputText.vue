@@ -1,7 +1,7 @@
 <template>
   <input
-    v-if="type == 'text'"
-    type="text"
+    v-if="['text', 'password'].includes(type)"
+    :type="type"
     autocomplete="none"
     :value="text"
     :required="is_required"

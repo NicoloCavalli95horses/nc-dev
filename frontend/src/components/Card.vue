@@ -2,7 +2,10 @@
   <div class="event">
     <h2>{{ item.year }}</h2>
     <h4>{{ item.title }}</h4>
-    <h5>{{ item.location }}</h5>
+    <div class="pin">
+      <svg><use :href="item.location.icon"></use></svg>
+      <h5>{{ item.location.text }}</h5>
+    </div>
     <p>{{ item.content.paragraph }}</p>
     <ul v-if="item.content.list?.length">
       <li v-for="(i, j) in item.content.list" :key="j">{{ i }}</li>
@@ -46,6 +49,15 @@ const props = defineProps({
     margin: 10px 0 10px 0;
     color: var(--secondary);
     font-size: 2.6rem;
+  }
+  .pin {
+    display: flex;
+    align-items: center;
+    svg {
+      width: 20px;
+      height: 20px;
+      margin: 0 8px 0 0;
+    }
   }
   p {
     margin-top: 12px;

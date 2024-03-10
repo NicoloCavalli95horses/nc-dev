@@ -7,24 +7,36 @@
       <component :is="Component" />
     </transition>
   </RouterView>
+  <Login v-if="can_login" @close="can_login = false" />
   <OnTopBtn />
+  <KeyBoardShortcut :keys="['l']" :modifiers="['Control', 'Alt']" @keydown="can_login = true" />
 </template>
 <script setup>
 //==================================
 // Import
 //==================================
-import { useRoute, RouterView } from "vue-router";
-import { watch } from 'vue';
-import ToastMsg from "./components/ToastMsg.vue";
-import NavBar from "./components/NavBar.vue";
-import OnTopBtn from "./components/OnTopBtn.vue";
-import Icons from "./components/Icons.vue";
+import {
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
+import {
+  useRoute,
+  RouterView
+} from "vue-router";
+
+import NavBar           from "./components/NavBar.vue";
+import Icons            from "./components/Icons.vue";
+import Login            from "./components/Login.vue";
+import ToastMsg         from "./components/ToastMsg.vue";
+import OnTopBtn         from "./components/OnTopBtn.vue";
+import KeyBoardShortcut from "./components/KeyBoardShortcut.vue";
 
 //==================================
 // Const
 //==================================
 const route = useRoute();
-
+const can_login = ref( false );
 
 //==================================
 // Watch

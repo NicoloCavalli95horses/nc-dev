@@ -142,6 +142,26 @@ export async function apiDeleteArticle({ id }) {
   return await _executeApi({ url, options });
 }
 
+/**
+ * Login as admin
+ * @param {Object} args 
+ * @param {Integer} args.username
+ * @param {Integer} args.password
+ * @returns response object 
+ */
+export async function apiLogin({ username, password }) {
+  const url = `${BASE_URL}login`;
+  const options = _getApiOptions({
+    method: "POST",
+    accept: "application/json",
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+  return await _executeApi({ url, options });
+}
+
 //==============================
 // Private
 //==============================
