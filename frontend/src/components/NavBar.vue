@@ -30,9 +30,10 @@
 //==================================
 import {
   ref,
-  onMounted,
-  onUnmounted,
 } from "vue";
+import {
+  is_mobile,
+} from '@/utils/globals';
 import router from '../router/index';
 
 //==================================
@@ -50,7 +51,6 @@ const items = [
 // Consts
 //==================================
 const active       = ref( 'home' );
-const is_mobile    = ref( window.innerWidth <= 500 );
 const show_sidebar = ref( false );
 
 //==================================
@@ -62,21 +62,6 @@ function onItemClick(i) {
   show_sidebar.value = false;
 }
 
-function onResize() {
- is_mobile.value = window.innerWidth <= 500;
-}
-
-
-//==================================
-// Life cycle
-//==================================
-onMounted(() => {
-  window.addEventListener('resize', onResize);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', onResize);
-})
 </script>
 
 <style lang="scss" scoped>
@@ -149,7 +134,7 @@ nav {
   position: fixed;
   top: 0;
   right:0;
-  width: 40%;
+  width: 100%;
   height: 100%;
   background-color: var(--grey-22);
   z-index: 9;

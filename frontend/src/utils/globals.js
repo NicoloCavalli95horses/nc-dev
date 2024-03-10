@@ -7,21 +7,11 @@ import { ref } from 'vue';
 //==================================
 // Consts
 //==================================
+const MOBILE_W = 500;
+const MONTHS   = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+
 export const toastMsg = ref( [] );
-const MONTHS = [
-  'jan',
-  'feb',
-  'mar',
-  'apr',
-  'may',
-  'jun',
-  'jul',
-  'aug',
-  'sep',
-  'oct',
-  'nov',
-  'dec'
-]
+export const is_mobile = ref( window.innerWidth <= MOBILE_W );
 
 //==================================
 // Functions
@@ -38,3 +28,8 @@ export function filterDate( date ) {
   const year = d.getFullYear();
   return `${day} ${MONTHS[month_idx]} ${year}`
 }
+
+function onResize() {
+  is_mobile.value = window.innerWidth <= MOBILE_W;
+}
+window.addEventListener('resize', onResize);

@@ -5,11 +5,9 @@
       <h2 class="bottom-48">
         Sharing is the best way to learn.<br />
         That's why I decided to keep track of my progresses building a li'l blog
-        from scratch.<br />
-        Here, you can find mostly boring and technical stuff about Web
-        Development.
+        from scratch
       </h2>
-      <div class="articles">
+      <div class="articles" :class="{ 'mobile' : is_mobile }">
         <template v-if="items.length">
           <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
         </template>
@@ -36,6 +34,7 @@ import {
   apiDeleteArticle,
 } from "@/utils/api";
 import {
+  is_mobile,
   addToastMsg,
 } from "@/utils/globals";
 
@@ -93,5 +92,8 @@ onMounted(async () => {
   display: grid;
   grid-gap: 32px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  &.mobile {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 </style>

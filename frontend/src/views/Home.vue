@@ -94,6 +94,8 @@ onBeforeUnmount(() => {
       &.gradient-text {
         background-image: linear-gradient(45deg, var(--grey-44), var(--secondary));
         background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
         padding: 4px 6px;
         border-radius: 12px;
         color: transparent;

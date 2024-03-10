@@ -109,6 +109,7 @@ onMounted( async () => {
 }
 
 .main-content {
+  max-width: 800px;
   margin: 22px 0 44px 0;
   user-select: text;
 }

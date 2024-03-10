@@ -1,7 +1,8 @@
 <template>
   <div class="event">
     <h2>{{ item.year }}</h2>
-    <h3>{{ item.title }}</h3>
+    <h4>{{ item.title }}</h4>
+    <h5>{{ item.location }}</h5>
     <p>{{ item.content.paragraph }}</p>
     <ul v-if="item.content.list?.length">
       <li v-for="(i, j) in item.content.list" :key="j">{{ i }}</li>
@@ -37,7 +38,14 @@ const props = defineProps({
   padding: 32px 0px;
   &:not(:last-of-type) {
     padding: 0 0 32px 0;
-    border-bottom: 1px solid var(--grey-33);
+  }
+  h2 {
+    color: var(--grey-44);
+  }
+  h4 {
+    margin: 10px 0 10px 0;
+    color: var(--secondary);
+    font-size: 2.6rem;
   }
   p {
     margin-top: 12px;

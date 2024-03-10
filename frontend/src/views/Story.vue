@@ -2,11 +2,10 @@
   <BaseLayout>
     <template #title>My story</template>
     <template #default>
-      <h3 class="bottom-24">Education</h3>
+      <h2 class="bottom-24">A glance over my academic and professional journey</h2>
       <div class="events">
         <Card v-for="item in EDUCATION" :key="item.id" :item="item" />
       </div>
-      <h3 class="top-24">Professional experience</h3>
       <div class="events">
         <Card v-for="item in PROFESSIONAL" :key="item.id" :item="item" />
       </div>
@@ -28,10 +27,10 @@ const EDUCATION = [
   {
     id: Symbol(),
     year: "2014 - 2017",
+    location: "IUSVE University, Venice (VE)",
     title: "Bachelor's Degree in Psychology",
     content: {
-      paragraph:
-        "A humanistic starting point characterized by an integrated approach and a practical settings",
+      paragraph: "A humanistic starting point characterized by an integrated approach and a practical settings",
       list: [
         "methods and procedures of investigation and scientific research in the psychological field",
         "application in theoretical-practical laboratories in educational, clinical and work psychology field",
@@ -44,6 +43,7 @@ const EDUCATION = [
     id: Symbol(),
     year: "2018 - 2021",
     title: "Master's Degree in Human Computer Interaction",
+    location: "Milano-Bicocca University, Milan (MI)",
     content: {
       paragraph:
         "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
@@ -58,11 +58,10 @@ const EDUCATION = [
   {
     id: Symbol(),
     year: "2021 - 2022",
-    title:
-      "2nd Level Master's Degree in Artificial Intelligence for Human Science",
+    title: "2nd Level Master's Degree in Artificial Intelligence for Human Science",
+    location: "Federico II University, Naples (NA)",
     content: {
-      paragraph:
-        "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
+      paragraph: "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
       list: [
         "history and state of art of psychology of learning and human intelligence",
         "computational linguistics in KNIME environment",
@@ -78,6 +77,7 @@ const PROFESSIONAL = [
     id: Symbol(),
     year: `2022 - today (${ getProExpTime() })`,
     title: "Web Developer (iCare)",
+    location: "Padua (PDA)",
     content: {
       paragraph:
         "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",
