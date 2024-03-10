@@ -39,13 +39,13 @@ class EmailController extends Controller
         'subject' => $subject,
         'message' => $message,
       ], 200);
-  } catch (\Exception $e) {
-      return response()->json([
-        'status' => 'FAIL',
-        'code' => 500,
-        'message' => 'failed to send email',
-        'error' => $e->getMessage(),
-      ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+          'status' => 'FAIL',
+          'code' => 500,
+          'message' => 'failed to send email',
+          'error' => $e->getMessage(),
+        ], 200);
+      }
     }
-  }
 }

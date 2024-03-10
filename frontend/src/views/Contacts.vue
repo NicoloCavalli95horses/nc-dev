@@ -62,18 +62,15 @@ const areFieldsValid = computed(() => emailRegex.test( email.value ) && subject.
 //==============================
 async function onEmailSend() {
   disable_send.value = true;
-  apiSendEmail({ from: email.value, subject: subject.value, message: msg.value }).then(
-    (res) => {
-      if ( res.code == 200 ) {
-        addToastMsg({ msg: 'Email sent', time: 5000 }); 
-      }
-      disable_send.value = false;
-    },
-    () => {
-      addToastMsg({ msg: 'Email send failed', time: 5000 }); 
-      disable_send.value = false;
-    }
-  );
+  const res = await apiSendEmail({ from: email.value, subject: subject.value, message: msg.value });
+  console.log( res );
+  if ( res.code == 200 ) {
+    addToastMsg({ msg: 'Email sent', time: 5000 }); 
+  } else {
+    addToastMsg({ msg: 'Email send failed', time: 5000 }); 
+    console.error('send email failed:', err);
+}
+  disable_send.value = false;
   email.value = undefined;
   msg.value = undefined;
   subject.value = undefined;

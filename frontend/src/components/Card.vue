@@ -33,11 +33,11 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .event {
-  max-width: 980px;
+  max-width: 800px;
   padding: 32px 0px;
   &:not(:last-of-type) {
     padding: 0 0 32px 0;
-    border-bottom: 1px solid var(--grey-28);
+    border-bottom: 1px solid var(--grey-33);
   }
   p {
     margin-top: 12px;
@@ -47,17 +47,6 @@ const props = defineProps({
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    .tag {
-      width: max-content;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
-      background-color: var(--grey-33);
-      padding: 8px 12px;
-      border-radius: var(--radius-xl);
-    }
   }
 }
 </style>

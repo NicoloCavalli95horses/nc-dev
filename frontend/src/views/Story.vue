@@ -27,7 +27,7 @@ import Card from "@/components/Card.vue";
 const EDUCATION = [
   {
     id: Symbol(),
-    year: "2014-2017",
+    year: "2014 - 2017",
     title: "Bachelor's Degree in Psychology",
     content: {
       paragraph:
@@ -42,7 +42,7 @@ const EDUCATION = [
   },
   {
     id: Symbol(),
-    year: "2018-2021",
+    year: "2018 - 2021",
     title: "Master's Degree in Human Computer Interaction",
     content: {
       paragraph:
@@ -57,7 +57,7 @@ const EDUCATION = [
   },
   {
     id: Symbol(),
-    year: "2021-2022",
+    year: "2021 - 2022",
     title:
       "2nd Level Master's Degree in Artificial Intelligence for Human Science",
     content: {
@@ -76,7 +76,7 @@ const EDUCATION = [
 const PROFESSIONAL = [
   {
     id: Symbol(),
-    year: "2022-today",
+    year: `2022 - today (${ getProExpTime() })`,
     title: "Web Developer (iCare)",
     content: {
       paragraph:
@@ -90,6 +90,23 @@ const PROFESSIONAL = [
     },
   },
 ];
+
+function getProExpTime() {
+  const diff = Math.abs(Date.now() - Date.parse('02/14/2022'));
+  let seconds = Math.floor(diff / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours   = Math.floor(minutes / 60);
+  let days    = Math.floor(hours / 24);
+  let months  = Math.floor(days / 30);
+  let years   = Math.floor(days / 365);
+  seconds %= 60;
+  minutes %= 60;
+  hours %= 24;
+  days %= 30;
+  months %= 12;
+
+  return `${years} years, ${months} months`;
+}
 </script>
 
 <style lang="scss" scoped>

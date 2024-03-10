@@ -2,6 +2,7 @@
   <BaseLayout>
     <template #title>Projects</template>
     <template #default>
+      <h2 class="bottom-48">A few things I have worked on over time,<br>including academic exercises and week-end's experiments.</h2>
       <BentoGrid :items="items" />
     </template>
   </BaseLayout>

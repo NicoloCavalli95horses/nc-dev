@@ -4,11 +4,9 @@
     <template #default>
       <div class="content">
         <h2>
-          I am a <span class="selected">designer</span> and
-          <span class="monospaced">&#60;developer&#47;&#62;</span><br />
-          specialized in Web Development with Vue.js and Laravel.<br /><br />
-          I like crafting simple and well-made UIs. As they say, art is all in
-          the details...
+          I am a versatile and <span class="gradient-text">creative</span> mind<br>
+          with a multidisciplinary background and a plethora of interests,<br>
+          specialized in Web Development and User Interface design.
         </h2>
         <Btn class="top-24" @click="onDownload">Download CV</Btn>
       </div>
@@ -91,20 +89,29 @@ onBeforeUnmount(() => {
   z-index: 1;
   position: relative;
   h2 {
-    line-height: 1.6;
     span {
       font-size: inherit;
-      &.selected {
-        border: 2px solid var(--primary);
-        color: var(--primary);
+      &.gradient-text {
+        background-image: linear-gradient(45deg, var(--grey-44), var(--secondary));
+        background-clip: text;
         padding: 4px 6px;
         border-radius: 12px;
+        color: transparent;
       }
       &.monospaced {
         font-family: monospace;
         opacity: 0.5;
+        letter-spacing: -1px;
+        font-weight: 100;
       }
     }
+    svg {
+      font-size: 0;
+    }
+  }
+  a.music-link {
+    line-height: 1.6;
+    font-size: 2.2rem;
   }
 }
 .ink-wrapper {

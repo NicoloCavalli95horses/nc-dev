@@ -5,10 +5,11 @@
     :type="type"
     :disabled="disabled ? true : false"
     :class="{
-      disabled: disabled,
-      default: def,
-      round: round,
-      down: mouse.down,
+      'disabled': disabled,
+      'default': def,
+      'round': round,
+      'down': mouse.down,
+      'icon' : icon
     }"
     @click="onClick"
     @mouseup="mouse.down = false"
@@ -55,6 +56,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  icon: Boolean,
 });
 
 const emit = defineEmits(["click", "cancel"]);
@@ -176,6 +178,10 @@ button {
   text-transform: uppercase;
   user-select: none;
   color: var(--font-light);
+  &.icon {
+    padding: 0.5rem;
+    border: 1px solid var(--grey-33);
+  }
 
   &:hover {
     transition-duration: var(--transition-medium);

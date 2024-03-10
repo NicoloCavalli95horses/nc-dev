@@ -215,10 +215,6 @@ svg {
   height: 88px;
 }
 
-.bold {
-  font-weight: bold;
-}
-
 .w-33 {
   width: 33%;
 }
@@ -257,14 +253,6 @@ svg {
   pointer-events: none;
 }
 
-code {
-  padding: 0.6rem 0.8rem;
-  border-radius: 2.2rem;
-  font-family: monospace;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0 0.3rem;
-}
 .spacing {
   letter-spacing: 0.2rem;
 }
@@ -368,4 +356,40 @@ label {
 .svg-24 {
   width: 2.4rem;
   height: 2.4rem;
+}
+
+.tag {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  background-color: var(--grey-33);
+  padding: 8px 12px;
+  border-radius: var(--radius-xl);
+}
+
+.error-msg {
+  color: var(--error-color);
+}
+
+.code {
+  font-family: monospace;
+  white-space: pre-wrap;
+  opacity: 0.6;
+  background-color: var(--grey-11);
+  color: var(--font-light);
+  font-size: 13px;
+  padding: 12px;
+  border-radius: var(--radius-s);
+}
+
+.bold {
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.list {
+  margin-left: 12px;
 }

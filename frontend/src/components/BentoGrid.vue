@@ -37,7 +37,7 @@ const props = defineProps({
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   grid-gap: 12px;
   .item {
-    background-color: var(--grey-33);
+    background-color: var(--grey-28);
     border-radius: clamp(1em, 1vw, 2em);
     display: flex;
     flex-direction: column;

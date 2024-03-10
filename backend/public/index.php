@@ -16,7 +16,9 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/../lsapp/storage/framework/maintenance.php')) {
+$prod_dir = getenv('APP_ENV') === 'production' ? '/lsapp/' : null;
+
+if (file_exists($maintenance = __DIR__.'/..'.$prod_dir.'/storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -31,7 +33,7 @@ if (file_exists($maintenance = __DIR__.'/../lsapp/storage/framework/maintenance.
 |
 */
 
-require __DIR__.'/../lsapp/vendor/autoload.php';
+require __DIR__.'/..'.$prod_dir.'/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,7 @@ require __DIR__.'/../lsapp/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../lsapp/bootstrap/app.php';
+$app = require_once __DIR__.'/..'.$prod_dir.'/bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 
