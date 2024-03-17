@@ -11,7 +11,7 @@
         <template v-if="items.length">
           <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
         </template>
-        <p v-else-if="error" class="error-msg">Impossible to fetch articles</p>
+        <p v-else-if="error"><b>Impossible to fetch articles</b></p>
         <p v-else>Loading...</p>
       </div>
     </template>

@@ -19,7 +19,7 @@
         </div>
         <h3>{{ item.title }}</h3>
         <div class="main-content">
-          <div v-html="item.content" id="article-html" />
+          <p id="article-html" v-html="item.content"></p>
         </div>
       </template>
     </template>
@@ -34,11 +34,12 @@ import {
   useRoute,
 } from 'vue-router';
 import {
+  nextTick,
   onMounted,
   ref,
 } from 'vue';
 
-import { filterDate } from "@/utils/globals";
+import { filterDate, syntaxHighlighter, addToastMsg } from "@/utils/globals";
 import { apiGetArticle } from "@/utils/api";
 import BaseLayout from "@/components/BaseLayout.vue";
 
@@ -59,6 +60,8 @@ async function getArticle() {
     item.value = res.data;
     loading.value = false;
     error.value = false;
+    item.value.content = syntaxHighlighter(item.value.content);
+    appendCopyPaste();
   } else {
     console.error(`error while fetching article ${route.params.id}`);
     loading.value = false;
@@ -66,6 +69,29 @@ async function getArticle() {
   }
 }
 
+function appendCopyPaste() {
+  nextTick(() => {
+    const codeElements = Array.from(document.querySelectorAll('code'));
+    codeElements.forEach( el => {
+      const textToCopy = el.textContent;
+      const div = document.createElement('div');
+      const svg = document.createElement('svg');
+      const use = document.createElement('use');
+      use.setAttribute('href', '#copy');
+      svg.appendChild(use);
+      div.appendChild(svg);
+      div.classList.add('copy-paste');
+      div.textContent = 'copy';
+      div.addEventListener('click', () => onClipboardCopy(textToCopy));
+      el.appendChild(div);
+    });
+  })
+}
+
+function onClipboardCopy(text){
+  navigator.clipboard.writeText(text);
+  addToastMsg({msg: 'Code copied', time:2000})
+}
 
 //==============================
 // Life cycle

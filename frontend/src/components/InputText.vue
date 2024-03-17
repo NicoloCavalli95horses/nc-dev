@@ -2,7 +2,7 @@
   <input
     v-if="['text', 'password'].includes(type)"
     :type="type"
-    autocomplete="none"
+    :autocomplete="autocomplete"
     :value="text"
     :required="is_required"
     :placeholder="placeholder"
@@ -11,7 +11,7 @@
 
   <textarea
     v-else-if="type == 'textarea'"
-    autocomplete="none"
+    :autocomplete="autocomplete"
     :value="text"
     :required="is_required"
     :placeholder="placeholder"
@@ -28,6 +28,10 @@ const props = defineProps({
   type: {
     type: String,
     default: 'text',
+  },
+  autocomplete: {
+    type: String,
+    default: 'none'
   },
   placeholder: String,
   is_required: Boolean,

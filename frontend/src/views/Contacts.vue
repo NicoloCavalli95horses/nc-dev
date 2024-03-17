@@ -13,9 +13,9 @@
           <p><label>mobile</label> +39 346 95 92 168</p>
           <div class="inputs">
             <h4>Email</h4>
-            <InputText placeholder="email" v-model:text="email" />
+            <InputText placeholder="email" v-model:text="email" autocomplete="email" />
             <h4>Subject</h4>
-            <InputText placeholder="email" v-model:text="subject" />
+            <InputText placeholder="subject" v-model:text="subject" />
             <h4>Message</h4>
             <InputText placeholder="your message" type="textarea" v-model:text="msg" />
             <Btn :disabled="disable_send || !areFieldsValid" @click="onEmailSend">Send</Btn>
@@ -63,7 +63,6 @@ const areFieldsValid = computed(() => emailRegex.test( email.value ) && subject.
 async function onEmailSend() {
   disable_send.value = true;
   const res = await apiSendEmail({ from: email.value, subject: subject.value, message: msg.value });
-  console.log( res );
   if ( res.code == 200 ) {
     addToastMsg({ msg: 'Email sent', time: 5000 }); 
   } else {

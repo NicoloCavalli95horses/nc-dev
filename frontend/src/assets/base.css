@@ -114,7 +114,7 @@ p, span, ul, li, a {
   font-size: 1.4rem;
   line-height: 1.5;
 }
-ul {
+ul, ol {
   margin-left: 22px;
 }
 

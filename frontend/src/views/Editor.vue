@@ -25,13 +25,11 @@
           <div class="body">
             <h4>Body</h4>
             <div class="btns">
-              <Btn icon :def="is_bold" @click="is_bold = !is_bold"><svg><use href="#format-bold"></use></svg></Btn>
-              <Btn icon :def="is_code" @click="is_code = !is_code"><svg><use href="#code"></use></svg></Btn>
-              <Btn icon :def="is_list" @click="is_list = !is_list"><svg><use href="#list-dot"></use></svg></Btn>
-              <Btn icon @click="content+='<br>'"><svg><use href="#new-line"></use></svg></Btn>
+              <Btn icon :def="false" @click="content+='<b></b>'"><svg><use href="#format-bold"></use></svg></Btn>
+              <Btn icon :def="false" @click="content+= '<code></code>'"><svg><use href="#code"></use></svg></Btn>
+              <Btn icon :def="false" @click="content+='<ul><li></li></ul>'"><svg><use href="#list-dot"></use></svg></Btn>
             </div>
-            <InputText placeholder="description" type="textarea" v-model:text="content" />
-            <Btn class="align-right" :def="false" @click="appendToBody">Append</Btn>
+            <InputText class="height-xl" placeholder="description" type="textarea" v-model:text="content" />
           </div>
         </div>
         <div class="right">
@@ -42,7 +40,7 @@
             </div>
           </div>
           <h4 class="top-12 bottom-24">{{ description }}</h4>
-          <div v-html="body" />
+          <div ref="article_ref" class="article"><p v-html="content"></p></div>
         </div>
 
         <!-- save -->
@@ -62,6 +60,7 @@ import {
   ref,
   computed,
   onMounted,
+  nextTick,
 } from "vue";
 import {
   useRoute,
@@ -75,11 +74,11 @@ import {
   apiUpdateArticle,
   apiCreateArticle,
 } from "@/utils/api";
+import router from "@/router";
 
 import Btn        from "@/components/Btn.vue";
 import InputText  from "@/components/InputText.vue";
 import BaseLayout from "@/components/BaseLayout.vue";
-import router from "@/router";
 
 //==============================
 // Props
@@ -96,24 +95,15 @@ const route = useRoute();
 //==============================
 // Consts
 //==============================
+let t = undefined;
 const title       = ref( '' );
 const description = ref( '' );
-const body        = ref( '' ); //html content of the article
 const tags        = ref( [] );
 const tag         = ref( undefined );
 const content     = ref( '' );
+const article_ref = ref( undefined );
 
-const is_bold     = ref( false );
-const is_code     = ref( false );
-const is_list     = ref( false );
-
-const getClass    = computed( () => {
-  return is_bold.value ? 'bold'
-    : is_code.value ? 'code'
-      : is_list.value ? 'list' : '';
-})
-
-const canSave = computed(() => title.value && description.value && tags.value.length && body.value.length && is_admin.value );
+const canSave = computed(() => title.value && description.value && tags.value.length && content.value.length && is_admin.value );
 const editID  = computed(() => route.params?.id );
 
 //==============================
@@ -123,22 +113,6 @@ function removeTag(idx) {
   if (tags.value[idx]) {
     tags.value.splice(idx, 1);
   }
-}
-
-function appendToBody() {
-  body.value += ' ' + getChunk(getClass.value);
-  content.value = '';
-  is_bold.value = false;
-  is_code.value = false;
-}
-
-function getChunk( classStyle ) {
-  if ( is_list.value ) {
-    return `<ul><li class="${classStyle}">${content.value}</li></ul>`
-  } else if ( is_code.value ) {
-    return `<div class="${classStyle}">${content.value}</div>`;
-  }
-  return `<span class="${classStyle}">${content.value}</span>`;
 }
 
 async function onSave() {
@@ -156,7 +130,7 @@ async function updateArticle() {
     title: title.value,
     description: description.value,
     tags: tags.value,
-    content: body.value,
+    content: content.value,
   });
   if ( res.code == 200 ) {
     addToastMsg({ msg: 'Article edited', time: 5000 });
@@ -171,7 +145,7 @@ async function createArticle() {
     title: title.value,
     description: description.value,
     tags: tags.value,
-    content: body.value,
+    content: content.value,
   });
   if ( res.code == 200 ) {
     addToastMsg({ msg: 'Article saved', time: 5000 });
@@ -192,7 +166,6 @@ function addTag() {
   }
 }
 
-
 //==============================
 // Life cycle
 //==============================
@@ -205,7 +178,7 @@ onMounted( async () => {
     content.value = res.data.content;
     tags.value = JSON.parse(res.data.tags);
   }
-})
+});
 
 </script>
 
@@ -247,6 +220,9 @@ onMounted( async () => {
       grid-auto-flow: column;
       grid-gap: 5px;
     }
+    .article {
+      white-space: pre;
+    }
   }
 }
 
@@ -256,5 +232,8 @@ onMounted( async () => {
 }
 .align-right {
   justify-self: end;
+}
+.height-xl {
+  height: 220px;
 }
 </style>
