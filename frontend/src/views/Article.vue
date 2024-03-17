@@ -5,7 +5,8 @@
       <div class="breadcrumbs">
         <p @click="$router.push({ path: '/blog' })">Blog</p>
         <span>&gt;</span>
-        <p v-if="item?.title" class="active">{{ item.title}}</p>
+        <p v-if="item?.title" class="active">
+          {{ item.title.length < MAX_TITLE_LENGTH ? item.title : item.title.substring(0, MAX_TITLE_LENGTH) + '...' }}</p>
       </div>
       <template v-if="loading"><p>loading...</p></template>
       <template v-else>
@@ -50,6 +51,7 @@ const route   = useRoute();
 const loading = ref( true );
 const error   = ref( false );
 const item    = ref( undefined );
+const MAX_TITLE_LENGTH = 20;
 
 //==============================
 // Functions
@@ -101,6 +103,7 @@ onMounted( async () => {
 })
 
 </script>
+
 
 <style lang="scss" scoped>
 .breadcrumbs {

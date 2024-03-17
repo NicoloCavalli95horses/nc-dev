@@ -379,26 +379,27 @@ label {
 }
 
 code {
+  width: 100%;
   position: relative;
-  display: block;
+  display: inline-block;
   margin: 12px 0;
   min-height: 60px;
   font-family: monospace;
-  overflow-x: auto;
   white-space: pre;
   background-color: var(--grey-11);
   color: var(--font-light);
   font-size: 13px;
   padding: 12px;
   border-radius: var(--radius-s);
+  overflow-x: auto;
 }
 .copy-paste {
   position: absolute;
   top: 6px;
-  right: 6px;
-  padding: 8px 10px;
+  right: 10px;
+  padding: 6px 10px;
   border-radius: var(--radius-m);
-  border: 1px solid var(--grey-33);
+  background-color: var(--grey-33);
   cursor: pointer;
 }
 
