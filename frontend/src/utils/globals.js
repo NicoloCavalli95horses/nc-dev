@@ -1,35 +1,22 @@
 //==================================
 // Import
 //==================================
-import { ref, watch } from "vue";
+import {
+  ref,
+  watch,
+} from "vue";
 
 //==================================
 // Consts
 //==================================
 const MOBILE_W = 500;
-const MONTHS = [
-  "jan",
-  "feb",
-  "mar",
-  "apr",
-  "may",
-  "jun",
-  "jul",
-  "aug",
-  "sep",
-  "oct",
-  "nov",
-  "dec",
-];
+const MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
 
 export const toastMsg = ref([]);
 export const is_mobile = ref(window.innerWidth <= MOBILE_W);
 export const is_admin = ref(false);
 
-window.addEventListener(
-  "resize",
-  () => (is_mobile.value = window.innerWidth <= MOBILE_W)
-);
+window.addEventListener("resize", () => (is_mobile.value = window.innerWidth <= MOBILE_W));
 
 //==================================
 // Functions

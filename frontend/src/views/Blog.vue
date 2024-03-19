@@ -15,7 +15,12 @@
           </div>
           <div>
             <p>Sort order</p>
-            <DropDown :items="SORT_ORDER_ITEMS" v-model:active_id="sort_order" />
+            <Btn icon @click="sort_order = !sort_order"  :def="false">
+              <svg>
+                <use v-if="sort_order" href="#sort-ascending"></use>
+                <use v-else href="#sort-descending"></use>
+              </svg>
+            </Btn>
           </div>
         </div>
       </div>
@@ -55,6 +60,7 @@ import {
   addToastMsg,
 } from "@/utils/globals";
 
+import Btn    from "@/components/Btn.vue";
 import Preview    from "@/components/Preview.vue";
 import DropDown    from "@/components/DropDown.vue";
 import BaseLayout from "@/components/BaseLayout.vue";
@@ -63,28 +69,23 @@ import BaseLayout from "@/components/BaseLayout.vue";
 // Consts
 //==============================
 const ORDER_BY_ITEMS = [
-  {id: 'updated_at',  val: 'Updated at' },
-  {id: 'created_at',  val: 'Created at' },
   {id: 'title',       val: 'Title'      },
+  {id: 'updated_at',  val: 'Update date' },
   {id: 'description', val: 'Description'},
-];
-const SORT_ORDER_ITEMS = [
-  {id: 'desc', val: 'Descending'},
-  {id: 'asc',  val: 'Ascending' },
 ];
 
 const router      = useRouter();
 const items       = ref( [] );
 const error       = ref( false );
 const loading     = ref( true );
-const sort_by     = ref( 'title' || ORDER_BY_ITEMS[0].id );
-const sort_order  = ref( 'desc' || SORT_ORDER_ITEMS[0].id );
+const sort_by     = ref( ORDER_BY_ITEMS[1].id );
+const sort_order  = ref( true );
 const filter_tags = ref( [] );
 
 const params = computed( () => {
   return { 
     sort: sort_by.value,
-    order: sort_order.value,
+    order: sort_order.value ? 'desc' : 'asc',
     ...(filter_tags.value.length ? {tags: filter_tags.value.join(',')} : {})
   };
 })
@@ -141,7 +142,7 @@ watch( params, async (newParams) => {
 }
 .articles {
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 18px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   &.mobile {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

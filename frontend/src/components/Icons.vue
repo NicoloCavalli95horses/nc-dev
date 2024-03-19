@@ -21,6 +21,14 @@
       <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
     </symbol>
  
+    <symbol id="sort-descending" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 7H22L18 3L14 7H17V21H19M2 17H12V19H2M6 5V7H2V5M2 11H9V13H2V11Z" />
+    </symbol>
+    
+    <symbol id="sort-ascending" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 17H22L18 21L14 17H17V3H19M2 17H12V19H2M6 5V7H2V5M2 11H9V13H2V11Z" />
+    </symbol>
+ 
     <symbol id="copy" viewBox="0 0 24 24" fill="currentColor">
       <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
     </symbol>

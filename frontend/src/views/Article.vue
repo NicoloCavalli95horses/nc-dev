@@ -104,15 +104,19 @@ onMounted( async () => {
 
 <style lang="scss" scoped>
 .header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-gap: 10px;
   margin: 0 0 12px 0;
+  justify-content: center;
   .tags {
     display: grid;
     grid-auto-flow: column;
     grid-gap: 6px;
+    justify-content: end;
+    @media screen and (max-width: 500px) {
+      justify-content: start;
+    }
   }
 }
 

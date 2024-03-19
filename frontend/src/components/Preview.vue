@@ -1,5 +1,5 @@
 <template>
-  <div class="thumb" @click="$router.push({ path: `/blog/${item.id}` })">
+  <div class="thumb" :class="{'hover': hover}" @click="onClick" @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="title">
       <h4>{{ item.title }}</h4>
       <div v-if="is_admin" class="btns">
@@ -33,22 +33,40 @@ import {
   is_admin,
   filterDate
 } from '@/utils/globals';
+import {
+  ref,
+} from 'vue';
+import {
+  useRouter,
+} from 'vue-router';
 
 import Btn from './Btn.vue';
 
 //==============================
 // Props and emits
 //==============================
-defineProps({
+const props = defineProps({
   item: Object,
   placeholder: Boolean
 });
 
 const emit = defineEmits([
- 'edit',
- 'delete',
+  'edit',
+  'delete',
 ]);
 
+//==============================
+// Consts
+//==============================
+const hover = ref( false );
+const router = useRouter();
+
+//==============================
+// Functions
+//==============================
+function onClick() {
+  router.push({ path: `/blog/${props.item.id}` });
+}
 
 </script>
 
@@ -56,6 +74,14 @@ const emit = defineEmits([
 .thumb {
   width: 100%;
   cursor: pointer;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  transition-duration: var(--transition-medium);
+  border-radius: var(--radius-m);
+  &.hover {
+    background-color: var(--grey-28);
+    transition-duration: var(--transition-medium);
+  }
 
   h5 {
     font-size: 11px;
