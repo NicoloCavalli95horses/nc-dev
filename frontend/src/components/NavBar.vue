@@ -1,25 +1,40 @@
 <template>
-  <div v-if="is_mobile" class="sidebar" :class="[ show_sidebar ? 'open' : 'close' ]">
-    <div v-for="i in items" :key="i.id" class="item" :class="{ 'active' : active == i.id }">
+  <div
+    v-if="is_mobile"
+    class="sidebar"
+    :class="[show_sidebar ? 'open' : 'close']"
+  >
+    <div
+      v-for="i in items"
+      :key="i.id"
+      class="item"
+      :class="{ active: active == i.id }"
+    >
       <h4 @click="onItemClick(i)">{{ i.value }}</h4>
     </div>
   </div>
   <nav>
     <div class="main-nav">
-    <template v-if="is_mobile">
-    <div class="w-50" />
-    <div class="bars" @click="show_sidebar = !show_sidebar">
-      <div class="bar" />
-      <div class="bar-small" />
-      <div class="bar" />
-    </div>
-    </template>
-    <template v-else>
-      <div class="w-50" />
-      <div v-for="i in items" :key="i.id" class="item" :class="{ 'active' : active == i.id }">
-        <h4 @click="onItemClick(i)">{{ i.value }}</h4>
-      </div>
-    </template>
+      <template v-if="is_mobile">
+        <div class="w-50" />
+        <div class="mobile-menu" @click="show_sidebar = !show_sidebar">
+            <svg>
+              <use v-if="show_sidebar" href="#close"></use>
+              <use v-else href="#menu"></use>
+            </svg>
+        </div>
+      </template>
+      <template v-else>
+        <div class="w-50" />
+        <div
+          v-for="i in items"
+          :key="i.id"
+          class="item"
+          :class="{ active: active == i.id }"
+        >
+          <h4 @click="onItemClick(i)">{{ i.value }}</h4>
+        </div>
+      </template>
     </div>
   </nav>
 </template>
@@ -28,40 +43,35 @@
 //==================================
 // Import
 //==================================
-import {
-  ref,
-} from "vue";
-import {
-  is_mobile,
-} from '@/utils/globals';
-import router from '../router/index';
+import { ref } from "vue";
+import { is_mobile } from "@/utils/globals";
+import router from "../router/index";
 
 //==================================
 // Consts
 //==================================
 const items = [
-  { id: 'home',     route: '',         value: 'home'     },
-  { id: 'story',    route: 'story',    value: 'my story' },
-  { id: 'blog',     route: 'blog',     value: 'blog'     },
-  { id: 'projects', route: 'projects', value: 'projects' },
-  { id: 'contacts', route: 'contacts', value: 'contacts' },
+  { id: "home", route: "", value: "home" },
+  { id: "story", route: "story", value: "my story" },
+  { id: "blog", route: "blog", value: "blog" },
+  { id: "projects", route: "projects", value: "projects" },
+  { id: "contacts", route: "contacts", value: "contacts" },
 ];
 
 //==================================
 // Consts
 //==================================
-const active       = ref( 'home' );
-const show_sidebar = ref( false );
+const active = ref("home");
+const show_sidebar = ref(false);
 
 //==================================
 // Functions
 //==================================
 function onItemClick(i) {
   active.value = i.id;
-  router.push('/' + i.route );
+  router.push("/" + i.route);
   show_sidebar.value = false;
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -81,7 +91,7 @@ nav {
       color: var(--primary);
       transition-duration: 400ms;
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 100%;
         left: 50%;
@@ -92,14 +102,15 @@ nav {
         border-radius: 50%;
       }
     }
-    .bars {
-      height: 18px;
+    .mobile-menu {
+      height: 28px;
       width: 28px;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
       border: 8px solid transparent;
+      cursor: pointer;
       .bar, .bar-small {
         background-color: var(--font-light);
         height: 2px;
@@ -109,6 +120,19 @@ nav {
       }
       .bar-small {
         width: 80%;
+      }
+      .cross {
+        position: absolute;
+        top: 50%;
+        background-color: var(--font-light);
+        width: 30px;
+        height: 2px;
+        &.x {
+          transform: rotate(45deg);
+        }
+        &.y {
+          transform: rotate(-45deg);
+        }
       }
     }
   }
@@ -126,14 +150,14 @@ nav {
     font-size: 12px;
   }
   &.active h4 {
-    color: var(--primary);      
+    color: var(--primary);
   }
 }
 
 .sidebar {
   position: fixed;
   top: 0;
-  right:0;
+  right: 0;
   width: 100%;
   height: 100%;
   background-color: var(--grey-22);

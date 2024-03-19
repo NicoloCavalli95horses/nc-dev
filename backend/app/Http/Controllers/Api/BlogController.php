@@ -12,12 +12,26 @@ class BlogController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
+    $sortBy = $request->query('sort', 'updated_at');
+    $sortOrder = $request->query('order', 'desc');
+    $tags = $request->query('tags', '');
+    $tagsArray = $tags ? explode(',', $tags) : '';
+    if ( $tagsArray ) {
+      $items = Blog::where(function ($query) use ($tagsArray) {
+        foreach ($tagsArray as $tag) {
+          $query->orWhere('tags', 'LIKE', '%' . $tag . '%');
+        }
+      })->get();
+    } else {
+      $items = Blog::orderBy($sortBy, $sortOrder)->get();
+    }
+
     return response()->json([
       'status' => 'OK',
       'code' => 200,
-      'data' => Blog::all(),
+      'data' => $items,
     ], 200);
   }
 
@@ -68,10 +82,10 @@ class BlogController extends Controller
   public function update(Request $request, Blog $blog)
   {
     $blog->update($request->validate([
-     'title' => 'sometimes|string|max:255',
-     'description' => 'sometimes|string|max:255',
-     'content' => 'sometimes|string|max:10000',
-     'tags' => 'sometimes|string',
+      'title' => 'sometimes|string|max:255',
+      'description' => 'sometimes|string|max:255',
+      'content' => 'sometimes|string|max:10000',
+      'tags' => 'sometimes|string',
     ]));
     return response()->json([
       'status' => 'OK',
@@ -90,6 +104,6 @@ class BlogController extends Controller
       'status' => 'OK',
       'code' => 200,
       'data' => 'article deleted',
-    ], 200); 
+    ], 200);
   }
 }

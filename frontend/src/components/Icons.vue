@@ -24,6 +24,14 @@
     <symbol id="copy" viewBox="0 0 24 24" fill="currentColor">
       <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
     </symbol>
+ 
+    <symbol id="menu" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+    </symbol>
+   
+    <symbol id="close" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+    </symbol>
     
     <symbol id="error" viewBox="0 0 24 24" fill="currentColor">
       <path d="M8.27,3L3,8.27V15.73L8.27,21H15.73L21,15.73V8.27L15.73,3M8.41,7L12,10.59L15.59,7L17,8.41L13.41,12L17,15.59L15.59,17L12,13.41L8.41,17L7,15.59L10.59,12L7,8.41" />

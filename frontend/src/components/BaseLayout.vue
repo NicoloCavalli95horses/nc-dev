@@ -1,15 +1,27 @@
 <template>
   <div class="main-layout">
-    <div class="vertical">
+    <div v-if="!hide_vertical" class="vertical">
       <h1><slot name="title" /></h1>
     </div>
-    <div class="main">
+    <div class="main" :class="{'margins': !hide_vertical}">
       <slot />
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+//==============================
+// Import
+//==============================
+
+//==============================
+// Props and emits
+//==============================
+const props = defineProps({
+  hide_vertical: Boolean,
+});
+
+</script>
 
 <style lang="scss" scoped>
 .main-layout {
@@ -25,12 +37,14 @@
   }
   .main {
     width: 100%;
-    margin-left: clamp(5rem, 7vw, 9rem);
-    padding: 32px 22px 0 22px;
     overflow: hidden;
     @media screen and (min-width: 600px) {
       width: calc( 100% - 64px);
       padding: 32px 44px 0 44px;
+    }
+    &.margins {
+      margin-left: clamp(5rem, 7vw, 9rem);
+      padding: 32px 22px 0 22px;
     }
   }
 }

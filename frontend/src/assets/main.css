@@ -374,10 +374,6 @@ label {
   color: var(--error-color);
 }
 
-.code-wrapper {
-  position: relative;
-}
-
 code {
   width: 100%;
   position: relative;
@@ -392,6 +388,10 @@ code {
   padding: 12px;
   border-radius: var(--radius-s);
   overflow-x: auto;
+  box-sizing: border-box;
+}
+code span {
+  font-family: monospace;
 }
 .copy-paste {
   position: absolute;
@@ -401,6 +401,15 @@ code {
   border-radius: var(--radius-m);
   background-color: var(--grey-33);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copy-paste svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 1.2rem;
+  margin: 0 4px 0 0;
 }
 
 .bold {

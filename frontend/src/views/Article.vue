@@ -1,15 +1,12 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :hide_vertical="is_mobile">
     <template #title>Article</template>
     <template #default>
-      <div class="breadcrumbs">
-        <p @click="$router.push({ path: '/blog' })">Blog</p>
-        <span>&gt;</span>
-        <p v-if="item?.title" class="active">
-          {{ item.title.length < MAX_TITLE_LENGTH ? item.title : item.title.substring(0, MAX_TITLE_LENGTH) + '...' }}</p>
-      </div>
-      <template v-if="loading"><p>loading...</p></template>
+      <template v-if="loading">
+        <p>Loading...</p>
+      </template>
       <template v-else>
+        <BreadCrumbs :title="item.title" />
         <div class="header">
           <div class="date"><p>{{ filterDate(item.updated_at) }}</p></div>
           <div class="tags">
@@ -35,14 +32,20 @@ import {
   useRoute,
 } from 'vue-router';
 import {
+  ref,
   nextTick,
   onMounted,
-  ref,
 } from 'vue';
-
-import { filterDate, syntaxHighlighter, addToastMsg } from "@/utils/globals";
+import {
+  filterDate,
+  syntaxHighlighter,
+  addToastMsg,
+  is_mobile
+} from "@/utils/globals";
 import { apiGetArticle } from "@/utils/api";
+
 import BaseLayout from "@/components/BaseLayout.vue";
+import BreadCrumbs from "@/components/BreadCrumbs.vue";
 
 //==============================
 // Consts
@@ -51,7 +54,6 @@ const route   = useRoute();
 const loading = ref( true );
 const error   = ref( false );
 const item    = ref( undefined );
-const MAX_TITLE_LENGTH = 20;
 
 //==============================
 // Functions
@@ -77,13 +79,8 @@ function appendCopyPaste() {
     codeElements.forEach( el => {
       const textToCopy = el.textContent;
       const div = document.createElement('div');
-      const svg = document.createElement('svg');
-      const use = document.createElement('use');
-      use.setAttribute('href', '#copy');
-      svg.appendChild(use);
-      div.appendChild(svg);
       div.classList.add('copy-paste');
-      div.textContent = 'copy';
+      div.innerHTML = '<svg><use href="#copy"></use></svg>copy';
       div.addEventListener('click', () => onClipboardCopy(textToCopy));
       el.appendChild(div);
     });
@@ -106,24 +103,6 @@ onMounted( async () => {
 
 
 <style lang="scss" scoped>
-.breadcrumbs {
-  position: sticky;
-  display: flex;
-  align-items: center;
-  margin: 0 0 24px 0;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--grey-33);
-  p {
-    cursor: pointer;
-    &.active {
-      color: var(--primary);
-    }
-  }
-  span {
-    margin: 0 12px;
-  }
-}
-
 .header {
   display: flex;
   flex-wrap: wrap;

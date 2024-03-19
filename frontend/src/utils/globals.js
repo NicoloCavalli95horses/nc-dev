@@ -44,7 +44,9 @@ export function filterDate(date) {
   const day = d.getDate();
   const month_idx = d.getMonth();
   const year = d.getFullYear();
-  return `${day} ${MONTHS[month_idx]} ${year}`;
+  const hh = d.getHours();
+  const mm = d.getMinutes();
+  return `${day} ${MONTHS[month_idx]} ${year}, ${hh < 10 ? '0'+hh : hh}:${mm < 10 ? '0'+mm : mm}`;
 }
 
 export function syntaxHighlighter(text) {

@@ -40,8 +40,10 @@ export async function apiTest() {
  * Get all the articles
  * @returns response object
  */
-export async function apiGetArticles() {
-  const url = `${BASE_URL}blog`;
+export async function apiGetArticles({params}) {
+  const query = new URLSearchParams(params).toString();
+  const url = `${BASE_URL}blog?${query}`;
+  console.log(url)
   const options = _getApiOptions();
   return await _executeApi({ url, options });
 }
