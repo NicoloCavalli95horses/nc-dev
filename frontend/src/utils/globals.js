@@ -39,6 +39,7 @@ export function filterDate(date) {
 export function syntaxHighlighter(text) {
   const keywords = [
     { word: "abstract", color: "#80d8ff" },
+    { word: "async", color: "#9932cc" },
     { word: "await", color: "#69f0ae" },
     { word: "boolean", color: "#ff5252" },
     { word: "break", color: "#ea80fc" },
@@ -101,7 +102,9 @@ export function syntaxHighlighter(text) {
     { word: "with", color: "#00ff00" },
     { word: "yield", color: "#32cd32" },
     // Vue.js specific keywords
+    { word: "watch", color: "#80e80e" },
     { word: "v-bind", color: "#80e80e" },
+    { word: "computed", color: "#66cdaa" },
     { word: "v-on", color: "#66cdaa" },
     { word: "v-if", color: "#0000cd" },
     { word: "v-else", color: "#ba55d3" },
@@ -115,6 +118,8 @@ export function syntaxHighlighter(text) {
     { word: "v-once", color: "#ffdead" },
     { word: "v-slot", color: "#e0e080" },
     { word: "v-text", color: "#0df0e6" },
+    { word: "immediate", color: "#0df0e6" },
+    { word: "deep", color: "#0df0e6" },
 ];
   const codeTagPattern = /<code>([\s\S]*?)<\/code>/g;
   const highlightKeywords = (match) => {

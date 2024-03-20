@@ -1,7 +1,8 @@
 //==============================
 // Consts
 //==============================
-const BASE_URL = import.meta.env.DEV ? "http://127.0.0.1:8000/api/" : "https://nicolocavalli.com/api/";
+const BASE_URL  = import.meta.env.DEV ? "http://127.0.0.1:8000/api/" : "https://nicolocavalli.com/api/";
+const API_TOKEN = import.meta.env.VITE_API_TOKEN; // env variables need to have VITE_ prefix to be imported here
 
 //==============================
 // Export functions
@@ -198,7 +199,11 @@ function _getApiOptions({
     credentials: credentials || "same-origin",
     body: body || undefined,
     accept: accept,
-    headers: headers || { "Content-Type": "application/json" },
+    headers: {
+      ...headers,
+      "Authorization": `Bearer ${API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
     redirect: redirect || "follow",
     referrerPolicy: referrerPolicy || "origin",
   };
