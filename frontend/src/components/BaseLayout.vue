@@ -37,7 +37,7 @@ const props = defineProps({
   }
   .main {
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
     @media screen and (min-width: 600px) {
       width: calc( 100% - 64px);
       padding: 32px 44px 0 44px;

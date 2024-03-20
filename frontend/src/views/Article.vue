@@ -105,7 +105,7 @@ onMounted( async () => {
 <style lang="scss" scoped>
 .header {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 10px;
   margin: 0 0 12px 0;
   justify-content: center;
@@ -114,7 +114,7 @@ onMounted( async () => {
     grid-auto-flow: column;
     grid-gap: 6px;
     justify-content: end;
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 550px) {
       justify-content: start;
     }
   }

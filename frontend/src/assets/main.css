@@ -1,5 +1,10 @@
 @import './base.css';
 
+.modals {
+  position: absolute;
+  top:0;
+}
+
 .float-r {
   float: right;
 }
