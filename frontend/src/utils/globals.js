@@ -3,7 +3,7 @@
 //==================================
 import {
   ref,
-  watch,
+  computed,
 } from "vue";
 
 //==================================
@@ -12,18 +12,27 @@ import {
 const MOBILE_W = 500;
 const MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
 
-export const toastMsg = ref([]);
-export const is_mobile = ref(window.innerWidth <= MOBILE_W);
-export const is_admin = ref(false);
-
-window.addEventListener("resize", () => (is_mobile.value = window.innerWidth <= MOBILE_W));
+export const toastMsg  = ref( [] );
+export const is_mobile = ref( window.innerWidth <= MOBILE_W );
 
 //==================================
 // Functions
 //==================================
+export const isAdmin = computed(() => sessionStorage.getItem("isAdmin"));
+
 export function addToastMsg({ msg, time = 1000 }) {
   const id = Date.now() + "" + Math.random() * 100;
   toastMsg.value.push({ id, msg, time });
+}
+
+export function debounce(callback, wait) {
+  let timeoutId = null;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
 }
 
 export function filterDate(date) {
@@ -136,11 +145,12 @@ export function syntaxHighlighter(text) {
   return highlightedText;
 }
 
+
 //==================================
-// Watchers
+// Events
 //==================================
-watch(is_admin, (newVal) => {
-  if (newVal) {
-    addToastMsg({ msg: "admin mode", time: 5000 });
-  }
-});
+const onResize = debounce(() => {
+  is_mobile.value = window.innerWidth <= MOBILE_W;
+}, 250);
+
+window.addEventListener("resize", onResize);

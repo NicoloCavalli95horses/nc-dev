@@ -3,47 +3,21 @@
     <template #title>Editor</template>
     <template #default>
       <div class="main-content">
-        <div class="left">
-          <div class="header">
-            <!-- title -->
-            <div class="row">
-              <h4>Title</h4>
-              <InputText placeholder="title" v-model:text="title" />
-            </div>
-            <!-- tags -->
-            <div class="row">
-              <h4>Tags</h4>
-              <InputText placeholder="tag" v-model:text="tag" :disabled="tags.length == 3" @keydown.enter="addTag" />
-            </div>
-            <!-- description -->
-            <div class="row">
-              <h4>Description</h4>
-              <InputText placeholder="description" type="textarea" v-model:text="description" />
-            </div>
-          </div>
-          <!-- body -->
-          <div class="body">
-            <h4>Body</h4>
-            <div class="btns">
-              <Btn icon :def="false" @click="content+='<b></b>'"><svg><use href="#format-bold"></use></svg></Btn>
-              <Btn icon :def="false" @click="content+= '<code></code>'"><svg><use href="#code"></use></svg></Btn>
-              <Btn icon :def="false" @click="content+='<ul><li></li></ul>'"><svg><use href="#list-dot"></use></svg></Btn>
-            </div>
-            <InputText class="height-xl" placeholder="description" type="textarea" v-model:text="content" />
-          </div>
-        </div>
-        <div class="right">
-          <h3>{{ title }}</h3>
+        <h3 contenteditable ref="title_ref">{{ title || 'This is the title of the article' }}</h3>
+        <h4 contenteditable ref="description_ref">{{ description || 'This is a little summary of the article content' }}</h4>
+        <div class="tags-wrapper">
+          <InputText placeholder="add a tag" v-model:text="tag" :disabled="tags.length == 3" @keydown.enter="addTag" />
           <div v-if="tags.length" class="tags">
             <div class="tag" v-for="(t, i) in tags" :key="t" @click="removeTag(i)">
               <label>{{ t }}</label>
             </div>
           </div>
-          <h4 class="top-12 bottom-24">{{ description }}</h4>
-          <div ref="article_ref" class="article"><p v-html="content"></p></div>
         </div>
-
-        <!-- save -->
+        <div class="article-wrapper">
+          <div class="layout article-content" ref="article_ref" contenteditable>{{ content || getDefaultContent }}</div>
+          <div class="layout article-preview" v-html="content"></div>
+        </div>
+        <Btn @click="onUpdatePreview" :def="false">preview</Btn>
         <div class="fixed-btns">
           <Btn @click="onSave" :disabled="!canSave">{{ editID ? 'edit' : 'save new'}}</Btn>
         </div>
@@ -58,22 +32,21 @@
 //==============================
 import {
   ref,
+  nextTick,
   computed,
   onMounted,
-  nextTick,
 } from "vue";
 import {
-  useRoute,
-} from 'vue-router';
-import {
-  is_admin,
   addToastMsg,
-} from '@/utils/globals';
+} from "@/utils/globals";
 import {
   apiGetArticle,
   apiUpdateArticle,
   apiCreateArticle,
 } from "@/utils/api";
+import {
+  useRoute,
+} from "vue-router";
 import router from "@/router";
 
 import Btn        from "@/components/Btn.vue";
@@ -91,20 +64,36 @@ const props = defineProps({
 });
 const route = useRoute();
 
-
 //==============================
 // Consts
 //==============================
-let t = undefined;
-const title       = ref( '' );
-const description = ref( '' );
+const title       = ref( undefined );
+const description = ref( undefined );
 const tags        = ref( [] );
 const tag         = ref( undefined );
-const content     = ref( '' );
-const article_ref = ref( undefined );
+const content     = ref( undefined );
 
-const canSave = computed(() => title.value && description.value && tags.value.length && content.value.length && is_admin.value );
-const editID  = computed(() => route.params?.id );
+const title_ref       = ref( undefined );
+const article_ref     = ref( undefined );
+const description_ref = ref( undefined );
+
+const editID  = computed(() => route.params?.id);
+const canSave = computed(() => tags.value.length && content.value );
+const getDefaultContent = computed(() => `
+<h4>This is the title of the article</h4>
+<p>This is a paragraph</p>
+<br>
+<p>Use the 'br' tag to create a new line</p>
+<code>function example() {
+  const isValid = false;
+  const response = await getData();
+  if (response.code == 200) {
+    return !isValid
+  }
+  return isValid;
+}
+</code>
+<br><p>This text is <b>highlighted</b></p>`);
 
 //==============================
 // Functions
@@ -116,12 +105,13 @@ function removeTag(idx) {
 }
 
 async function onSave() {
-  if ( !is_admin.value ) { return; }
-  if ( editID.value ) {
+  title.value = title_ref.value.textContent;
+  description.value = description_ref.value.textContent;
+  if (editID.value) {
     await updateArticle();
-    return;
-  } 
-  await createArticle();
+  } else {
+    await createArticle();
+  }
 }
 
 async function updateArticle() {
@@ -132,11 +122,11 @@ async function updateArticle() {
     tags: tags.value,
     content: content.value,
   });
-  if ( res.code == 200 ) {
-    addToastMsg({ msg: 'Article edited', time: 5000 });
+  if (res.code == 200) {
+    addToastMsg({ msg: "Article edited", time: 5000 });
   } else {
-    addToastMsg({ msg: 'Failed to update article', time: 5000 }); 
-  }  
+    addToastMsg({ msg: "Failed to update article", time: 5000 });
+  }
   goToBlog();
 }
 
@@ -147,38 +137,46 @@ async function createArticle() {
     tags: tags.value,
     content: content.value,
   });
-  if ( res.code == 200 ) {
-    addToastMsg({ msg: 'Article saved', time: 5000 });
+  if (res.code == 200) {
+    addToastMsg({ msg: "Article saved", time: 5000 });
   } else {
-   addToastMsg({ msg: 'Failed to save new article', time: 5000 });
+    addToastMsg({ msg: "Failed to save new article", time: 5000 });
   }
-  goToBlog(); 
+  goToBlog();
 }
 
 function goToBlog() {
-  router.push({name: 'blog'});
+  router.push({ name: "blog" });
 }
 
 function addTag() {
-  if ( tag.value ) {
+  if (tag.value) {
     tags.value.push(tag.value);
     tag.value = undefined;
   }
 }
 
+function onUpdatePreview() {
+  content.value = article_ref.value.textContent;
+}
+
 //==============================
 // Life cycle
 //==============================
-onMounted( async () => {
-  if ( !editID.value ) { return; }
-  const res = await apiGetArticle({ id: editID.value });
-  if ( res.code == 200 ) {
-    title.value = res.data.title;
-    description.value = res.data.description;
-    content.value = res.data.content;
-    tags.value = JSON.parse(res.data.tags);
+onMounted(async () => {
+  if (editID.value) {
+    const res = await apiGetArticle({ id: editID.value });
+    if (res.code == 200) {
+      title.value = res.data.title;
+      description.value = res.data.description;
+      content.value = res.data.content;
+      tags.value = JSON.parse(res.data.tags);
+    }
+  } else {
+    nextTick(() => onUpdatePreview());
   }
 });
+
 
 </script>
 
@@ -186,54 +184,34 @@ onMounted( async () => {
 .main-content {
   display: grid;
   grid-gap: 22px;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-  user-select: text;
-  .row {
+  .tags-wrapper {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 6px;
-  }
-  .left {
-    .header {
-      display: grid;
-      grid-gap: 10px;
-      margin: 12px 0 0 0;
-    }
-    .body {
-      margin: 24px 0 0 0;
-      display: grid;
-      grid-gap: 8px;
-      .btns {
-        width: max-content;
-        display: grid;
-        grid-auto-flow: column;
-        grid-gap: 8px;
-      }
-    }
-  }
-  .right {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
     .tags {
-      margin: 8px 0 0 0;
-      width: max-content;
       display: grid;
       grid-auto-flow: column;
-      grid-gap: 5px;
+      grid-gap: 8px;
+      justify-content: start;
+      cursor: pointer;
     }
-    .article {
-      white-space: pre;
+  }
+  .article-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+    height: 45vh;
+    .layout {
+      overflow-y: scroll;
+      padding: 16px 18px;
+      box-sizing: border-box;
+      background-color: var(--grey-28);
     }
+  }
+  .fixed-btns {
+    position: fixed;
+    bottom: 22px;
   }
 }
 
-.fixed-btns {
-  position: fixed;
-  bottom: 22px;
-}
-.align-right {
-  justify-self: end;
-}
-.height-xl {
-  height: 220px;
-}
 </style>

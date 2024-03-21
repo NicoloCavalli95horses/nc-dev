@@ -2,7 +2,7 @@
   <div class="thumb" :class="{'hover': hover}" @click="onClick" @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="title">
       <h4>{{ item.title }}</h4>
-      <div v-if="is_admin" class="btns">
+      <div v-if="isAdmin" class="btns">
         <Btn icon :def="false" @click="(e) => { e.stopPropagation(); emit('edit'); }">
           <svg><use href="#edit"></use></svg>
         </Btn>
@@ -30,7 +30,7 @@
 // Import
 //==============================
 import {
-  is_admin,
+  isAdmin,
   filterDate
 } from '@/utils/globals';
 import {
@@ -78,6 +78,7 @@ function onClick() {
   box-sizing: border-box;
   transition-duration: var(--transition-medium);
   border-radius: var(--radius-m);
+  border: 1px solid var(--grey-28);
   &.hover {
     background-color: var(--grey-28);
     transition-duration: var(--transition-medium);
@@ -103,16 +104,14 @@ function onClick() {
     margin-top: 12px;
   }
   .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 6px;
     margin-top: 8px;
-    gap: 10px;
     .tags {
       display: grid;
       grid-gap: 6px;
       grid-auto-flow: column;
+      justify-content: end;
     }
   }
 }

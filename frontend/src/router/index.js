@@ -2,6 +2,7 @@
 // Import
 //===========================
 import { createRouter, createWebHistory } from "vue-router";
+import { isAdmin, addToastMsg } from "@/utils/globals";
 
 //===========================
 // Consts
@@ -43,6 +44,13 @@ const router = createRouter({
       path: "/editor",
       name: "editor",
       component: () => import("../views/Editor.vue"),
+      beforeEnter: () => {
+        console.log(isAdmin.value)
+        if (!isAdmin.value) {
+          addToastMsg({msg: 'not allowed', time: 4000})
+          return {name: 'home'}
+        }
+      },
     },
     {
       path: "/editor/:id",

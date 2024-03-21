@@ -61,7 +61,7 @@ body {
 }
 
 /* Font */
-h2, h5, p, ul, li, a, span, input, textarea, label, summary, details {
+h2, h5, p, ul, li, a, span, input, textarea, label, summary, details, .article-content {
   font-family: 'Montserrat', monospace;
 }
 
@@ -70,7 +70,7 @@ h1, h3, h4 {
 }
 
 /* Color */
-h2, h3, h4, p, ul, li, a, span, label, summary, details {
+h2, h3, h4, p, ul, li, a, span, label, summary, details, .article-content {
   color: var(--font-light);
 }
 
@@ -110,7 +110,7 @@ h6 {
   font-size: 1.2rem;
 }
 
-p, span, ul, li, a {
+p, span, ul, li, a, .article-content {
   font-size: 1.4rem;
   line-height: 1.5;
 }

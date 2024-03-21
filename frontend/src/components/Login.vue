@@ -19,7 +19,6 @@ import {
   ref,
 } from 'vue';
 import {
-  is_admin,
   addToastMsg,
 } from '../utils/globals';
 
@@ -51,7 +50,8 @@ async function onLogin() {
   password.value = undefined;
   
   if ( res.code == 200 && res.status == 'OK' ) {
-    is_admin.value = true;
+    sessionStorage.setItem("isAdmin", true);
+    addToastMsg({ msg: "admin mode", time: 5000 });
     emit('close');
   } else {
     addToastMsg({msg: 'auth failure', time: 5000});
