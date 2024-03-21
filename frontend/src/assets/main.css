@@ -398,7 +398,7 @@ code {
 code span {
   font-family: monospace;
 }
-.copy-paste {
+/* .copy-paste {
   position: absolute;
   top: 6px;
   right: 10px;
@@ -415,7 +415,7 @@ code span {
   height: 1.2rem;
   font-size: 1.2rem;
   margin: 0 4px 0 0;
-}
+} */
 
 .bold {
   font-weight: bold;

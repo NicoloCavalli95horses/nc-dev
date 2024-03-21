@@ -65,7 +65,7 @@ async function getArticle() {
     loading.value = false;
     error.value = false;
     item.value.content = syntaxHighlighter(item.value.content);
-    appendCopyPaste();
+    // appendCopyPaste();
   } else {
     console.error(`error while fetching article ${route.params.id}`);
     loading.value = false;
@@ -73,24 +73,24 @@ async function getArticle() {
   }
 }
 
-function appendCopyPaste() {
-  nextTick(() => {
-    const codeElements = Array.from(document.querySelectorAll('code'));
-    codeElements.forEach( el => {
-      const textToCopy = el.textContent;
-      const div = document.createElement('div');
-      div.classList.add('copy-paste');
-      div.innerHTML = '<svg><use href="#copy"></use></svg>copy';
-      div.addEventListener('click', () => onClipboardCopy(textToCopy));
-      el.appendChild(div);
-    });
-  })
-}
+// function appendCopyPaste() {
+//   nextTick(() => {
+//     const codeElements = Array.from(document.querySelectorAll('code'));
+//     codeElements.forEach( el => {
+//       const textToCopy = el.textContent;
+//       const div = document.createElement('div');
+//       div.classList.add('copy-paste');
+//       div.innerHTML = '<svg><use href="#copy"></use></svg>copy';
+//       div.addEventListener('click', () => onClipboardCopy(textToCopy));
+//       el.appendChild(div);
+//     });
+//   })
+// }
 
-function onClipboardCopy(text){
-  navigator.clipboard.writeText(text);
-  addToastMsg({msg: 'Code copied', time:2000})
-}
+// function onClipboardCopy(text){
+//   navigator.clipboard.writeText(text);
+//   addToastMsg({msg: 'Code copied', time:2000})
+// }
 
 //==============================
 // Life cycle

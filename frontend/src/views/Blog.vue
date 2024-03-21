@@ -29,7 +29,7 @@
           <p>Loading...</p>
         </template>
         <template v-else-if="error">
-          <p><b>Impossible to fetch articles</b></p>
+          <p>Impossible to fetch articles</p>
         </template>
         <template v-else>
           <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
