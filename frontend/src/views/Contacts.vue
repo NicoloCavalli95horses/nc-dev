@@ -9,8 +9,9 @@
             <a href="https://www.instagram.com/nicolo.cavalli95/"><svg><use href="#instagram"></use></svg></a>
             <a href="https://www.linkedin.com/in/nicolo-cavalli/"><svg><use href="#linkedin"></use></svg></a>
           </p>
-          <p><label>email</label> nicolo.cavalli95@gmail.com</p>
-          <p><label>mobile</label> +39 346 95 92 168</p>
+          <p><label>location</label>Rennes, France</p>
+          <p><label>email</label>nicolo.cavalli95@gmail.com</p>
+          <p><label>mobile</label>346 95 92 168</p>
           <div class="inputs">
             <h4>Email</h4>
             <InputText placeholder="email" v-model:text="email" autocomplete="email" />
@@ -67,7 +68,7 @@ async function onEmailSend() {
     addToastMsg({ msg: 'Email sent', time: 5000 }); 
   } else {
     addToastMsg({ msg: 'Email send failed', time: 5000 }); 
-    console.error('send email failed:', err);
+    console.error('send email failed:', res.error);
 }
   disable_send.value = false;
   email.value = undefined;

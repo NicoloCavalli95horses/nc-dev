@@ -2,12 +2,11 @@
   <BaseLayout>
     <template #title>My story</template>
     <template #default>
-      <h2 class="bottom-24">A glance over my academic and professional journey</h2>
       <div class="events">
-        <Card v-for="item in EDUCATION" :key="item.id" :item="item" />
+        <Card v-for="item in items" :ref="(el) => cards[item.id] = el" :key="item.id" :item="item" />
       </div>
-      <div class="events">
-        <Card v-for="item in PROFESSIONAL" :key="item.id" :item="item" />
+      <div v-if="current_w > 1000" class="date-box">
+        <h3 v-for="id in ids" :key="id" @click="goTo(id)" :class="{'active': active_id == id}">{{ id }}</h3>
       </div>
     </template>
   </BaseLayout>
@@ -17,108 +16,81 @@
 //==============================
 // Import
 //==============================
-import BaseLayout from "@/components/BaseLayout.vue";
+import {
+  ref,
+  watch,
+  reactive,
+  computed,
+  onMounted,
+} from "vue";
+import {
+  scroll_top,
+  current_w,
+} from "../utils/globals.js";
+import * as data from "../text/story.json";
+
 import Card from "@/components/Card.vue";
+import BaseLayout from "@/components/BaseLayout.vue";
 
 //==============================
 // Consts
 //==============================
-const EDUCATION = [
-  {
-    id: Symbol(),
-    year: "2014 - 2017",
-    title: "Bachelor's Degree in Psychology",
-    location: {
-      icon: "#school",
-      text: "IUSVE University, Venice (VE)",
-    },
-    content: {
-      paragraph: "A humanistic starting point characterized by an integrated approach and a practical settings",
-      list: [
-        "methods and procedures of investigation and scientific research in the psychological field",
-        "application in theoretical-practical laboratories in educational, clinical and work psychology field",
-        "exercise of psychological tests",
-      ],
-      tags: ["communication", "statistics", "research methods"],
-    },
-  },
-  {
-    id: Symbol(),
-    year: "2018 - 2021",
-    title: "Master's Degree in Human Computer Interaction",
-    location: {
-      icon: "#school",
-      text: "Milano-Bicocca University, Milan (MI)",
-    },
-    content: {
-      paragraph:
-        "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
-      list: [
-        "understanding of the basics of computer science, with a focus on the Web Development field",
-        "cognitive ergonomy and principles of visual design applied to digital products",
-        "design laboratories and experience of creating and developing a brand",
-      ],
-      tags: ["html", "css", "javascript", "node.js", "ux", "ui", "figma"],
-    },
-  },
-  {
-    id: Symbol(),
-    year: "2021 - 2022",
-    title: "2nd Level Master's Degree in Artificial Intelligence for Human Science",
-    location: {
-      icon: "#school",
-      text: "Federico II University, Naples (NA)",
-    },
-    content: {
-      paragraph: "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
-      list: [
-        "history and state of art of psychology of learning and human intelligence",
-        "computational linguistics in KNIME environment",
-        "hands-on experience in implementing the most famous machine learning algorithms in Python",
-      ],
-      tags: ["python", "keras", "pandas", "tensorflow"],
-    },
-  },
-];
+const items = computed( () => [ ...data.education, ...data.professional] );
+const cards = reactive( {} );
+const rects = reactive( {} );
+const ids = computed(() => items.value.map(el => el.id));
+const active_id = ref( undefined );
 
-const PROFESSIONAL = [
-  {
-    id: Symbol(),
-    year: `2022 - today (${ getProExpTime() })`,
-    title: "Web Developer (iCare)",
-    location: {
-      icon: "#office",
-      text: "Padua (PD)"
-    },
-    content: {
-      paragraph:
-        "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",
-      list: [
-        "maintain and develop the enterprise design system",
-        "develop, debug and improve usability and functionality of complex interface, from isolated base components to whole pages and views",
-        "unit test and end-to-end test in Cypress",
-      ],
-      tags: ["vue.js", "cypress", "jira", "confluence", "figma"],
-    },
-  },
-];
-
-function getProExpTime() {
-  const diff = Math.abs(Date.now() - Date.parse('02/14/2022'));
-  let seconds = Math.floor(diff / 1000);
-  let minutes = Math.floor(seconds / 60);
-  let hours   = Math.floor(minutes / 60);
-  let days    = Math.floor(hours / 24);
-  let months  = Math.floor(days / 30);
-  let years   = Math.floor(days / 365);
-  seconds %= 60;
-  minutes %= 60;
-  hours %= 24;
-  days %= 30;
-  months %= 12;
-
-  return `${years} years, ${months} months`;
+//==============================
+// Functions
+//==============================
+function goTo( id ) {
+ if ( cards[id]?.card_ref ) {
+  cards[id].card_ref.scrollIntoView( {behaviour: "smooth", block: "end", inline: "nearest"} );
+  active_id.value = id;
+ }
 }
+
+function setActiveCard( top ) {
+  let lowest = Infinity;
+
+  if ( Object.values(cards).length ) {
+    for (const key in rects) {
+      if (Object.prototype.hasOwnProperty.call(rects, key)) {
+        const rect = rects[key];
+        const elTop = rect.top;
+        if (elTop > top && elTop < lowest) {
+          lowest = elTop;
+          active_id.value = key;
+        }
+      }
+    }
+  }
+}
+
+//==============================
+// Watch
+//==============================
+watch( scroll_top, (newScrollTop) => {
+  setActiveCard(newScrollTop)
+})
+
+
+//==============================
+// Life cycle
+//==============================
+onMounted( () => {
+  if ( Object.values(cards).length ) {
+    for (const key in cards) {
+      if (Object.prototype.hasOwnProperty.call(cards, key)) {
+        const card = cards[key].card_ref;
+        rects[key] = card.getBoundingClientRect();
+      }
+    }
+  }
+  setActiveCard( 0 );
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -132,5 +104,35 @@ h3 {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 22px;
+  padding: 12px 0 22px 0;
+  margin-right: 80px;
+}
+.date-box {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50%;
+  top: 122px;
+  right: 22px;
+  width: 80px;
+  cursor: pointer;
+  h3 {
+    transition-duration: var(--transition-medium);
+    &.active, &:hover {
+      color: var(--primary);
+    }
+    &:not(:last-of-type) {
+      &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translate(0, 100%);
+        width: 2px;
+        height: 50px;
+        background-color: var(--primary);
+      }
+    }
+  }
 }
 </style>

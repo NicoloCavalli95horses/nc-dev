@@ -1,5 +1,5 @@
 <template>
-  <div class="event">
+  <div class="event" ref="card_ref" :id="item.id">
     <h2>{{ item.year }}</h2>
     <h4>{{ item.title }}</h4>
     <div class="pin">
@@ -20,19 +20,26 @@
 
 <script setup>
 //==============================
+// Import
+//==============================
+import { ref } from 'vue';
+
+//==============================
 // Props and emits
 //==============================
 const props = defineProps({
   item: Object,
 });
 
-//==============================
-// Consts
-//==============================
+const card_ref = ref( undefined );
 
 //==============================
-// Consts
+// Expose
 //==============================
+defineExpose({
+  card_ref,
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +66,7 @@ const props = defineProps({
       margin: 0 8px 0 0;
     }
   }
-  p {
+  p, ul {
     margin-top: 12px;
   }
   .tags {

@@ -12,8 +12,10 @@ import {
 const MOBILE_W = 500;
 const MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
 
-export const toastMsg  = ref( [] );
-export const is_mobile = ref( window.innerWidth <= MOBILE_W );
+export const toastMsg   = ref( [] );
+export const is_mobile  = ref( window.innerWidth <= MOBILE_W );
+export const current_w  = ref( window.innerWidth );
+export const scroll_top = ref( 0 );
 
 //==================================
 // Functions
@@ -151,6 +153,10 @@ export function syntaxHighlighter(text) {
 //==================================
 const onResize = debounce(() => {
   is_mobile.value = window.innerWidth <= MOBILE_W;
+  current_w.value = window.innerWidth;
 }, 250);
 
+const onScroll = debounce((e) => scroll_top.value = e.target.scrollTop, 250);
+
 window.addEventListener("resize", onResize);
+document.body.addEventListener("scroll", onScroll);

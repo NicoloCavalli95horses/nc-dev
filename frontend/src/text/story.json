@@ -1,0 +1,123 @@
+{
+  "education": [
+    {
+      "id": 2014,
+      "year": "2014 - 2017",
+      "title": "Bachelor's Degree in Psychology",
+      "location": {
+        "icon": "#school",
+        "text": "IUSVE University, Venice (VE)"
+      },
+      "content": {
+        "paragraph": "A humanistic starting point characterized by an integrated approach and a practical settings",
+        "list": [
+          "methods and procedures of investigation and scientific research in the psychological field",
+          "application in theoretical-practical laboratories in educational, clinical and work psychology field",
+          "exercise of psychological tests"
+        ],
+        "tags": [
+          "communication",
+          "statistics",
+          "research methods"
+        ]
+      }
+    },
+    {
+      "id": 2018,
+      "year": "2018 - 2021",
+      "title": "Master's Degree in Human Computer Interaction",
+      "location": {
+        "icon": "#school",
+        "text": "Milano-Bicocca University, Milan (MI)"
+      },
+      "content": {
+        "paragraph": "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
+        "list": [
+          "understanding of the basics of computer science, with a focus on the Web Development field",
+          "cognitive ergonomy and principles of visual design applied to digital products",
+          "design laboratories and experience of creating and developing a brand"
+        ],
+        "tags": [
+          "html",
+          "css",
+          "php",
+          "javascript",
+          "node.js",
+          "ux",
+          "ui",
+          "figma"
+        ]
+      }
+    },
+    {
+      "id": 2021,
+      "year": "2021 - 2022",
+      "title": "2nd Level Master's Degree in Artificial Intelligence for Human Science",
+      "location": {
+        "icon": "#school",
+        "text": "Federico II University, Naples (NA)"
+      },
+      "content": {
+        "paragraph": "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
+        "list": [
+          "history and state of art of psychology of learning and human intelligence",
+          "computational linguistics in KNIME environment",
+          "hands-on experience in implementing the most famous machine learning algorithms in Python"
+        ],
+        "tags": [
+          "python",
+          "keras",
+          "pandas",
+          "tensorflow"
+        ]
+      }
+    }
+  ],
+  "professional": [
+    {
+      "id": 2022,
+      "year": "2022 - 2024",
+      "title": "Web Developer (iCare)",
+      "location": {
+        "icon": "#office",
+        "text": "Padua (PD)"
+      },
+      "content": {
+        "paragraph": "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",
+        "list": [
+          "maintain and develop the enterprise design system",
+          "develop, debug and improve usability and functionality of complex interface, from isolated base components to whole pages and views",
+          "unit test and end-to-end test in Cypress"
+        ],
+        "tags": [
+          "vue.js",
+          "cypress",
+          "jira",
+          "confluence",
+          "figma"
+        ]
+      }
+    },
+    {
+      "id": 2024,
+      "year": "2024 - current",
+      "title": "PhD researcher (DiverSE/INRIA lab)",
+      "location": {
+        "icon": "#school",
+        "text": "University of Rennes 1, Rennes (FR)"
+      },
+      "content": {
+        "paragraph": "DiverSE is a research team of IRISA, a mixed research unit grouping CNRS, University of Rennes 1, INRIA INSA Rennes, in Rennes. The team operate in the second biggest research group in France. DiverSE team's research agenda is in the area of software engineering, developing models, methodologies and theories to address the challenges raised by the emergence of several forms of diversity in the design, deployment and evolution of software intensive systems.",
+        "list": [
+          "currently working on Web front-end testing: large scale analysis and techniques improvement"
+        ],
+        "tags": [
+          "javascript",
+          "obsidian",
+          "research",
+          "web testing"
+        ]
+      }
+    }
+  ]
+}
