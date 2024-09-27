@@ -92,6 +92,10 @@ h2 {
   font-size: 2.2rem;
   line-height: 1.6;
 }
+h2.title {
+  color: var(--secondary);
+  font-size: clamp(4rem, 6vw, 8rem);
+}
 
 h3 {
   color: var(--secondary);
@@ -110,9 +114,10 @@ h6 {
   font-size: 1.2rem;
 }
 
-p, span, ul, li, a, .article-content {
-  font-size: 1.4rem;
-  line-height: 1.5;
+p, span, ul, li, a {
+  font-size: 1.5rem;
+  line-height: 1.7;
+  letter-spacing: 1px;
 }
 ul, ol {
   margin-left: 22px;

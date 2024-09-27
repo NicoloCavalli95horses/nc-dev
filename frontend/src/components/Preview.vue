@@ -1,5 +1,5 @@
 <template>
-  <div class="thumb" :class="{'hover': hover}" @click="onClick" @mouseenter="hover = true" @mouseleave="hover = false">
+  <div class="thumb shadow" :class="{'hover': hover}" @click="onClick" @mouseenter="hover = true" @mouseleave="hover = false">
     <div class="title">
       <h4>{{ item.title }}</h4>
       <div v-if="isAdmin" class="btns">
@@ -76,13 +76,10 @@ function onClick() {
   cursor: pointer;
   padding: 12px 14px;
   box-sizing: border-box;
-  transition-duration: var(--transition-medium);
   border-radius: var(--radius-m);
-  border: 1px solid var(--grey-28);
-  &.hover {
-    background-color: var(--grey-28);
-    transition-duration: var(--transition-medium);
-  }
+  background-color: var(--grey-28);
+  display: flex;
+  flex-direction: column;
 
   h5 {
     font-size: 11px;
@@ -101,10 +98,13 @@ function onClick() {
     }
   }
   .body {
+    flex-grow: 1;
     margin-top: 12px;
   }
   .footer {
-    display: grid;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
     grid-gap: 6px;
     margin-top: 8px;
     .tags {

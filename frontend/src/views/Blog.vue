@@ -1,13 +1,8 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :hide_vertical="current_w < 600">
     <template #title>Blog</template>
     <template #default>
       <div class="bottom-48">
-        <h2>
-          Sharing is the best way to learn.<br />
-          That's why I decided to keep track of my progresses building a li'l blog
-          from scratch
-        </h2>
         <div class="filters-bar">
           <div>
             <p>Order by</p>
@@ -29,7 +24,7 @@
           <p>Loading...</p>
         </template>
         <template v-else-if="error">
-          <p>Impossible to fetch articles</p>
+          <p class="error-msg">Impossible to fetch articles</p>
         </template>
         <template v-else>
           <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
@@ -57,6 +52,7 @@ import {
 } from "@/utils/api";
 import {
   is_mobile,
+  current_w, 
   addToastMsg,
 } from "@/utils/globals";
 
@@ -143,7 +139,8 @@ watch( params, async (newParams) => {
 .articles {
   display: grid;
   grid-gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  padding: 10px;
   &.mobile {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }

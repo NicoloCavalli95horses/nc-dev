@@ -1,4 +1,5 @@
 <template>
+ <div class="ink-wrapper">
   <svg class="ink-svg" viewBox="0 0 100 100">
     <filter :id="filter_id">
       <feTurbulence
@@ -23,24 +24,61 @@
       :style="{ filter: `url(#${filter_id})` }"
     />
   </svg>
+</div>
 </template>
 
 <script setup>
 //==============================
 // Import
 //==============================
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+} from 'vue';
 
-//==============================
-// Props and emits
-//==============================
-defineProps({
-  scale: Number,
-  filter_id: [Number, String],
-});
 
 //==============================
 // Consts
 //==============================
+const INK_SPEED = 2;
+
+const scale     = ref( 150 );
+const filter_id = ref( randId() );
+
+let animation_direction = true;
+let ink_interval = undefined;
+
+
+//==============================
+// Functions
+//==============================
+function randId() {
+  const timestamp = new Date().getTime();
+  const random = Math.random() * 10000;
+  const uniqueId = `${timestamp}_${random}`;
+  return uniqueId;
+}
+
+//==============================
+// Life cycle
+//==============================
+onMounted(() => {
+  ink_interval = setInterval(() => {
+    if (animation_direction && scale.value < 150) {
+      scale.value += INK_SPEED;
+    } else if (!animation_direction && scale.value > 50) {
+      scale.value -= INK_SPEED;
+    } else {
+      animation_direction = !animation_direction;
+    }
+    filter_id.value = randId();
+  }, 120);
+});
+
+onBeforeUnmount(() => {
+  clearInterval(ink_interval);
+});
 </script>
 
 <style lang="scss" scoped>

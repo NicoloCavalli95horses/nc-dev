@@ -1,8 +1,10 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :hide_vertical="current_w < 600">
     <template #title>Projects</template>
     <template #default>
-      <h2 class="bottom-48">A few things I have worked on over time,<br>including academic exercises and week-end's experiments.</h2>
+      <h2>A few things I have worked on over time</h2><br>
+      <p>Including academic exercises and week-end's experiments</p>
+      <br><br>
       <BentoGrid :items="items" />
     </template>
   </BaseLayout>
@@ -12,6 +14,10 @@
 //==============================
 // Import
 //==============================
+import {
+  current_w,
+} from '@/utils/globals';
+
 import BentoGrid from "@/components/BentoGrid.vue";
 import BaseLayout from "@/components/BaseLayout.vue";
 

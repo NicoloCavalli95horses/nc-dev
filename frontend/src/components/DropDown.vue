@@ -67,12 +67,7 @@ function onToggle() {
 function onClick(e, item) {
   e.stopPropagation();
   show.value = false;
-  if (props.active_id == item.id) {
-    emit("unselect");
-    emit("update:active_id", null);
-  } else {
-    emit("update:active_id", item.id);
-  }
+  emit("update:active_id", item.id);
 }
 </script>
 

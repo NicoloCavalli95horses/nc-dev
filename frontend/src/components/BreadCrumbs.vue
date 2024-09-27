@@ -50,7 +50,6 @@ onMounted(() => {
   align-items: center;
   margin: 0 0 24px 0;
   padding: 12px 0;
-  border-bottom: 1px solid var(--grey-33);
   p {
     cursor: pointer;
     &.active {

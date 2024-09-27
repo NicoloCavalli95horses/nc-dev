@@ -1,7 +1,7 @@
 <template>
   <div class="bento-grid">
     <template v-for="item in items" :key="item.id">
-      <a :href="item.href" class="item">
+      <a :href="item.href" class="item shadow">
         <div class="text">
           <label>{{ item.title }}</label>
           <p>{{ item.content }}</p>
@@ -36,6 +36,7 @@ const props = defineProps({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   grid-gap: 12px;
+  padding: 10px;
   .item {
     background-color: var(--grey-28);
     border-radius: clamp(1em, 1vw, 2em);

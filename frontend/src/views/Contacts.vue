@@ -1,23 +1,21 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :hide_vertical="current_w < 600">
     <template #title>Contacts</template>
     <template #default>
+      <Ink />
       <section>
         <div class="contact-box">
-          <p>
-            <a href="https://github.com/NicoloCavalli95horses"><svg><use href="#github"></use></svg></a>
-            <a href="https://www.instagram.com/nicolo.cavalli95/"><svg><use href="#instagram"></use></svg></a>
-            <a href="https://www.linkedin.com/in/nicolo-cavalli/"><svg><use href="#linkedin"></use></svg></a>
+          <p class="b-24 r-text">
+           <a href="https://github.com/NicoloCavalli95horses"><svg><use href="#github"></use></svg></a>
+           <a href="https://www.instagram.com/nicolo.cavalli95/"><svg><use href="#instagram"></use></svg></a>
+           <a href="https://www.linkedin.com/in/nicolo-cavalli/"><svg><use href="#linkedin"></use></svg></a>
           </p>
-          <p><label>location</label>Rennes, France</p>
-          <p><label>email</label>nicolo.cavalli95@gmail.com</p>
-          <p><label>mobile</label>346 95 92 168</p>
           <div class="inputs">
-            <h4>Email</h4>
+            <label>Email</label>
             <InputText placeholder="email" v-model:text="email" autocomplete="email" />
-            <h4>Subject</h4>
+            <label>Subject</label>
             <InputText placeholder="subject" v-model:text="subject" />
-            <h4>Message</h4>
+            <label>Message</label>
             <InputText placeholder="your message" type="textarea" v-model:text="msg" />
             <Btn :disabled="disable_send || !areFieldsValid" @click="onEmailSend">Send</Btn>
           </div>
@@ -40,9 +38,11 @@ import {
 } from '../utils/api';
 import {
   addToastMsg,
-} from '../utils/globals';
+  current_w,
+} from '@/utils/globals';
 
 import Btn from '@/components/Btn.vue';
+import Ink from '@/components/Ink.vue';
 import InputText from '@/components/InputText.vue';
 import BaseLayout from '@/components/BaseLayout.vue';
 
@@ -81,14 +81,11 @@ async function onEmailSend() {
 
 <style lang="scss" scoped>
   section {
+    position: relative;
     width: 100%;
     max-width: 800px;
+    z-index: 1;
     .contact-box {
-      p {
-        &:not(:first-of-type) {
-          margin: 22px 0;
-        }
-      }
       .inputs {
         display: grid;
         grid-gap: 12px;

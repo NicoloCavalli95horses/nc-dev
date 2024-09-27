@@ -1,5 +1,5 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :hide_vertical="current_w < 600">
     <template #title>My story</template>
     <template #default>
       <div class="events">

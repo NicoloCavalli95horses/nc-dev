@@ -2,22 +2,20 @@
   <BaseLayout :hide_vertical="is_mobile">
     <template #title>Article</template>
     <template #default>
-      <template v-if="loading">
-        <p>Loading...</p>
-      </template>
+      <p v-if="loading">Loading...</p>
       <template v-else>
-        <BreadCrumbs :title="item.title" />
-        <div class="header">
-          <div class="date"><p>{{ filterDate(item.updated_at) }}</p></div>
-          <div class="tags">
-            <div class="tag" v-for="t, i in JSON.parse(item.tags)" :key="i">
-              <label>{{ t }}</label>
+        <BreadCrumbs class="fixed-top" :title="item.title" />
+        <div class="main-content">
+          <div class="header">
+            <div class="date"><p>{{ filterDate(item.updated_at) }}</p></div>
+            <div class="tags">
+              <div class="tag" v-for="t, i in JSON.parse(item.tags)" :key="i">
+                <label>{{ t }}</label>
+              </div>
             </div>
           </div>
-        </div>
-        <h3>{{ item.title }}</h3>
-        <div class="main-content">
-          <p id="article-html" v-html="item.content"></p>
+          <h3>{{ item.title }}</h3>
+          <p id="html-article" v-html="item.content"></p>
         </div>
       </template>
     </template>
@@ -37,10 +35,10 @@ import {
   onMounted,
 } from 'vue';
 import {
+  is_mobile,
   filterDate,
-  syntaxHighlighter,
   addToastMsg,
-  is_mobile
+  syntaxHighlighter,
 } from "@/utils/globals";
 import { apiGetArticle } from "@/utils/api";
 
@@ -122,7 +120,22 @@ onMounted( async () => {
 
 .main-content {
   max-width: 800px;
-  margin: 22px 0 44px 0;
+  margin: 82px auto;
   user-select: text;
+  :deep(*) {
+    line-height: 2;
+  }
+}
+
+.fixed-top {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  background-color: var(--grey-22);
+  top: 49px;
+  margin-left: -2px;
+  @media only screen and (max-width: 500px) {
+    top: 79px;
+  }
 }
 </style>

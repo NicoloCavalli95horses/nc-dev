@@ -11,10 +11,7 @@
         </h2>      
         <Btn class="top-24" @click="onDownload">Download CV</Btn>
       </div>
-
-      <div class="ink-wrapper">
-        <Ink :filter_id="filter_id" :scale="ink_scale" />
-      </div>
+      <Ink />
     </template>
   </BaseLayout>
 </template>
@@ -23,31 +20,22 @@
 //==============================
 // Import
 //==============================
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import { is_mobile } from '../utils/globals.js';
-import BaseLayout from "@/components/BaseLayout.vue";
-import Btn from "@/components/Btn.vue";
-import Ink from "@/components/Ink.vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  } from "vue";
+import {
+  is_mobile,
+  } from '../utils/globals.js';
 
-//==============================
-// Consts
-//==============================
-const ink_scale = ref(150);
-const INK_SPEED = 2;
-const filter_id = ref(randId());
-let ink_up = true;
-let ink_interval = undefined;
+import Ink from "@/components/Ink.vue";
+import Btn from "@/components/Btn.vue";
+import BaseLayout from "@/components/BaseLayout.vue";
 
 //==============================
 // Functions
 //==============================
-function randId() {
-  const timestamp = new Date().getTime();
-  const random = Math.random() * 10000;
-  const uniqueId = `${timestamp}_${random}`;
-  return uniqueId;
-}
-
 function onDownload() {
   downloadAsset({file: 'nicolo_cavalli_cv.pdf'});
 }
@@ -61,27 +49,6 @@ function downloadAsset({file}) {
   a.click();
   document.body.removeChild(a);
 }
-
-
-//==============================
-// Life cycle
-//==============================
-onMounted(() => {
-  ink_interval = setInterval(() => {
-    if (ink_up && ink_scale.value < 150) {
-      ink_scale.value += INK_SPEED;
-    } else if (!ink_up && ink_scale.value > 50) {
-      ink_scale.value -= INK_SPEED;
-    } else {
-      ink_up = !ink_up;
-    }
-    filter_id.value = randId();
-  }, 80);
-});
-
-onBeforeUnmount(() => {
-  clearInterval(ink_interval);
-});
 
 
 </script>
@@ -117,15 +84,5 @@ onBeforeUnmount(() => {
     line-height: 1.6;
     font-size: 2.2rem;
   }
-}
-.ink-wrapper {
-  position: absolute;
-  width: 50vh;
-  height: 50vh;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>
