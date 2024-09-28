@@ -61,7 +61,6 @@ const dd_rect   = ref( undefined );
 function onToggle() {
   show.value = !show.value;
   dd_rect.value = dd_ref.value.getBoundingClientRect();
-  console.log(dd_rect.value)
 }
 
 function onClick(e, item) {

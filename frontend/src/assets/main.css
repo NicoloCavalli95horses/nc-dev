@@ -426,12 +426,6 @@ code span {
   margin-left: 12px;
 }
 
-b {
-  padding: 4px 6px;
-  border-radius: var(--radius-s);
-  background-color: var(--secondary);
-}
-
 .ink-wrapper {
   position: absolute;
   width: 50vh;

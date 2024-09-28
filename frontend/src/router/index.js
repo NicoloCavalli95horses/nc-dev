@@ -45,7 +45,6 @@ const router = createRouter({
       name: "editor",
       component: () => import("../views/Editor.vue"),
       beforeEnter: () => {
-        console.log(isAdmin.value)
         if (!isAdmin.value) {
           addToastMsg({msg: 'not allowed', time: 4000})
           return {name: 'home'}

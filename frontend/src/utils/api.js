@@ -36,6 +36,16 @@ export async function apiTest() {
   return await _executeApi({ url, options });
 }
 
+/**
+ * Get all the tags and their frequencies
+ * @returns response object
+ */
+export async function apiGetTags() {
+  const url = `${BASE_URL}tags`;
+  const options = _getApiOptions();
+  return await _executeApi({ url, options });
+}
+
 
 /**
  * Get all the articles
@@ -44,7 +54,6 @@ export async function apiTest() {
 export async function apiGetArticles({params}) {
   const query = new URLSearchParams(params).toString();
   const url = `${BASE_URL}blog?${query}`;
-  console.log(url)
   const options = _getApiOptions();
   return await _executeApi({ url, options });
 }

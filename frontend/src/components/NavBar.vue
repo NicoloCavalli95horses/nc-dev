@@ -1,18 +1,10 @@
 <template>
-  <div
-    v-if="is_mobile"
-    class="sidebar"
-    :class="[show_sidebar ? 'open' : 'close']"
-  >
-    <div
-      v-for="i in items"
-      :key="i.id"
-      class="item"
-      :class="{ active: active == i.id }"
-    >
+  <nav v-if="is_mobile" class="sidebar" :class="[show_sidebar ? 'open' : 'close']">
+    <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active == i.id }">
       <h4 @click="onItemClick(i)">{{ i.value }}</h4>
     </div>
-  </div>
+    <div class="letter">{{ active.substring(0,1).toUpperCase() }}</div>
+  </nav>
   <nav>
     <div class="main-nav">
       <template v-if="is_mobile">
@@ -26,12 +18,7 @@
       </template>
       <template v-else>
         <div class="w-50" />
-        <div
-          v-for="i in items"
-          :key="i.id"
-          class="item"
-          :class="{ active: active == i.id }"
-        >
+        <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active == i.id }">
           <h4 @click="onItemClick(i)">{{ i.value }}</h4>
         </div>
       </template>
@@ -51,9 +38,9 @@ import router from "../router/index";
 // Consts
 //==================================
 const items = [
-  { id: "home", route: "", value: "home" },
-  { id: "story", route: "story", value: "my story" },
-  { id: "blog", route: "blog", value: "blog" },
+  { id: "home",     route: "",         value: "home" },
+  { id: "story",    route: "story",    value: "story" },
+  { id: "blog",     route: "blog",     value: "blog" },
   { id: "projects", route: "projects", value: "projects" },
   { id: "contacts", route: "contacts", value: "contacts" },
 ];
@@ -61,7 +48,7 @@ const items = [
 //==================================
 // Consts
 //==================================
-const active = ref("home");
+const active = ref( router.currentRoute?._value?.name || 'home' );
 const show_sidebar = ref(false);
 
 //==================================
@@ -144,10 +131,12 @@ nav {
   margin: 0 6px;
   transition-duration: 400ms;
   cursor: pointer;
+  padding: 10px;
   h4 {
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 12px;
+    letter-spacing: 2px;
+    font-size: 1.6em;
+    position: relative;
   }
   &.active h4 {
     color: var(--primary);
@@ -178,6 +167,13 @@ nav {
   }
   h4 {
     margin: 12px 0;
+  }
+  .letter {
+    position: fixed;
+    bottom: 0;
+    right: 10%;
+    font-size: 135pt;
+    color: var(--grey-28);
   }
 }
 </style>
