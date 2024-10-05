@@ -53,7 +53,7 @@ export async function apiGetTags() {
  */
 export async function apiGetArticles({params}) {
   const query = new URLSearchParams(params).toString();
-  const url = `${BASE_URL}blog?${query}`;
+  const url = `${BASE_URL}post?${query}`;
   const options = _getApiOptions();
   return await _executeApi({ url, options });
 }
@@ -66,7 +66,7 @@ export async function apiGetArticles({params}) {
  * @returns response object 
  */
 export async function apiGetArticle({ id }) {
-  const url = `${BASE_URL}blog/${id}`;
+  const url = `${BASE_URL}post/${id}`;
   const options = _getApiOptions();
   return await _executeApi({ url, options });
 }
@@ -89,7 +89,7 @@ export async function apiCreateArticle({
   content,
   tags,
 }) {
-  const url = `${BASE_URL}blog`;
+  const url = `${BASE_URL}post`;
   const options = _getApiOptions({
     method: "POST",
     accept: "application/json",
@@ -123,7 +123,7 @@ export async function apiUpdateArticle({
   tags,
   start_time,
 }) {
-  const url = `${BASE_URL}blog/${id}`;
+  const url = `${BASE_URL}post/${id}`;
   const options = _getApiOptions({
     method: "PUT",
     accept: "application/json",
@@ -146,7 +146,7 @@ export async function apiUpdateArticle({
  * @returns response object 
  */
 export async function apiDeleteArticle({ id }) {
-  const url = `${BASE_URL}blog/${id}`;
+  const url = `${BASE_URL}post/${id}`;
   const options = _getApiOptions({
     method: "DELETE",
     accept: "application/json",

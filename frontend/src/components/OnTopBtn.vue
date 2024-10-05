@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-right" :class="[show ? 'fade-in' : 'fade-out']">
+  <div class="fixed-right shadow" :class="[show ? 'fade-in' : 'fade-out']">
     <Btn @click="onTopClick">
       <svg><use href="#arrow-up"></use></svg>
     </Btn>

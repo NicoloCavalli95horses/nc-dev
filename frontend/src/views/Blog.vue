@@ -5,15 +5,18 @@
       <!-- Filters -->
       <section class="filters-bar">
         <!-- Tags -->
-        <!-- <div>
+        <div>
           <p>Filter by tag</p>
           <div class="tags">
-            <div class="tag" :class="{'active': active_tags.includes(tag)}" v-for="(freq, tag) in tags" :key="tag" @click="onTagClick(tag)">
-              <label>{{ tag }} <b class="freq">{{ freq }}</b></label>
+          <template v-if="tags.length">
+            <div class="tag" :class="{'active': active_tags.includes(tag)}" v-for="tag in tags" :key="tag" @click="onTagClick(tag)">
+              <label>{{ tag }}</label>
             </div>
+          </template>
+          <p v-else class="grey-text">No tags</p>
           </div>
-        </div> -->
-        <!-- Order by -->
+        </div>
+       <!-- Order by -->
         <div>
           <p>Order by</p>
           <DropDown :items="ORDER_BY_ITEMS" v-model:active_id="sort_by" />
@@ -28,15 +31,22 @@
             </svg>
           </Btn>
         </div>
+        <!-- Pagination -->
+        <div>
+        <p>Page</p>
+        <Pagination
+          :disabled="tot_pages === 1"
+          :curr_page="parseInt(curr_page)"
+          :tot_pages="parseInt(tot_pages)"
+          @page="(n) => curr_page = n"
+        />
+        </div>
       </section>
       <!-- Articles -->
       <section class="articles" :class="{ 'mobile' : is_mobile }">
-        <template v-if="loading">
-          <p>Loading...</p>
-        </template>
-        <template v-else-if="error">
-          <p>No articles found</p>
-        </template>
+          <p v-if="loading">Loading...</p>
+          <p v-else-if="error">Unable to fetch articles</p>
+          <p v-else-if="!items.length" class="grey-text">0 articles found</p>
         <template v-else>
           <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
         </template>
@@ -52,11 +62,12 @@
 import {
   useRouter,
 } from 'vue-router';
+import router from '@/router/index.js';
 import {
   ref,
   watch,
   computed,
-  // onBeforeMount,
+  onBeforeMount,
 } from "vue";
 import {
   apiGetArticles,
@@ -69,35 +80,43 @@ import {
   addToastMsg,
 } from "@/utils/globals";
 
-import Btn    from "@/components/Btn.vue";
+import Btn        from "@/components/Btn.vue";
 import Preview    from "@/components/Preview.vue";
-import DropDown    from "@/components/DropDown.vue";
+import DropDown   from "@/components/DropDown.vue";
+import Pagination from "@/components/Pagination.vue";
 import BaseLayout from "@/components/BaseLayout.vue";
 
 //==============================
 // Consts
 //==============================
 const ORDER_BY_ITEMS = [
-  {id: 'title',       val: 'Title'      },
+  {id: 'title',       val: 'Title'       },
   {id: 'updated_at',  val: 'Update date' },
-  {id: 'description', val: 'Description'},
+  {id: 'description', val: 'Description' },
 ];
 
-const router      = useRouter();
+//==============================
+// Refs
+//==============================
+const nav = useRouter();
+const routerQuery = computed( () => router.currentRoute.value.query );
+
 const items       = ref( [] );
 const error       = ref( false );
 const loading     = ref( true );
 const sort_by     = ref( ORDER_BY_ITEMS[1].id );
-const sort_order  = ref( true );
-// const tags        = ref( {} );
-// const active_tags = ref( [] );
+const sort_order  = ref( 'asc' );
+const curr_page   = ref( 1 );
+const tot_pages   = ref( 10 );
+const tags        = ref( {} );
+const active_tags = ref( routerQuery.value.tags || [] );
 
-const params = computed( () => {
-  return { 
-    sort: sort_by.value,
-    order: sort_order.value ? 'desc' : 'asc',
-  };
-})
+const params = computed( () => ({
+  page: curr_page.value || 1,
+  order: sort_order.value? 'asc' : 'desc',
+  sort: sort_by.value,
+  ...(active_tags.value.length ? {tags: active_tags.value.toString()} : {})
+}));
 
 //==============================
 // Functions
@@ -106,27 +125,25 @@ async function getArticles() {
   const res = await apiGetArticles({params: params.value});
   loading.value = false;
   if (res.code == 200) {
-    items.value = [...res.data];
+    items.value = [...res.data.data];
+    tot_pages.value = res.data.last_page;
     error.value = false;
   } else {
     error.value = true;
   }
 }
 
-// function onTagClick(tag) {
-//   if (active_tags.value.includes(tag)) {
-//     const idx = active_tags.value.indexOf(tag);
-//     active_tags.value.splice(idx, 1);
-//   } else {
-//     active_tags.value.push(tag);
-//   }
-// }
+function onTagClick(tag) {
+  if (active_tags.value.includes(tag)) {
+    const idx = active_tags.value.indexOf(tag);
+    active_tags.value.splice(idx, 1);
+  } else {
+    active_tags.value.push(tag);
+  }
+}
 
 function onEdit(i){
-  router.push({
-    name: 'update',
-    params: { id: i.id }
-  });
+  nav.push( {name: 'update', params: { id: i.id }} );
 }
 
 async function onDelete(i) {
@@ -134,8 +151,29 @@ async function onDelete(i) {
   if ( res.code === 200 ) {
     addToastMsg({ msg: 'Article deleted', time: 5000 }),
     await getArticles();
+    await getTags();
   } else {
     addToastMsg({ msg: 'Failed to delete article', time: 5000 }); 
+  }
+}
+
+async function getTags() {
+  const res = await apiGetTags();
+  if ( res.code === 200 ) {
+    tags.value = res.data.map(i => i.name);
+  } else {
+    addToastMsg({ msg: 'Failed to fetch tags', time: 5000 }); 
+  }
+}
+
+function initFilters() {
+  if (Object.keys(routerQuery.value).length) {
+    sort_by.value = routerQuery.value.sort || ORDER_BY_ITEMS[1].id;
+    sort_order.value = routerQuery.value.order || 'asc';
+    curr_page.value = routerQuery.value.page || 1;
+    active_tags.value = routerQuery.value.tags?.split(',') || [];
+  } else {
+    nav.push( {query: { ...params.value }} );
   }
 }
 
@@ -144,23 +182,19 @@ async function onDelete(i) {
 //==============================
 watch( params, async (newParams) => {
   loading.value = true;
-  router.push({ query: { ...newParams }})
+  nav.push( {query: { ...newParams }} )
   await getArticles();
-}, { immediate: true });
+});
 
 
 //==============================
 // Life cycle
 //==============================
-// onBeforeMount( async () => {
-  // This works fine, but a solution has to be found to improve the backend search for all the tags
-  // const res = await apiGetTags();
-  // if ( res.code === 200 ) {
-  //   tags.value = res.data;
-  // } else {
-  //   addToastMsg({ msg: 'Failed to fetch tags', time: 5000 }); 
-  // }
-// });
+onBeforeMount( async () => {
+  await getTags();
+  initFilters();
+  await getArticles();
+});
 
 
 </script>

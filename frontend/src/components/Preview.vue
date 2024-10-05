@@ -17,8 +17,8 @@
     <div class="footer">
       <h5>{{ filterDate( item.updated_at ) }}</h5>
      <div v-if="item.tags" class="tags">
-      <div class="tag" v-for="t in JSON.parse(item.tags)" :key="t">
-        <label>{{ t }}</label>
+      <div class="tag" v-for="t in item.tags" :key="t">
+        <label>{{ t.name }}</label>
       </div>
      </div>
     </div>
@@ -65,7 +65,7 @@ const router = useRouter();
 // Functions
 //==============================
 function onClick() {
-  router.push({ path: `/blog/${props.item.id}` });
+  router.push({ path: `/blog/${props.item.id}_${props.item.title}` });
 }
 
 </script>

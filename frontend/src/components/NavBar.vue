@@ -30,9 +30,13 @@
 //==================================
 // Import
 //==================================
-import { ref } from "vue";
+import {
+  ref,
+  watch,
+  computed,
+} from "vue";
 import { is_mobile } from "@/utils/globals";
-import router from "../router/index";
+import router from "@/router/index";
 
 //==================================
 // Consts
@@ -48,8 +52,9 @@ const items = [
 //==================================
 // Consts
 //==================================
-const active = ref( router.currentRoute?._value?.name || 'home' );
+const active       = ref( undefined );
 const show_sidebar = ref(false);
+const routerQuery = computed( () => router.currentRoute.value.name );
 
 //==================================
 // Functions
@@ -59,6 +64,15 @@ function onItemClick(i) {
   router.push("/" + i.route);
   show_sidebar.value = false;
 }
+
+//==================================
+// Watch
+//==================================
+watch( routerQuery, (newVal) => {
+  if (active.value != newVal) {
+    active.value = newVal;
+  }
+})
 </script>
 
 <style lang="scss" scoped>

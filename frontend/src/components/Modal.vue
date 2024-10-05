@@ -93,6 +93,7 @@ function onBdClick() {
   left: 0;
   width: 100%;
   height: 100vh;
+  z-index: 99;
   .modal {
     position: absolute;
     top: 50%;

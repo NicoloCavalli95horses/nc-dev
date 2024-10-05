@@ -9,6 +9,7 @@
   </RouterView>
   <Login v-if="can_login" @close="can_login = false" />
   <OnTopBtn />
+  <Btn v-if="isAdmin && !['update', 'editor'].includes(route.name)" class="editor-btn shadow" @click="goToEditor">editor</Btn>
   <KeyBoardShortcut :keys="['l']" :modifiers="['Control', 'Alt']" @keydown="can_login = true" />
 </template>
 <script setup>
@@ -24,19 +25,33 @@ import {
   useRoute,
   RouterView
 } from "vue-router";
+import {
+  isAdmin,
+} from "@/utils/globals";
+import router from "@/router/index";
 
-import NavBar           from "./components/NavBar.vue";
-import Icons            from "./components/Icons.vue";
-import Login            from "./components/Login.vue";
-import ToastMsg         from "./components/ToastMsg.vue";
-import OnTopBtn         from "./components/OnTopBtn.vue";
-import KeyBoardShortcut from "./components/KeyBoardShortcut.vue";
+import Btn              from "@/components/Btn.vue";
+import NavBar           from "@/components/NavBar.vue";
+import Icons            from "@/components/Icons.vue";
+import Login            from "@/components/Login.vue";
+import ToastMsg         from "@/components/ToastMsg.vue";
+import OnTopBtn         from "@/components/OnTopBtn.vue";
+import KeyBoardShortcut from "@/components/KeyBoardShortcut.vue";
 
 //==================================
 // Const
 //==================================
 const route = useRoute();
 const can_login = ref( false );
+
+
+//==================================
+// Functions
+//==================================
+function goToEditor() {
+  router.replace({path: '/editor'});
+}
+
 
 //==================================
 // Watch
@@ -56,5 +71,10 @@ watch( () => route.path, () => {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+.editor-btn {
+  position: fixed;
+  bottom: 22px;
+  left: 22px;
 }
 </style>

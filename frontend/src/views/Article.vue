@@ -9,8 +9,8 @@
           <div class="header">
             <div class="date"><p>{{ filterDate(item.updated_at) }}</p></div>
             <div class="tags">
-              <div class="tag" v-for="t, i in JSON.parse(item.tags)" :key="i">
-                <label>{{ t }}</label>
+              <div class="tag" v-for="t in item.tags" :key="t.id">
+                <label>{{ t.name }}</label>
               </div>
             </div>
           </div>
@@ -63,32 +63,12 @@ async function getArticle() {
     loading.value = false;
     error.value = false;
     item.value.content = syntaxHighlighter(item.value.content);
-    // appendCopyPaste();
   } else {
     console.error(`error while fetching article ${route.params.id}`);
     loading.value = false;
     error.value = true;
   }
 }
-
-// function appendCopyPaste() {
-//   nextTick(() => {
-//     const codeElements = Array.from(document.querySelectorAll('code'));
-//     codeElements.forEach( el => {
-//       const textToCopy = el.textContent;
-//       const div = document.createElement('div');
-//       div.classList.add('copy-paste');
-//       div.innerHTML = '<svg><use href="#copy"></use></svg>copy';
-//       div.addEventListener('click', () => onClipboardCopy(textToCopy));
-//       el.appendChild(div);
-//     });
-//   })
-// }
-
-// function onClipboardCopy(text){
-//   navigator.clipboard.writeText(text);
-//   addToastMsg({msg: 'Code copied', time:2000})
-// }
 
 //==============================
 // Life cycle
@@ -132,7 +112,7 @@ onMounted( async () => {
   width: 100%;
   height: 40px;
   background-color: var(--grey-22);
-  top: 49px;
+  top: 51px;
   margin-left: -2px;
   @media only screen and (max-width: 500px) {
     top: 79px;

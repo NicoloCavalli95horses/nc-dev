@@ -119,7 +119,7 @@ async function updateArticle() {
     id: editID.value,
     title: title.value,
     description: description.value,
-    tags: tags.value,
+    tags: tags.value.toString(),
     content: content.value,
   });
   if (res.code == 200) {
@@ -134,7 +134,7 @@ async function createArticle() {
   const res = await apiCreateArticle({
     title: title.value,
     description: description.value,
-    tags: tags.value,
+    tags: tags.value.toString(),
     content: content.value,
   });
   if (res.code == 200) {
@@ -170,7 +170,7 @@ onMounted(async () => {
       title.value = res.data.title;
       description.value = res.data.description;
       content.value = res.data.content;
-      tags.value = JSON.parse(res.data.tags);
+      tags.value = res.data.tags.map(t => t.name);
     }
   } else {
     nextTick(() => onUpdatePreview());
@@ -206,6 +206,10 @@ onMounted(async () => {
       padding: 16px 18px;
       box-sizing: border-box;
       background-color: var(--grey-28);
+    }
+    .article-content {
+      font-size: 14px;
+      white-space: pre;
     }
   }
   .fixed-btns {

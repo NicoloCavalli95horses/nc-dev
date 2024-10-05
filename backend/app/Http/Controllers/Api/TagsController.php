@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
@@ -14,10 +14,8 @@ class TagsController extends Controller
    */
   public function index(Request $request)
   {
-    $items = [
-        'test' => 2,
-        'prova' => 4
-    ];
+
+    $items = Tag::all();
 
     return response()->json([
       'status' => 'OK',
