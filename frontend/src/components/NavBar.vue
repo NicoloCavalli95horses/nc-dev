@@ -142,7 +142,6 @@ nav {
 .item {
   position: relative;
   white-space: nowrap;
-  margin: 0 6px;
   transition-duration: 400ms;
   cursor: pointer;
   padding: 10px;

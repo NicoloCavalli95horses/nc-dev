@@ -81,5 +81,8 @@ textarea {
     filter: grayscale(60%);
     opacity: 0.7;
   }
+  @media screen and (min-width: 600px) { // from 600px up
+    height: 20rem;
+  }
 }
 </style>

@@ -74,7 +74,7 @@ function onClick() {
 .thumb {
   width: 100%;
   cursor: pointer;
-  padding: 22px;
+  padding: 16px;
   box-sizing: border-box;
   border-radius: var(--radius-m);
   display: flex;

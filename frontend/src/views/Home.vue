@@ -65,9 +65,6 @@ function downloadAsset({file}) {
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
-        padding: 4px 6px;
-        border-radius: 12px;
-        color: transparent;
       }
       &.monospaced {
         font-family: monospace;

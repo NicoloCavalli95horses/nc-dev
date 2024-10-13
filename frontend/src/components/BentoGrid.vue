@@ -30,7 +30,7 @@ const props = defineProps({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 12px;
-  padding: 10px;
+  padding: 10px 0;
   .item {
     border-radius: clamp(1em, 1vw, 2em);
     display: flex;
