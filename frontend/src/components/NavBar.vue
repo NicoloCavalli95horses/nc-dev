@@ -1,9 +1,9 @@
 <template>
   <nav v-if="is_mobile" class="sidebar" :class="[show_sidebar ? 'open' : 'close']">
-    <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active == i.id }">
+    <div v-for="i in items" :key="i.id" class="item mobile" :class="{ 'active': active === i.id }">
+      <svg><use :href="i.icon"></use></svg>
       <h4 @click="onItemClick(i)">{{ i.value }}</h4>
     </div>
-    <div class="letter">{{ active.substring(0,1).toUpperCase() }}</div>
   </nav>
   <nav>
     <div class="main-nav">
@@ -18,7 +18,7 @@
       </template>
       <template v-else>
         <div class="w-50" />
-        <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active == i.id }">
+        <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
           <h4 @click="onItemClick(i)">{{ i.value }}</h4>
         </div>
       </template>
@@ -42,11 +42,11 @@ import router from "@/router/index";
 // Consts
 //==================================
 const items = [
-  { id: "home",     route: "",         value: "home" },
-  { id: "story",    route: "story",    value: "story" },
-  { id: "blog",     route: "blog",     value: "blog" },
-  { id: "projects", route: "projects", value: "projects" },
-  { id: "contacts", route: "contacts", value: "contacts" },
+  { id: "home",     route: "",         value: "home",     icon: "#home" },
+  { id: "story",    route: "story",    value: "story",    icon: "#path" },
+  { id: "blog",     route: "blog",     value: "blog",     icon: "#pen" },
+  { id: "projects", route: "projects", value: "projects", icon: "#projects" },
+  { id: "contacts", route: "contacts", value: "contacts", icon: "#phone" },
 ];
 
 //==================================
@@ -152,7 +152,23 @@ nav {
     font-size: 1.6em;
     position: relative;
   }
+  &.mobile {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    &.active {
+      border: 1px solid var(--primary);
+      border-radius: 44px;
+    }
+    h4 {
+      padding: 0 0 0 6px;
+    }
+  }
   &.active h4 {
+    color: var(--primary);
+  }
+  &.active svg {
     color: var(--primary);
   }
 }
@@ -164,13 +180,14 @@ nav {
   width: 100%;
   height: 100%;
   background-color: var(--grey-22);
-  z-index: 9;
+  z-index: 2;
   transition-property: transform;
   transition-timing-function: ease-in-out;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 0 48px;
   &.close {
     transform: translate(100%, 0);
     transition-duration: 400ms;
@@ -181,13 +198,6 @@ nav {
   }
   h4 {
     margin: 12px 0;
-  }
-  .letter {
-    position: fixed;
-    bottom: 0;
-    right: 10%;
-    font-size: 135pt;
-    color: var(--grey-28);
   }
 }
 </style>

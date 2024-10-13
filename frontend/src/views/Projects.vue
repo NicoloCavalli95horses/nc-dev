@@ -27,10 +27,21 @@ import BaseLayout from "@/components/BaseLayout.vue";
 const items = [
   {
     id: Symbol(),
-    title: "Pegorer STA website",
+    title: "Machine learning for web accessibility",
+    content: "Interacting with a website using your own body movements: through the device's webcam, the system can recognize postures or gestures of your choice; an action is associated for each of these gestures (scroll up, down, or zoom in)",
+    href: "https://a3-project.netlify.app/",
+  },
+  {
+    id: Symbol(),
+    title: "A* pathfinder - interactive simulation",
+    content: "An interactive simulation of the A* pathfinder algorithm",
+    href: "https://apathfinder.netlify.app/",
+  },
+  {
+    id: Symbol(),
+    title: "Pegorer STA company website",
     content: "Full responsive single page application with a structured multi steps contact form. Handled the SEO optimization",
     href: "https://www.pegorersta.it/",
-    src: '/img/pegorersta.png',
   },
   {
     id: Symbol(),
@@ -46,24 +57,9 @@ const items = [
   },
   {
     id: Symbol(),
-    title: "Machine learning for web accessibility",
-    content: "Interacting with a website using your own body movements: through the device's webcam, the system can recognize postures or gestures of your choice; an action is associated for each of these gestures (scroll up, down, or zoom in)",
-    href: "https://a3-project.netlify.app/",
-    src: '/img/a3project.png',
-  },
-  {
-    id: Symbol(),
-    title: "Fractal tree",
+    title: "Fractal tree - recursive components",
     content: "Exploring the idea of recursive component in Vue.js",
     href: "https://fractal-tree-vue.netlify.app/",
-    src: '/img/fractal.png',
-  },
-  {
-    id: Symbol(),
-    title: "A* pathfinder",
-    content: "An interactive simulation of the A* pathfinder algorithm",
-    href: "https://apathfinder.netlify.app/",
-    src: '/img/apathfinder.png',
   },
   {
     id: Symbol(),
@@ -73,7 +69,7 @@ const items = [
   },
   {
     id: Symbol(),
-    title: "WS live chat",
+    title: "Web Socket live chat",
     content: "Web Socket chat in Node.js",
     href: "https://ws-chat-ntws.onrender.com/",
   },
@@ -85,7 +81,7 @@ const items = [
   },
   {
     id: Symbol(),
-    title: "Two players game",
+    title: "Fighters game",
     content: "Two players fighting game. A little exercise to master the Pinia state management system",
     href: "https://thelastwarrior.netlify.app/",
   },

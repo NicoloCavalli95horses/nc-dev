@@ -84,8 +84,9 @@
 
 svg {
   color: var(--font-light);
-  width: 2.5rem;
   height: 2.5rem;
+  width: 4rem;
+  font-size: 4rem;
 }
 
 .full-flex {
@@ -276,11 +277,6 @@ svg {
   opacity: 0;
 }
 
-svg {
-  width: 4rem;
-  font-size: 4rem;
-}
-
 .no-overflow {
   overflow: hidden;
 }
@@ -397,24 +393,6 @@ code {
 code span {
   font-family: monospace;
 }
-/* .copy-paste {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  padding: 6px 10px;
-  border-radius: var(--radius-m);
-  background-color: var(--grey-33);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.copy-paste svg {
-  width: 1.2rem;
-  height: 1.2rem;
-  font-size: 1.2rem;
-  margin: 0 4px 0 0;
-} */
 
 .bold {
   font-weight: bold;
