@@ -1,13 +1,37 @@
 @import url('https://fonts.googleapis.com/css?family=Signika+Negative&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-:root {
+body.dark-theme {
   --primary: rgb(228, 61, 61);
   --secondary: rgb(255, 63, 63);
   --backdrop: rgba(255, 235, 210, 0.1);
   --font-light: rgb(255, 235, 210);
   --error-color: rgb(209, 44, 44);
   --font-dark: #222;
+  --bg-color: #222;
+  --scroll-track: #222;
+  --scroll-thumb: #444;
+  --ink-color: #333;
+  --dd-bg: #333;
+  --input-border: var(--ink-color);
+}
+
+body.light-theme {
+  --primary: rgb(27, 194, 194);
+  --secondary: rgb(0, 192, 192);
+  --backdrop: rgba(0, 0, 0, 0.1);
+  --font-light: #222;
+  --error-color: rgb(46, 211, 211);
+  --font-dark: rgb(255, 235, 210);
+  --bg-color: rgb(255, 255, 240);
+  --ink-color: rgb(46, 211, 211, 0.3);
+  --scroll-track: #222;
+  --scroll-thumb: #444;
+  --dd-bg: #99a;
+  --input-border: var(--ink-color);
+}
+
+:root {
   --grey-11: #111; 
   --grey-22: #222; 
   --grey-28: #282828; 
@@ -16,7 +40,6 @@
   --grey-55: #555; 
   --grey-66: #666; 
   --grey-77: #777; 
-
 
   --radius-xl: 2.6rem;
   --radius-l: 1.8rem;
@@ -59,7 +82,7 @@ body {
   border: 0;
   outline: 0;
   scroll-behavior: smooth;
-  background-color: var(--grey-22);
+  background-color: var(--bg-color);
   user-select: none;
 }
 
@@ -149,12 +172,12 @@ a {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--grey-22);
+  background: var(--scroll-track);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--grey-44);
+  background: var(--scroll-thumb);
 }
 
 /* Handle on hover */

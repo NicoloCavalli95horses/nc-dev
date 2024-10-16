@@ -1,5 +1,5 @@
 <template>
- <div class="ink-wrapper">
+<div class="ink-wrapper">
   <svg class="ink-svg" viewBox="0 0 100 100">
     <filter :id="filter_id">
       <feTurbulence
@@ -20,7 +20,7 @@
       cx="50%"
       cy="50%"
       r="50%"
-      fill="var(--grey-33)"
+      fill="var(--ink-color)"
       :style="{ filter: `url(#${filter_id})` }"
     />
   </svg>

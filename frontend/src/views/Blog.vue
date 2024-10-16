@@ -22,7 +22,7 @@
           <DropDown :items="ORDER_BY_ITEMS" v-model:active_id="sort_by" />
         </div>
         <!-- Sort order -->
-        <div>
+        <div v-if="!is_mobile">
           <p>Sort order</p>
           <Btn icon @click="sort_order = !sort_order"  :def="false">
             <svg>

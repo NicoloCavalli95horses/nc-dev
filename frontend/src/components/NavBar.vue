@@ -1,10 +1,13 @@
 <template>
+  <!-- Mobile menu -->
   <nav v-if="is_mobile" class="sidebar" :class="[show_sidebar ? 'open' : 'close']">
+    <LightDarkTheme class="theme-toggle" />
     <div v-for="i in items" :key="i.id" class="item mobile" :class="{ 'active': active === i.id }">
       <svg><use :href="i.icon"></use></svg>
       <h4 @click="onItemClick(i)">{{ i.value }}</h4>
     </div>
   </nav>
+  <!-- Desktop menu -->
   <nav>
     <div class="main-nav">
       <template v-if="is_mobile">
@@ -17,6 +20,7 @@
         </div>
       </template>
       <template v-else>
+        <LightDarkTheme />
         <div class="w-50" />
         <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
           <h4 @click="onItemClick(i)">{{ i.value }}</h4>
@@ -37,6 +41,7 @@ import {
 } from "vue";
 import { is_mobile } from "@/utils/globals";
 import router from "@/router/index";
+import LightDarkTheme from './LightDarkTheme.vue';
 
 //==================================
 // Consts
@@ -53,8 +58,8 @@ const items = [
 // Consts
 //==================================
 const active       = ref( undefined );
-const show_sidebar = ref(false);
-const routerQuery = computed( () => router.currentRoute.value.name );
+const show_sidebar = ref( false );
+const routerQuery  = computed( () => router.currentRoute.value.name );
 
 //==================================
 // Functions
@@ -72,7 +77,8 @@ watch( routerQuery, (newVal) => {
   if (active.value != newVal) {
     active.value = newVal;
   }
-})
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -81,7 +87,7 @@ nav {
   top: 0;
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--grey-22);
+  background-color: var(--bg-color);
   z-index: 10;
   .main-nav {
     display: flex;
@@ -178,7 +184,7 @@ nav {
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--grey-22);
+  background-color: var(--bg-color);
   z-index: 2;
   transition-property: transform;
   transition-timing-function: ease-in-out;
@@ -187,6 +193,11 @@ nav {
   align-items: flex-start;
   justify-content: center;
   padding: 0 48px;
+  .theme-toggle {
+    position: absolute;
+    bottom: 42px;
+    right: 22px;
+  }
   &.close {
     transform: translate(100%, 0);
     transition-duration: 400ms;

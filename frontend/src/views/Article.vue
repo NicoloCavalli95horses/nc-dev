@@ -111,7 +111,7 @@ onMounted( async () => {
   position: fixed;
   width: 100%;
   height: 40px;
-  background-color: var(--grey-22);
+  background-color: var(--bg-color);
   top: 51px;
   margin-left: -2px;
   @media only screen and (max-width: 500px) {

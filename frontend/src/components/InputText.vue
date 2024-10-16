@@ -50,7 +50,7 @@ textarea {
   width: 100%;
   border-radius: 1.2rem;
   outline: none;
-  border: 0.2rem solid transparent;
+  border: 0.2rem solid var(--input-border);
   caret-color: var(--primary);
   font-size: 1.8rem;
   &:focus {

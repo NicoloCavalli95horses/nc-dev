@@ -83,7 +83,7 @@ function onClick(e, item) {
   border-radius: var(--radius-m);
   cursor: pointer;
   user-select: none;
-  background-color: var(--grey-33);
+  background-color: var(--dd-bg);
   &.error {
     border: 0.2rem solid var(--error);
   }
@@ -111,7 +111,7 @@ function onClick(e, item) {
     justify-content: space-between;
     height: v-bind("DD_HEIGHT");
     box-sizing: border-box;
-    background-color: var(--grey-33);
+    background-color: var(--dd-bg);
     transition-duration: var(--transition-medium);
     &:hover {
       filter: brightness(110%);

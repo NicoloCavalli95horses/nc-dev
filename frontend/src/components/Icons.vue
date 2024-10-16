@@ -20,6 +20,14 @@
     <symbol id="pin" viewBox="0 0 24 24" fill="currentColor">
       <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
     </symbol>
+   
+    <symbol id="moon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M2 12A10 10 0 0 0 15 21.54A10 10 0 0 1 15 2.46A10 10 0 0 0 2 12Z" />
+    </symbol>
+    
+    <symbol id="sun" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 20A8 8 0 1 1 20 12A8 8 0 0 1 12 20M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Z" />
+    </symbol>
     
     <symbol id="send" viewBox="0 0 24 24" fill="currentColor">
       <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
