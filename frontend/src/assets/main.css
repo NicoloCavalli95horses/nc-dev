@@ -383,7 +383,7 @@ code {
   font-family: monospace;
   white-space: pre;
   background-color: var(--grey-11);
-  color: var(--font-light);
+  color: var(--code-default);
   font-size: 13px;
   padding: 12px;
   border-radius: var(--radius-s);

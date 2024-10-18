@@ -14,6 +14,7 @@ body.dark-theme {
   --ink-color: #333;
   --dd-bg: #333;
   --input-border: var(--ink-color);
+  --code-default: rgb(255, 235, 210);
 }
 
 body.light-theme {
@@ -29,6 +30,7 @@ body.light-theme {
   --scroll-thumb: #444;
   --dd-bg: #99a;
   --input-border: var(--ink-color);
+  --code-default: rgb(255, 235, 210);
 }
 
 :root {

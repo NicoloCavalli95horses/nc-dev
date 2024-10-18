@@ -107,7 +107,7 @@ const loading     = ref( true );
 const sort_by     = ref( ORDER_BY_ITEMS[1].id );
 const sort_order  = ref( 'asc' );
 const curr_page   = ref( 1 );
-const tot_pages   = ref( 10 );
+const tot_pages   = ref( 1 );
 const tags        = ref( {} );
 const active_tags = ref( routerQuery.value.tags || [] );
 

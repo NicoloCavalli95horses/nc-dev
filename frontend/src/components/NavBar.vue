@@ -3,8 +3,12 @@
   <nav v-if="is_mobile" class="sidebar" :class="[show_sidebar ? 'open' : 'close']">
     <LightDarkTheme class="theme-toggle" />
     <div v-for="i in items" :key="i.id" class="item mobile" :class="{ 'active': active === i.id }">
-      <svg><use :href="i.icon"></use></svg>
-      <h4 @click="onItemClick(i)">{{ i.value }}</h4>
+      <div class="icon-box">
+        <svg><use :href="i.icon"></use></svg>
+      </div>
+      <div class="text-box" @click="onItemClick(i)">
+        <h4>{{ i.value }} <span v-if="i.subvalue" class="sub-element">/ {{ i.subvalue }}</span></h4>
+      </div>
     </div>
   </nav>
   <!-- Desktop menu -->
@@ -12,7 +16,7 @@
     <div class="main-nav">
       <template v-if="is_mobile">
         <div class="w-50" />
-        <div class="mobile-menu" @click="show_sidebar = !show_sidebar">
+        <div class="mobile-menu" @click="openSidebar">
             <svg>
               <use v-if="show_sidebar" href="#close"></use>
               <use v-else href="#menu"></use>
@@ -46,28 +50,43 @@ import LightDarkTheme from './LightDarkTheme.vue';
 //==================================
 // Consts
 //==================================
-const items = [
+const items = computed(() => ([
   { id: "home",     route: "",         value: "home",     icon: "#home" },
   { id: "story",    route: "story",    value: "story",    icon: "#path" },
-  { id: "blog",     route: "blog",     value: "blog",     icon: "#pen" },
+  { id: "blog",     route: "blog",     value: "blog",     icon: "#pen", subvalue: sub_element.value },
   { id: "projects", route: "projects", value: "projects", icon: "#projects" },
   { id: "contacts", route: "contacts", value: "contacts", icon: "#phone" },
-];
+]));
 
 //==================================
 // Consts
 //==================================
 const active       = ref( undefined );
 const show_sidebar = ref( false );
+const sub_element  = ref( undefined );
 const routerQuery  = computed( () => router.currentRoute.value.name );
+const routerParams = computed( () => router.currentRoute.value.params );
 
 //==================================
 // Functions
 //==================================
 function onItemClick(i) {
   active.value = i.id;
-  router.push("/" + i.route);
   show_sidebar.value = false;
+  if (!i.subvalue) {
+    router.push("/" + i.route);
+  }
+}
+
+function openSidebar() {
+  show_sidebar.value = !show_sidebar.value;
+  sub_element.value = undefined;
+  const currParam = routerParams.value.id;
+  if (currParam) {
+    // If user is reading an article, create the sub-element in the nav menu
+    active.value = "blog";
+    sub_element.value = currParam.replace(/^\d+_/, '').replace(/\.$/, '');
+  }
 }
 
 //==================================
@@ -166,8 +185,20 @@ nav {
       border: 1px solid var(--primary);
       border-radius: 44px;
     }
-    h4 {
-      padding: 0 0 0 6px;
+    .icon-box {
+      display: grid;
+      place-content: center;
+      width: 10%;
+    }
+    .text-box {
+      white-space: nowrap;
+      width: 90%;
+      padding: 0 8px;
+      overflow: hidden;
+      .sub-element {
+        color: var(--primary);
+        text-transform: lowercase;
+      }
     }
   }
   &.active h4 {

@@ -14,7 +14,7 @@
               </div>
             </div>
           </div>
-          <h3>{{ item.title }}</h3>
+          <h3 class="b-24">{{ item.title }}</h3>
           <p id="html-article" v-html="item.content"></p>
         </div>
       </template>
@@ -102,7 +102,7 @@ onMounted( async () => {
   max-width: 800px;
   margin: 82px auto;
   user-select: text;
-  :deep(*) {
+  #html-article {
     line-height: 2;
   }
 }
