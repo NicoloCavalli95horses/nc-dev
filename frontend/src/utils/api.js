@@ -3,10 +3,25 @@
 //==============================
 const BASE_URL  = import.meta.env.DEV ? "http://127.0.0.1:8000/api/" : "https://nicolocavalli.com/api/";
 const API_TOKEN = import.meta.env.VITE_API_TOKEN; // env variables need to have VITE_ prefix to be imported here
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 //==============================
 // Export functions
 //==============================
+
+/**
+ * 
+ * @param {Object} args 
+ * @param {String} args.from 
+ * @param {Subject} args.subject 
+ * @param {Message} args.message
+ * @returns response object 
+ */
+export async function apiGetGithubData() {
+  const url = `https://api.github.com/users/NicoloCavalli95horses/repos`;
+  const options = _getApiOptions( {token: GITHUB_TOKEN} );
+  return await _executeApi({ url, options });
+}
 
 /**
  * 
@@ -200,6 +215,7 @@ function _getApiOptions({
   referrerPolicy,
   body,
   accept,
+  token = API_TOKEN,
 } = {}) {
   return {
     method: method || "GET",
@@ -210,7 +226,7 @@ function _getApiOptions({
     accept: accept,
     headers: {
       ...headers,
-      "Authorization": `Bearer ${API_TOKEN}`,
+      "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     redirect: redirect || "follow",

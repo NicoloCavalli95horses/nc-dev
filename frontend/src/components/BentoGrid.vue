@@ -1,10 +1,13 @@
 <template>
   <div class="bento-grid">
     <template v-for="item in items" :key="item.id">
-      <a :href="item.href" class="item shadow">
+      <a :href="item.homepage" class="item shadow">
         <div class="text">
           <label>{{ item.title }}</label>
           <p>{{ item.content }}</p>
+          <h4>{{ item.language }}</h4>
+          <p>Last update: {{ item.updated_at }}</p>
+           <a :href="item.href"><svg><use href="#github"></use></svg></a>
         </div>
       </a>
     </template>
