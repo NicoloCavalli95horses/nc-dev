@@ -2,12 +2,20 @@
   <div class="bento-grid">
     <template v-for="item in items" :key="item.id">
       <a :href="item.homepage" class="item shadow">
-        <div class="text">
+        <div class="title">
           <label>{{ item.title }}</label>
-          <p>{{ item.content }}</p>
-          <h4>{{ item.language }}</h4>
-          <p>Last update: {{ item.updated_at }}</p>
-           <a :href="item.href"><svg><use href="#github"></use></svg></a>
+        </div>
+        <div class="content">
+          <div>{{ item.content }}</div>
+          <div class="footer">
+            <div class="row">
+              <label class="tag">{{ item.language }}</label>
+              <div><a :href="item.href"><svg><use href="#github"></use></svg></a></div>
+            </div>
+            <div class="row">
+              <div class="r-text w-100">Last update: {{ toDDMMYYYY(item?.updated_at) }}</div>
+            </div>
+          </div>
         </div>
       </a>
     </template>
@@ -15,6 +23,13 @@
 </template>
 
 <script setup>
+//==============================
+// Import
+//==============================
+import {
+  toDDMMYYYY,
+} from '../utils/globals.js';
+
 //==============================
 // Props and emits
 //==============================
@@ -36,15 +51,28 @@ const props = defineProps({
   padding: 10px 0;
   .item {
     border-radius: clamp(1em, 1vw, 2em);
+    padding: 12px 14px;
     display: flex;
     flex-direction: column;
-    .text {
-      padding: 22px;
-      label {
-        min-height: 60px;
-      }
-      p {
-        margin-top: 4px;
+    background-color: var(--grey-28);
+    .content {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+      color: #fff;
+      .footer {
+        margin-top: 12px;
+        display: grid;
+        grid-gap: 10px;
+        .row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        font-size: 12px;
+        color: var(--grey-40);
       }
     }
   }

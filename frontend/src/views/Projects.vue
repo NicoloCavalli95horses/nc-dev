@@ -34,68 +34,7 @@ import BaseLayout from "@/components/BaseLayout.vue";
 //==============================
 const items   = ref( [] );
 const loading = ref( true );
-// [
-//   {
-//     id: Symbol(),
-//     title: "Machine learning for web accessibility",
-//     content: "Interacting with a website using your own body movements: through the device's webcam, the system can recognize postures or gestures of your choice; an action is associated for each of these gestures (scroll up, down, or zoom in)",
-//     href: "https://a3-project.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "A* pathfinder - interactive simulation",
-//     content: "An interactive simulation of the A* pathfinder algorithm",
-//     href: "https://apathfinder.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Pegorer STA company website",
-//     content: "Full responsive single page application with a structured multi steps contact form. Handled the SEO optimization",
-//     href: "https://www.pegorersta.it/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Three.js learning path",
-//     content: "Documentation of progress in using the Three.js library",
-//     href: "https://threejs-learning.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "NPM Vue.js components library",
-//     content: "Small ready to use UI components library",
-//     href: "https://www.npmjs.com/package/nicolo_cavalli_ui_lib",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Fractal tree - recursive components",
-//     content: "Exploring the idea of recursive component in Vue.js",
-//     href: "https://fractal-tree-vue.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "2D vectors playground",
-//     content: "Interactive platform about 2D vectors",
-//     href: "https://2dvectors.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Web Socket live chat",
-//     content: "Web Socket chat in Node.js",
-//     href: "https://ws-chat-ntws.onrender.com/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Ray casting",
-//     content: "An interactive simulation of the Ray Casting algorithm",
-//     href: "https://ray-casting.netlify.app/",
-//   },
-//   {
-//     id: Symbol(),
-//     title: "Fighters game",
-//     content: "Two players fighting game. A little exercise to master the Pinia state management system",
-//     href: "https://thelastwarrior.netlify.app/",
-//   },
-// ];
+const ALLOWED_PROJECT = [ '2d-vectors', 'a3', 'fractal-tree', 'nc-dev', 'pego-website', 'KMS-web-testing', 'the-last-warrior-game', 'threejs-journey'];
 
 //==============================
 // Life cycle
@@ -104,12 +43,12 @@ onMounted( async () => {
   const res = await apiGetGithubData();
   if (!res) { return; }
 
-  items.value = res.map(i => {
+  items.value = res.filter(i => ALLOWED_PROJECT.includes(i.name)).map(i => {
     return {
       id: i.id,
       title: i.name,
       content: i.description,
-      language: i.language,
+      language: i.language || 'markdown',
       href: i.html_url,
       homepage: i.homepage,
       updated_at: i.updated_at
