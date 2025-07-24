@@ -1,7 +1,6 @@
 <template>
   <!-- Mobile menu -->
   <nav v-if="is_mobile" class="sidebar" :class="[show_sidebar ? 'open' : 'close']">
-    <LightDarkTheme class="theme-toggle" />
     <div v-for="i in items" :key="i.id" class="item mobile" :class="{ 'active': active === i.id }">
       <div class="icon-box">
         <svg><use :href="i.icon"></use></svg>
@@ -24,10 +23,11 @@
         </div>
       </template>
       <template v-else>
-        <LightDarkTheme />
         <div class="w-50" />
-        <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
+        <div class="items">
+          <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
           <h4 @click="onItemClick(i)">{{ i.value }}</h4>
+        </div>
         </div>
       </template>
     </div>
@@ -45,7 +45,7 @@ import {
 } from "vue";
 import { is_mobile } from "@/utils/globals";
 import router from "@/router/index";
-import LightDarkTheme from './LightDarkTheme.vue';
+
 
 //==================================
 // Consts
@@ -113,19 +113,26 @@ nav {
     align-items: center;
     justify-content: space-between;
     margin: 18px 22px;
-    .item.active h4 {
-      color: var(--primary);
-      transition-duration: 400ms;
-      &::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translate(-50%, 50%);
-        width: 4px;
-        height: 4px;
-        background-color: var(--primary);
-        border-radius: 50%;
+    .items {
+      display: flex;
+      background-color: var(--grey-33);
+      border-radius: var(--radius-xl);
+      padding: 6px 12px;
+
+      .item.active h4 {
+        color: var(--primary);
+        transition-duration: 400ms;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translate(-50%, 50%);
+          width: 4px;
+          height: 4px;
+          background-color: var(--primary);
+          border-radius: 50%;
+        }
       }
     }
     .mobile-menu {

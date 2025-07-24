@@ -196,12 +196,16 @@ export async function apiLogin({ username, password }) {
 async function _executeApi({ url, options }) {
   try {
     const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error();
+    
+    if (response.ok && response.status === 200) {
+      return await response.json();
+    } else {
+      console.warn('API error', response)
+      return;
     }
-    return await response.json();
-  } catch (error) {
-    return error;
+
+  } catch {
+    return;
   }
 }
 

@@ -48,7 +48,7 @@
           <p v-else-if="error">Unable to fetch articles</p>
           <p v-else-if="!items.length" class="grey-text">0 articles found</p>
         <template v-else>
-          <Preview v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
+          <PostSnippet v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
         </template>
       </section>
     </template>
@@ -80,11 +80,11 @@ import {
   addToastMsg,
 } from "@/utils/globals";
 
-import Btn        from "@/components/Btn.vue";
-import Preview    from "@/components/Preview.vue";
-import DropDown   from "@/components/DropDown.vue";
-import Pagination from "@/components/Pagination.vue";
-import BaseLayout from "@/components/BaseLayout.vue";
+import Btn         from "@/components/Btn.vue";
+import PostSnippet from "@/components/PostSnippet.vue";
+import DropDown    from "@/components/DropDown.vue";
+import Pagination  from "@/components/Pagination.vue";
+import BaseLayout  from "@/components/BaseLayout.vue";
 
 //==============================
 // Consts

@@ -7,7 +7,7 @@
           I am a versatile and <span class="gradient-text">creative</span> mind<br>
           with a multidisciplinary background and a plethora of interests,<br>
           specialized in Web Development and User Interface design.
-          <span v-if="!is_mobile"><br><br>I am currently pursuing a PhD in analyzing and improving web front-end testing techniques.</span>
+          <span v-if="!is_mobile"><br><br>I am currently pursuing a PhD in web front-end security testing.</span>
         </h2>      
         <Btn class="top-24" @click="onDownload">Download CV</Btn>
       </div>

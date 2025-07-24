@@ -55,6 +55,7 @@ const props = defineProps({
     display: flex;
     flex-direction: column;
     background-color: var(--grey-28);
+    border: 1px solid var(--grey-22);
     .content {
       margin-top: 12px;
       display: flex;

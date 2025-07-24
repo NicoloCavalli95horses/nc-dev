@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Signika+Negative&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-body.dark-theme {
+body {
   --primary: rgb(228, 61, 61);
   --secondary: rgb(255, 63, 63);
   --backdrop: rgba(255, 235, 210, 0.1);
@@ -17,7 +17,7 @@ body.dark-theme {
   --code-default: rgb(255, 235, 210);
 }
 
-body.light-theme {
+/* body.light-theme {
   --primary: rgb(27, 194, 194);
   --secondary: rgb(0, 192, 192);
   --backdrop: rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@ body.light-theme {
   --dd-bg: #99a;
   --input-border: var(--ink-color);
   --code-default: rgb(255, 235, 210);
-}
+} */
 
 :root {
   --grey-11: #111; 

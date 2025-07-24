@@ -24,10 +24,12 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+$h: 90px;
+
 .main-layout {
-  margin: 80px 12px 42px 12px; //navbar
+  margin: $h 12px 42px 12px; //navbar
   @media screen and (min-width: 600px) { // from 600px up
-    margin: 80px 22px 22px 22px;
+    margin: $h 22px 22px 22px;
   }
   display: flex;
   .vertical {
@@ -48,7 +50,7 @@ const props = defineProps({
     }
     &.margins {
       margin-left: clamp(5rem, 7vw, 9rem);
-      padding: 32px 22px 0 22px;
+      padding: 32px 22px 0 42px;
     }
   }
 }

@@ -65,7 +65,7 @@ const router = useRouter();
 // Functions
 //==============================
 function onClick() {
-  router.push({ path: `/blog/${props.item.id}_${props.item.title}` });
+  router.push( {path: `/blog/${props.item.id}_${props.item.title}`} );
 }
 
 </script>
@@ -74,11 +74,13 @@ function onClick() {
 .thumb {
   width: 100%;
   cursor: pointer;
-  padding: 16px;
   box-sizing: border-box;
-  border-radius: var(--radius-m);
   display: flex;
   flex-direction: column;
+  background-color: var(--grey-28);
+  border-radius: clamp(1em, 1vw, 2em);
+  padding: 14px 16px;
+  border: 1px solid var(--grey-22);
 
   h5 {
     font-size: 11px;
