@@ -6,7 +6,7 @@
         <svg><use :href="i.icon"></use></svg>
       </div>
       <div class="text-box" @click="onItemClick(i)">
-        <h4>{{ i.value }} <span v-if="i.subvalue" class="sub-element">/ {{ i.subvalue }}</span></h4>
+        <h4>{{ i.value }} <span v-if="i.subvalue" class="sub-element">/ {{ i.subvalue.length < MAX_SUB_LENGTH ? i.subvalue : i.subvalue.substring(0, MAX_SUB_LENGTH) + "..." }}</span></h4>
       </div>
     </div>
   </nav>
@@ -66,6 +66,7 @@ const show_sidebar = ref( false );
 const sub_element  = ref( undefined );
 const routerQuery  = computed( () => router.currentRoute.value.name );
 const routerParams = computed( () => router.currentRoute.value.params );
+const MAX_SUB_LENGTH = 20;
 
 //==================================
 // Functions
