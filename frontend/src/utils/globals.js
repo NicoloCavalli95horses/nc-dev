@@ -38,6 +38,7 @@ export function debounce(callback, wait) {
 }
 
 export function filterDate(date) {
+  if (!date) { return; }
   const d = new Date(date);
   const day = d.getDate();
   const month_idx = d.getMonth();

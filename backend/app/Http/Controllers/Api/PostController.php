@@ -18,10 +18,12 @@ class PostController extends Controller
     $sortBy = $request->query('sort', 'updated_at');
     $sortOrder = $request->query('order', 'desc');
     $tags = $request->query('tags', '');
-    $tagsArray = $tags ? explode(',', $tags) : '';
+    $tagsArray = $tags ? explode(',', $tags) : [];
     $perPage = $request->query('per_page', 10);
 
-    $query = Post::query();
+    $query = Post::select('id','title','description','created_at','updated_at');
+  
+    // $query = Post::query();
 
     // Filter by tag
     if (!empty($tagsArray)) {

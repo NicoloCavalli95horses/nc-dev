@@ -17,22 +17,6 @@ body {
   --code-default: rgb(255, 235, 210);
 }
 
-/* body.light-theme {
-  --primary: rgb(27, 194, 194);
-  --secondary: rgb(0, 192, 192);
-  --backdrop: rgba(0, 0, 0, 0.1);
-  --font-light: #222;
-  --error-color: rgb(46, 211, 211);
-  --font-dark: rgb(255, 235, 210);
-  --bg-color: rgb(255, 255, 240);
-  --ink-color: rgb(46, 211, 211, 0.3);
-  --scroll-track: #222;
-  --scroll-thumb: #444;
-  --dd-bg: #99a;
-  --input-border: var(--ink-color);
-  --code-default: rgb(255, 235, 210);
-} */
-
 :root {
   --grey-11: #111; 
   --grey-22: #222; 

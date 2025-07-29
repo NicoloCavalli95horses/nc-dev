@@ -44,11 +44,9 @@
       </section>
       <!-- Articles -->
       <section class="articles" :class="{ 'mobile' : is_mobile }">
-          <p v-if="loading">Loading...</p>
-          <p v-else-if="error">Unable to fetch articles</p>
-          <p v-else-if="!items.length" class="grey-text">0 articles found</p>
+        <p v-if="error">Unable to fetch articles</p>
         <template v-else>
-          <PostSnippet v-for="i in items" :key="i.id" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
+          <PostSnippet v-for="i in items" :key="i.id" :flash_animation="loading" :item="i" @edit="onEdit(i)" @delete="onDelete(i)" />
         </template>
       </section>
     </template>
@@ -101,7 +99,7 @@ const ORDER_BY_ITEMS = [
 const nav = useRouter();
 const routerQuery = computed( () => router.currentRoute.value.query );
 
-const items       = ref( [] );
+const items       = ref( [{},{},{},{},{},{}] ); // template for loading animation
 const error       = ref( false );
 const loading     = ref( true );
 const sort_by     = ref( ORDER_BY_ITEMS[1].id );
@@ -122,7 +120,7 @@ const params = computed( () => ({
 // Functions
 //==============================
 async function getArticles() {
-  const res = await apiGetArticles({params: params.value});
+  const res = await apiGetArticles( {params: params.value} );
   loading.value = false;
   if (res.code == 200) {
     items.value = [...res.data.data];
