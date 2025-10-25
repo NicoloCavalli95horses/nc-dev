@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,10 +17,14 @@ class LoginController extends Controller
     ];
 
     if ($request->username == $adminCredentials['username'] && Hash::check($request->password, Hash::make($adminCredentials['password']))) {
+
       return response()->json([
           'status' => 'OK',
           'code' => 200,
-          'data' => ["auth" => true],
+          'data' => [
+            "auth" => true,
+            "token" => env('API_TOKEN')
+          ],
       ], 200);
   } else {
       return response()->json([

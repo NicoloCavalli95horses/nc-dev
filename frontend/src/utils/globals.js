@@ -20,7 +20,8 @@ export const scroll_top = ref( 0 );
 //==================================
 // Functions
 //==================================
-export const isAdmin = computed(() => sessionStorage.getItem("isAdmin"));
+export const token = ref( undefined );
+export const isAdmin = ref( false );
 
 export function addToastMsg({ msg, time = 1000 }) {
   const id = Date.now() + "" + Math.random() * 100;

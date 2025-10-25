@@ -23,8 +23,6 @@ class PostController extends Controller
 
     $query = Post::select('id','title','description','created_at','updated_at');
   
-    // $query = Post::query();
-
     // Filter by tag
     if (!empty($tagsArray)) {
       $query->whereHas('tags', function ($query) use ($tagsArray) {

@@ -1,8 +1,16 @@
 //==============================
+// Import
+//==============================
+import { 
+  token,
+  addToastMsg,
+ } from './globals.js';
+
+
+//==============================
 // Consts
 //==============================
 const BASE_URL  = import.meta.env.DEV ? "http://127.0.0.1:8000/api/" : "https://nicolocavalli.com/api/";
-const API_TOKEN = import.meta.env.VITE_API_TOKEN; // env variables need to have VITE_ prefix to be imported here
 const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
 
 //==============================
@@ -113,6 +121,7 @@ export async function apiCreateArticle({
       title,
       description,
       content,
+      token: token.value,
       tags: JSON.stringify(tags),
     }),
   });
@@ -146,6 +155,7 @@ export async function apiUpdateArticle({
       title,
       description,
       content,
+      token: token.value,
       tags: JSON.stringify(tags),
       start_time,
     }),
@@ -165,6 +175,7 @@ export async function apiDeleteArticle({ id }) {
   const options = _getApiOptions({
     method: "DELETE",
     accept: "application/json",
+    token: token.value,
   });
   return await _executeApi({ url, options });
 }
@@ -196,18 +207,24 @@ export async function apiLogin({ username, password }) {
 async function _executeApi({ url, options }) {
   try {
     const response = await fetch(url, options);
-    
+    const data = await response.json();
+
     if (response.ok && response.status === 200) {
-      return await response.json();
+      // success
+      return data;
     } else {
-      console.warn('API error', response)
-      return;
+      const msg = data?.message || 'Unknown error';
+      addToastMsg({ msg, time: 3000});
+      return null;
     }
 
-  } catch {
-    return;
+  } catch (err) {
+    console.error('Request error:', err);
+    addToastMsg({ msg: 'Request error' });
+    return null;
   }
 }
+
 
 function _getApiOptions({
   method,
@@ -219,8 +236,9 @@ function _getApiOptions({
   referrerPolicy,
   body,
   accept,
-  token = API_TOKEN,
+  token,
 } = {}) {
+
   return {
     method: method || "GET",
     mode: mode || "cors",

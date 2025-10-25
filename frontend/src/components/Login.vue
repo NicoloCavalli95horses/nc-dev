@@ -19,6 +19,8 @@ import {
   ref,
 } from 'vue';
 import {
+  token,
+  isAdmin,
   addToastMsg,
 } from '../utils/globals';
 
@@ -28,6 +30,7 @@ import Btn       from './Btn.vue';
 import Modal     from './Modal.vue';
 import InputText from './InputText.vue';
 
+
 // ==============================
 // Props and emits
 // ==============================
@@ -35,11 +38,13 @@ const emit = defineEmits([
   'close',
 ]);
 
+
 // ==============================
 // Consts
 // ==============================
 const username = ref ( undefined );
 const password = ref( undefined );
+
 
 // ==============================
 // Function
@@ -49,11 +54,14 @@ async function onLogin() {
   username.value = undefined;
   password.value = undefined;
   
-  if ( res.code == 200 && res.status == 'OK' ) {
-    sessionStorage.setItem("isAdmin", true);
+  if ( res.code == 200 && res.status == 'OK' && res.data ) {
+    isAdmin.value = res.data.auth;
+    token.value = res.data.token;
     addToastMsg({ msg: "admin mode", time: 5000 });
     emit('close');
   } else {
+    isAdmin.value = false;
+    token.value = undefined;
     addToastMsg({msg: 'auth failure', time: 5000});
   }
 }

@@ -16,7 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::apiResource('test', TestController::class);
     Route::apiResource('email', EmailController::class);
-    Route::apiResource('post', PostController::class);
     Route::apiResource('tags', TagsController::class);
     Route::apiResource('login', LoginController::class);
+    
+    // Public
+    Route::apiResource('post', PostController::class)->only(['index', 'show']);
+    
+    // Protected
+    Route::middleware(['admin'])->group(function () {
+        Route::apiResource('post', PostController::class)->only(['store', 'update', 'show', 'destroy']);
+    });
 });
