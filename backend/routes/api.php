@@ -24,6 +24,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     
     // Protected
     Route::middleware(['admin'])->group(function () {
-        Route::apiResource('post', PostController::class)->only(['store', 'update', 'show', 'destroy']);
+        Route::apiResource('post', PostController::class)->only(['store', 'update', 'destroy']);
     });
 });

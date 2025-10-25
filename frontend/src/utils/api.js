@@ -116,12 +116,12 @@ export async function apiCreateArticle({
   const options = _getApiOptions({
     method: "POST",
     accept: "application/json",
+    token: token.value,
     body: JSON.stringify({
       id,
       title,
       description,
       content,
-      token: token.value,
       tags: JSON.stringify(tags),
     }),
   });
@@ -151,11 +151,11 @@ export async function apiUpdateArticle({
   const options = _getApiOptions({
     method: "PUT",
     accept: "application/json",
+    token: token.value,
     body: JSON.stringify({
       title,
       description,
       content,
-      token: token.value,
       tags: JSON.stringify(tags),
       start_time,
     }),
