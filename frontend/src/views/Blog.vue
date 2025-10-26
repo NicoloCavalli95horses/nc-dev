@@ -9,7 +9,7 @@
           <p>Filter by tag</p>
           <div class="tags">
           <template v-if="tags.length">
-            <div class="tag" :class="{'active': active_tags.includes(tag)}" v-for="tag in tags" :key="tag" @click="onTagClick(tag)">
+            <div class="tag shadow" :class="{'active': active_tags.includes(tag)}" v-for="tag in tags" :key="tag" @click="onTagClick(tag)">
               <label>{{ tag }}</label>
             </div>
           </template>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="thumb shadow"
+    class="thumb shadow-xl"
     :class="{'hover': hover, 'flash': flash_animation}"
     @click="onClick"
     @mouseenter="hover = true"
@@ -87,9 +87,9 @@ function onClick() {
   width: 100%;
   cursor: pointer;
   box-sizing: border-box;
-  background-color: var(--grey-28);
-  border: 1px solid var(--grey-22);
+  border: 6px solid var(--grey-28);
   border-radius: clamp(1em, 1vw, 2em);
+  background: linear-gradient(to bottom, rgba(0,0,0,0), var(--grey-28));
   &.flash {
     animation-name: flash;
     animation-duration: 700ms;
@@ -104,17 +104,6 @@ function onClick() {
     height: 180px;
     padding: 14px 16px;
     border-radius: clamp(1em, 1vw, 2em);
-    &::after {
-      position: absolute;
-      border-bottom-left-radius: inherit;
-      border-bottom-right-radius: inherit;
-      content: "";
-      width: 100%;
-      height: 80px;
-      bottom: 0px;
-      left: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0), var(--grey-44));
-    }
   }
 
   h5 {

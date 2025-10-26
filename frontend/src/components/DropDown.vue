@@ -1,6 +1,6 @@
 <template>
   <div class="main-dd">
-    <div class="dd-wrapper" ref="dd_ref" :class="{ 'error': error }" @click="onToggle">
+    <div class="dd-wrapper shadow" ref="dd_ref" :class="{ 'error': error }" @click="onToggle">
       <p :class="{ 'error': error }">{{ items.find((item) => item.id == active_id).val || placeholder }}</p>
       <svg :class="{ 'rotate': show }"><use href="#arrow-right"></use></svg>
       <teleport v-if="show" to=".modals">
@@ -83,7 +83,7 @@ function onClick(e, item) {
   border-radius: var(--radius-m);
   cursor: pointer;
   user-select: none;
-  background-color: var(--dd-bg);
+  background-color: var(--grey-28);
   &.error {
     border: 0.2rem solid var(--error);
   }
@@ -111,7 +111,7 @@ function onClick(e, item) {
     justify-content: space-between;
     height: v-bind("DD_HEIGHT");
     box-sizing: border-box;
-    background-color: var(--dd-bg);
+    background-color: var(--grey-28);
     transition-duration: var(--transition-medium);
     &:hover {
       filter: brightness(110%);

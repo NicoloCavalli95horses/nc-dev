@@ -26,7 +26,7 @@ const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
  * @returns response object 
  */
 export async function apiGetGithubData() {
-  const url = `https://api.github.com/users/NicoloCavalli95horses/repos`;
+  const url = `https://api.github.com/users/NicoloCavalli95horses/repos?per_page=100&page=1`;
   const options = _getApiOptions( {token: GITHUB_TOKEN} );
   return await _executeApi({ url, options });
 }

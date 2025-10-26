@@ -34,16 +34,35 @@ import BaseLayout from "@/components/BaseLayout.vue";
 //==============================
 const items   = ref( [] );
 const loading = ref( true );
-const ALLOWED_PROJECT = [ '2d-vectors', 'a3', 'fractal-tree', 'nc-dev', 'pego-website', 'KMS-web-testing', 'the-last-warrior-game', 'threejs-journey'];
+const CACHE_KEY = 'github_projects';
+const ALLOWED_PROJECT = [
+  '2d-vectors',
+  'a3',
+  'fractal-tree',
+  'nc-dev',
+  'pego-website',
+  'KMS-web-testing',
+  'the-last-warrior-game',
+  'threejs-journey'
+];
 
 //==============================
-// Life cycle
+// Functions
 //==============================
-onMounted( async () => {
-  const res = await apiGetGithubData();
-  if (!res) { return; }
 
-  items.value = res.filter(i => ALLOWED_PROJECT.includes(i.name)).map(i => {
+async function getProjects() {
+  // Check existing cache
+  const cached = window.sessionStorage.getItem(CACHE_KEY);
+  if (cached) {
+    return JSON.parse(cached);
+  }
+  
+  // Fetch data and cache it
+  const data = await apiGetGithubData();
+
+  if (data) {
+    // filter projects
+    const filtered = data.filter(i => ALLOWED_PROJECT.includes(i.name)).map(i => {
     return {
       id: i.id,
       title: i.name,
@@ -53,9 +72,21 @@ onMounted( async () => {
       homepage: i.homepage,
       updated_at: i.updated_at
     }
-  });
+    });
+    window.sessionStorage.setItem(CACHE_KEY, JSON.stringify(filtered));
+    return filtered;
+  }
+}
+
+
+//==============================
+// Life cycle
+//==============================
+onMounted( async () => {
+  items.value = await getProjects();
   loading.value = false;
 });
+
 </script>
 
 <style lang="scss" scoped>

@@ -24,7 +24,7 @@
       </template>
       <template v-else>
         <div class="w-50" />
-        <div class="items">
+        <div class="items shadow">
           <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
           <h4 @click="onItemClick(i)">{{ i.value }}</h4>
         </div>
@@ -118,7 +118,7 @@ nav {
       display: flex;
       background-color: var(--grey-33);
       border-radius: var(--radius-xl);
-      padding: 6px 12px;
+      padding: 6px 16px;
 
       .item.active h4 {
         color: var(--primary);
