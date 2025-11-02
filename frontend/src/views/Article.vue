@@ -15,7 +15,7 @@
             </div>
           </div>
           <h3 class="b-24">{{ item.title }}</h3>
-          <p id="html-article" v-html="item.content"></p>
+          <div id="html-article" v-html="item.content"></div>
         </div>
       </template>
     </template>

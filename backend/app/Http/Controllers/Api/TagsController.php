@@ -1,5 +1,8 @@
 <?php
 
+//==============================
+// Import
+//==============================
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\Log;
@@ -7,14 +10,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
+
+//==============================
+// Class
+//==============================
 class TagsController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
   public function index(Request $request)
   {
-
     $items = Tag::all();
 
     return response()->json([
@@ -23,5 +26,4 @@ class TagsController extends Controller
       'data' => $items,
     ], 200);
   }
-
 }

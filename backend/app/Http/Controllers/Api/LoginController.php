@@ -1,37 +1,29 @@
 <?php
 
+//==============================
+// Import
+//==============================
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use Illuminate\Http\Request;
+use App\Services\LoginService;
 
+
+//==============================
+// Class
+//==============================
 class LoginController extends Controller
 {
-  public function store(Request $request)
-  {
-    $adminCredentials = [
-      'username' => env('ADMIN_USERNAME'),
-      'password' => env('ADMIN_PASSWORD'),
-    ];
+    protected $loginService;
 
-    if ($request->username == $adminCredentials['username'] && Hash::check($request->password, Hash::make($adminCredentials['password']))) {
+    public function __construct(LoginService $loginService)
+    {
+      $this->loginService = $loginService;
+    }
 
-      return response()->json([
-          'status' => 'OK',
-          'code' => 200,
-          'data' => [
-            "auth" => true,
-            "token" => env('API_TOKEN')
-          ],
-      ], 200);
-  } else {
-      return response()->json([
-          'status' => 'FAIL',
-          'code' => 401, // Unauthorized
-          'data' => ["auth" => false],
-      ], 401);
-  }
-  }
+    public function store(Request $request)
+    {
+      return $this->loginService->store($request);
+    }
 }

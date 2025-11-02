@@ -16,7 +16,7 @@
         <p style="font-size: 16px;">Hey, someone emailed you from your website</p>
 
         <section
-            style="background-color: #007bff; color: #ffffff; padding: 10px; border-radius: 4px; margin: 0 0 10px 0;">
+            style="padding: 10px; border-radius: 4px; margin: 0 0 10px 0;">
             <p style="text-transform: uppercase; font-weight: 800; font-size: 14px;">From</p>
             <h2 style="margin: 0; font-size: 24px;">{{ $data['from'] }}</h2>
         </section>
