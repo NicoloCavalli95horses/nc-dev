@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Signika+Negative&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Limelight&display=swap');
 
 body {
   --primary: rgb(228, 61, 61);
@@ -62,7 +63,6 @@ body {
   height: 100%;
   position: fixed;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   margin: 0;
   padding: 0;
   border: 0;
@@ -77,8 +77,8 @@ h2, h5, p, ul, li, a, span, input, textarea, label, summary, details, .article-c
   font-family: 'Montserrat', monospace;
 }
 
-h1, h3, h4 {
-  font-family: 'Signika Negative', sans-serif;
+h1, h3, h4, .text-box {
+  font-family: 'Limelight', sans-serif;
 }
 
 /* Color */

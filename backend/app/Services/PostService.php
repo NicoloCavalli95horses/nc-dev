@@ -7,6 +7,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Log;
 
 
 //==============================
@@ -41,12 +42,26 @@ class PostService
   //  Store a new post
   public function store(Request $request)
   {
+    Log::info('🟡 Received new article', [
+      'input' => $request->all()
+    ]);
+
+    Log::info('Content statistics', [
+      'chars' => strlen($request['content']),       // byte exact
+      'mb_chars' => mb_strlen($request['content']), // unicode chars
+    ]);
+
+
     try {
       $validatedData = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string|max:255',
         'content' => 'required|string|max:10000',
         'tags' => 'required|string',
+      ]);
+
+      Log::info('🟢 Validation passed', [
+        'validated' => $validatedData
       ]);
 
       // Create new post
@@ -56,8 +71,14 @@ class PostService
         'content' => $validatedData['content'],
       ]);
 
+      Log::info('🟢 Article saved in DB', [
+        'article_id' => $article->id
+      ]);
+
       $tags = array_map(function($tag) { return trim($tag, '"'); }, explode(',', $validatedData['tags']));
       $tags = array_filter($tags);
+
+      Log::info('🔵 Tags parsed', ['tags' => $tags]);
       
       // Save new tag and associate to new post
       if (count($tags) > 0) {
@@ -71,12 +92,42 @@ class PostService
         }
         // sync tags to posts (pivot table)
         $article->tags()->sync($tagIds);
+
+        Log::info('🟢 Tags synced to article', [
+          'article_id' => $article->id,
+          'tags' => $tagIds
+        ]);
       }
 
       return $article;
 
+    } catch (\Illuminate\Validation\ValidationException $e) {
+
+        Log::warning('🔴 Validation failed', [
+            'errors' => $e->errors(),
+            'input' => $request->all()
+        ]);
+
+        throw $e; // Laravel replies with 422
+
+    } catch (\Illuminate\Database\QueryException $e) {
+
+        Log::error('❌ Database error while saving article', [
+            'message' => $e->getMessage(),
+            'sql' => $e->getSql(),
+            'bindings' => $e->getBindings()
+        ]);
+
+        return response()->json(['error' => 'DB error'], 500);
+
     } catch (\Exception $e) {
-      return false;
+
+        Log::error('❌ General error while saving article', [
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ]);
+
+        return response()->json(['error' => 'Generic error'], 500);
     }
   }
 

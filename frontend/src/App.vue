@@ -1,6 +1,6 @@
 <template>
   <Icons />
-  <NavBar />
+  <NavMain />
   <ToastMsg />
   <RouterView v-slot="{ Component }">
     <transition name="fade" mode="out-in">
@@ -17,9 +17,9 @@
 // Import
 //==================================
 import {
-  onMounted,
   ref,
   watch,
+  onMounted,
 } from 'vue';
 import {
   useRoute,
@@ -31,7 +31,7 @@ import {
 import router from "@/router/index";
 
 import Btn              from "@/components/Btn.vue";
-import NavBar           from "@/components/NavBar.vue";
+import NavMain          from "@/components/navbar/NavMain.vue";
 import Icons            from "@/components/Icons.vue";
 import Login            from "@/components/Login.vue";
 import ToastMsg         from "@/components/ToastMsg.vue";

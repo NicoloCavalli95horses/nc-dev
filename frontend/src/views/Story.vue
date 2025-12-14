@@ -95,8 +95,6 @@ onMounted( () => {
 
 <style lang="scss" scoped>
 h3 {
-  font-family: monospace;
-  letter-spacing: -1px;
   color: var(--grey-33);
 }
 .events {
@@ -114,7 +112,7 @@ h3 {
   justify-content: space-between;
   height: 50%;
   top: 122px;
-  right: 22px;
+  right: 36px;
   width: 80px;
   cursor: pointer;
   h3 {

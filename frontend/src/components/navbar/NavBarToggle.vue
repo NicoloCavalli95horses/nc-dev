@@ -26,8 +26,8 @@
         <div class="w-50" />
         <div class="items shadow">
           <div v-for="i in items" :key="i.id" class="item" :class="{ 'active': active === i.id }">
-          <h4 @click="onItemClick(i)">{{ i.value }}</h4>
-        </div>
+            <h4 @click="onItemClick(i)">{{ i.value }}</h4>
+          </div>
         </div>
       </template>
     </div>
@@ -48,22 +48,17 @@ import router from "@/router/index";
 
 
 //==================================
-// Consts
+// Props
 //==================================
-const items = computed(() => ([
-  { id: "home",     route: "",         value: "home",     icon: "#home" },
-  { id: "story",    route: "story",    value: "story",    icon: "#path" },
-  { id: "blog",     route: "blog",     value: "blog",     icon: "#pen", subvalue: sub_element.value },
-  { id: "projects", route: "projects", value: "projects", icon: "#projects" },
-  { id: "contacts", route: "contacts", value: "contacts", icon: "#phone" },
-]));
+const props = defineProps({
+  items: Array,
+});
 
 //==================================
 // Consts
 //==================================
 const active       = ref( undefined );
 const show_sidebar = ref( false );
-const sub_element  = ref( undefined );
 const routerQuery  = computed( () => router.currentRoute.value.name );
 const routerParams = computed( () => router.currentRoute.value.params );
 const MAX_SUB_LENGTH = 20;
@@ -81,13 +76,6 @@ function onItemClick(i) {
 
 function openSidebar() {
   show_sidebar.value = !show_sidebar.value;
-  sub_element.value = undefined;
-  const currParam = routerParams.value.id;
-  if (currParam) {
-    // If user is reading an article, create the sub-element in the nav menu
-    active.value = "blog";
-    sub_element.value = currParam.replace(/^\d+_/, '').replace(/\.$/, '');
-  }
 }
 
 //==================================
@@ -97,7 +85,7 @@ watch( routerQuery, (newVal) => {
   if (active.value != newVal) {
     active.value = newVal;
   }
-});
+}, {immediate:true});
 
 </script>
 

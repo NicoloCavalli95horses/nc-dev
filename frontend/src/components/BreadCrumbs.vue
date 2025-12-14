@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumbs">
     <p @click="router.push({ path: '/blog' })">Blog</p>
-    <span>&gt;</span>
+    <span>|</span>
     <p v-if="title" class="active">
       {{ title.length < MAX_TITLE_LENGTH ? title : title.substring(0, MAX_TITLE_LENGTH) + "..." }}
     </p>
@@ -32,7 +32,7 @@ const props = defineProps({
 //==============================
 const router = useRouter();
 const previousPage = ref(undefined);
-const MAX_TITLE_LENGTH = 50;
+const MAX_TITLE_LENGTH = 35;
 
 //==============================
 // Life cycle
@@ -60,7 +60,7 @@ onMounted(() => {
     }
   }
   span {
-    margin: 0 12px;
+    margin: 0 8px;
   }
 }
 </style>

@@ -103,7 +103,7 @@ const items       = ref( [{},{},{},{},{},{}] ); // template for loading animatio
 const error       = ref( false );
 const loading     = ref( true );
 const sort_by     = ref( ORDER_BY_ITEMS[1].id );
-const sort_order  = ref( 'asc' );
+const sort_order  = ref( false );
 const curr_page   = ref( 1 );
 const tot_pages   = ref( 1 );
 const tags        = ref( {} );
@@ -167,7 +167,7 @@ async function getTags() {
 function initFilters() {
   if (Object.keys(routerQuery.value).length) {
     sort_by.value = routerQuery.value.sort || ORDER_BY_ITEMS[1].id;
-    sort_order.value = routerQuery.value.order || 'asc';
+    sort_order.value = routerQuery.value.order || false;
     curr_page.value = routerQuery.value.page || 1;
     active_tags.value = routerQuery.value.tags?.split(',') || [];
   } else {

@@ -120,7 +120,7 @@ async function onSave() {
   const isEdit = body.value.id;
   const res = isEdit ? await apiUpdateArticle(body.value) : await apiCreateArticle(body.value);
 
-  if (res.code == 200) {
+  if (res?.code == 200) {
     addToastMsg({ msg: `Article ${isEdit ? 'edited' : 'saved'}. Local draft removed`, time: 5000 });
     localStorage.removeItem('draft');
   } else {
