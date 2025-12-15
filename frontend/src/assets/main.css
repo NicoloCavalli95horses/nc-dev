@@ -425,3 +425,16 @@ code span {
 .grey-text {
   color: var(--grey-77);
 }
+
+.typewriting-effect {
+  overflow-y: hidden;
+  white-space: nowrap;
+  border-bottom: 4px solid var(--grey-33);
+  animation: typing 3.5s steps(35, end) forwards;
+}
+
+@keyframes typing {
+  from { height: 0; }
+  to { height: 100%; }
+  100% { border-color: transparent; }
+}

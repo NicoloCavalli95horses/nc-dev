@@ -1,7 +1,7 @@
 <template>
   <div class="bento-grid">
     <template v-for="item in items" :key="item.id">
-      <a :href="item.homepage" class="item shadow-xl">
+      <a :href="item.homepage" class="item shadow-xl no-underline">
         <div class="title">
           <label>{{ item.title }}</label>
         </div>
@@ -10,7 +10,7 @@
           <div class="footer">
             <div class="row">
               <label class="tag">{{ item.language }}</label>
-              <div><a :href="item.href"><svg><use href="#github"></use></svg></a></div>
+              <div><a :href="item.href" class="no-underline"><svg><use href="#github"></use></svg></a></div>
             </div>
             <div class="row">
               <div class="r-text w-100">Last update: {{ toDDMMYYYY(item?.updated_at) }}</div>

@@ -6,7 +6,7 @@
       <svg><use :href="item.location.icon"></use></svg>
       <h5>{{ item.location.text }}</h5>
     </div>
-    <p>{{ item.content.paragraph }}</p>
+    <p v-html="item.content.paragraph" />
     <ul v-if="item.content.list?.length">
       <li v-for="(i, j) in item.content.list" :key="j">{{ i }}</li>
     </ul>

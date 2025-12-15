@@ -135,7 +135,7 @@ ul, ol {
   margin-left: 22px;
 }
 
-a {
+a.no-underline {
   text-decoration: none;
 }
 

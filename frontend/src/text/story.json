@@ -9,30 +9,31 @@
         "text": "IUSVE University, Venice (VE)"
       },
       "content": {
-        "paragraph": "A humanistic starting point characterized by an integrated approach and a practical settings",
+        "paragraph": "I have always been fascinated by the human mind and its inner mechanisms. I graduated in psychology in 2017 from <a href='https://www.iusve.it/'>IUSVE</a>, a Salesian university located in the Venetian area. The three-year degree program has an integrated approach and offers both theoretical and practical content. At IUSVE, I learned:",
         "list": [
           "methods and procedures of investigation and scientific research in the psychological field",
           "application in theoretical-practical laboratories in educational, clinical and work psychology field",
-          "exercise of psychological tests"
+          "application of psychological tests and assessment methods for various psychological constructs (structured, unstructured, projective)"
         ],
         "tags": [
           "statistics",
-          "research methods"
+          "research methods",
+          "psychological tests"
         ]
       }
     },
     {
       "id": 2018,
       "year": "2018 - 2021",
-      "title": "Master's Degree in Human Computer Interaction",
+      "title": "Master's Degree in Human Computer Interaction (HCI)",
       "location": {
         "icon": "#school",
         "text": "Milano-Bicocca University, Milan (MI)"
       },
       "content": {
-        "paragraph": "Strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions",
+        "paragraph": "Torn between pursuing a career in cognitive psychology and exploring other different disciplines, I decided to move to Milan to pursue my interest in technology and user interface design. This Master's Degree, whose original name in Italian is <a href='https://www.unimib.it/magistrale/teoria-tecnologia-comunicazione'>Theory and Technology of Communication</a>, is a strongly interdisciplinary course diversified in different axes such as psychology, computer science, visual communication and the study of human language in its various expressions. At University Milano-Bicocca, I learned:",
         "list": [
-          "understanding of the basics of computer science, with a focus on the Web Development field",
+          "basics of computer science, with a focus on web development",
           "cognitive ergonomy and principles of visual design applied to digital products",
           "design laboratories and experience of creating and developing a brand"
         ],
@@ -57,16 +58,17 @@
         "text": "Federico II University, Naples (NA)"
       },
       "content": {
-        "paragraph": "University course designed to acquire current skills in the field of AI with a strong focus in both technical and humanistic skills",
+        "paragraph": "During the Covid-19 pandemic, I attended a post-master's degree specialization course at the Federico II University of Naples. The <a href='https://www.studiumanistici.unina.it/corsi/intelligenza-artificiale-per-le-scienze-umane/'>course</a> is designed to acquire skills in the field of AI with an interdisciplinary approach. At University Federico II, I learned:",
         "list": [
           "history and state of art of psychology of learning and human intelligence",
           "computational linguistics in KNIME environment",
-          "hands-on experience in implementing the most famous machine learning algorithms in Python"
+          "hands-on experience in implementing the most important machine learning algorithms in Python"
         ],
         "tags": [
           "python",
           "keras",
           "pandas",
+          "neural network",
           "tensorflow"
         ]
       }
@@ -82,7 +84,7 @@
         "text": "Padua (PD)"
       },
       "content": {
-        "paragraph": "iCare is a trusted partner in ophthalmic diagnostics, offering physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). Main tasks performed:",
+        "paragraph": "I worked at iCare for 3 years, a trusted partner in ophthalmic diagnostics. The company offers physicians fast, easy-to-use, and reliable tools for diagnosis of glaucoma, diabetic retinopathy, and macular degeneration (AMD). I have been mostly involved in developing and testing web interfaces for a web viewer, which was shared between various medical devices. Among the tasks performed:",
         "list": [
           "maintain and develop the enterprise design system",
           "develop, debug and improve usability and functionality of complex interface, from isolated base components to whole pages and views",
@@ -106,9 +108,9 @@
         "text": "University of Rennes 1, Rennes (FR)"
       },
       "content": {
-        "paragraph": "DiverSE is a research team of IRISA, a mixed research unit grouping CNRS, University of Rennes 1, INRIA INSA Rennes, in Rennes. The team operate in the second biggest research group in France. DiverSE team's research agenda is in the area of software engineering, developing models, methodologies and theories to address the challenges raised by the emergence of several forms of diversity in the design, deployment and evolution of software intensive systems.",
+        "paragraph": "After 3 years, I decided to undertake a PhD program abroad, enhancing my technical knowledge and embracing a new life in another country. Currently, I am part of the DiverSE research team of IRISA, a mixed research unit grouping CNRS, University of Rennes 1, INRIA, INSA Rennes. The team operate in the second biggest research group in France. DiverSE team's research agenda is in the area of software engineering, developing models, methodologies and theories to address the challenges raised by the emergence of several forms of diversity in the design, deployment and evolution of software intensive systems.",
         "list": [
-          "currently working on Web front-end testing: large scale analysis and techniques improvement"
+          "I currently work on web security, with a focus on front-end analysis and improving security-oriented testing techniques"
         ],
         "tags": [
           "javascript",

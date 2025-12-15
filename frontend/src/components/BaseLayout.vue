@@ -1,7 +1,7 @@
 <template>
   <div class="main-layout">
     <div v-if="!hide_vertical" class="vertical">
-      <h1><slot name="title" /></h1>
+      <h1 :class="{'typewriting-effect': animate_title}"><slot name="title" /></h1>
     </div>
     <div class="main" :class="{'margins': !hide_vertical}">
       <slot />
@@ -19,6 +19,7 @@
 //==============================
 const props = defineProps({
   hide_vertical: Boolean,
+  animate_title: Boolean,
 });
 
 </script>
