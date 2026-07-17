@@ -11,24 +11,18 @@ import {
 // Consts
 //==============================
 const BASE_URL  = import.meta.env.DEV ? "http://127.0.0.1:8000/api/" : "https://nicolocavalli.com/api/";
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+
 
 //==============================
 // Export functions
 //==============================
 
 /**
- * 
- * @param {Object} args 
- * @param {String} args.from 
- * @param {Subject} args.subject 
- * @param {Message} args.message
  * @returns response object 
  */
-export async function apiGetGithubData() {
-  const url = `https://api.github.com/users/NicoloCavalli95horses/repos?per_page=100&page=1`;
-  const options = _getApiOptions( {token: GITHUB_TOKEN} );
-  return await _executeApi({ url, options });
+export async function apiGetGitHubData() {
+  const url = `${BASE_URL}github`;
+  return await _executeApi({ url, options: {} });
 }
 
 /**

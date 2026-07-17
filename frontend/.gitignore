@@ -29,3 +29,4 @@ backend/public/*
 *.sw?
 
 *.tsbuildinfo
+info/
